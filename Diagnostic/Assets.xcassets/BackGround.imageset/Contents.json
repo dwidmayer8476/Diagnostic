@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "diagnosticback.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
