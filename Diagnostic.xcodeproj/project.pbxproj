@@ -7,17 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CFA884222EF07AA5007FF475 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CFA884212EF07AA5007FF475 /* FirebaseDatabase */; };
-		CFA884242EF07AA5007FF475 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CFA884232EF07AA5007FF475 /* FirebaseFirestore */; };
+		4CCB1BBD2EF31240007E4553 /* Page5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB1BBC2EF3123D007E4553 /* Page5.swift */; };
+		4CCB1BBF2EF31244007E4553 /* Page6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB1BBE2EF31242007E4553 /* Page6.swift */; };
+		4CCB1BC12EF31249007E4553 /* Page7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB1BC02EF31246007E4553 /* Page7.swift */; };
+		4CCB1BC32EF3124E007E4553 /* Page8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB1BC22EF3124B007E4553 /* Page8.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F3F9C0E72EF071DF0093900A /* Diagnostic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diagnostic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CCB1BBC2EF3123D007E4553 /* Page5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page5.swift; sourceTree = "<group>"; };
+		4CCB1BBE2EF31242007E4553 /* Page6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page6.swift; sourceTree = "<group>"; };
+		4CCB1BC02EF31246007E4553 /* Page7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page7.swift; sourceTree = "<group>"; };
+		4CCB1BC22EF3124B007E4553 /* Page8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page8.swift; sourceTree = "<group>"; };
+		4CCB1BD32EF31260007E4553 /* Diagnostic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diagnostic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4CCB1BB42EF311FB007E4553 /* Exceptions for "Diagnostic" folder in "Diagnostic" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Page1.swift,
+			);
+			target = F3F9C0E62EF071DF0093900A /* Diagnostic */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F3F9C0E92EF071DF0093900A /* Diagnostic */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4CCB1BB42EF311FB007E4553 /* Exceptions for "Diagnostic" folder in "Diagnostic" target */,
+			);
 			path = Diagnostic;
 			sourceTree = "<group>";
 		};
@@ -28,8 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFA884222EF07AA5007FF475 /* FirebaseDatabase in Frameworks */,
-				CFA884242EF07AA5007FF475 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,16 +57,12 @@
 			isa = PBXGroup;
 			children = (
 				F3F9C0E92EF071DF0093900A /* Diagnostic */,
-				F3F9C0E82EF071DF0093900A /* Products */,
+				4CCB1BBC2EF3123D007E4553 /* Page5.swift */,
+				4CCB1BBE2EF31242007E4553 /* Page6.swift */,
+				4CCB1BC02EF31246007E4553 /* Page7.swift */,
+				4CCB1BC22EF3124B007E4553 /* Page8.swift */,
+				4CCB1BD32EF31260007E4553 /* Diagnostic.app */,
 			);
-			sourceTree = "<group>";
-		};
-		F3F9C0E82EF071DF0093900A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F3F9C0E72EF071DF0093900A /* Diagnostic.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,11 +85,9 @@
 			);
 			name = Diagnostic;
 			packageProductDependencies = (
-				CFA884212EF07AA5007FF475 /* FirebaseDatabase */,
-				CFA884232EF07AA5007FF475 /* FirebaseFirestore */,
 			);
 			productName = Diagnostic;
-			productReference = F3F9C0E72EF071DF0093900A /* Diagnostic.app */;
+			productReference = 4CCB1BD32EF31260007E4553 /* Diagnostic.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -103,11 +114,8 @@
 			);
 			mainGroup = F3F9C0DE2EF071DF0093900A;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				CFA884202EF07AA5007FF475 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = F3F9C0E82EF071DF0093900A /* Products */;
+			productRefGroup = F3F9C0DE2EF071DF0093900A;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -131,6 +139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCB1BC12EF31249007E4553 /* Page7.swift in Sources */,
+				4CCB1BBD2EF31240007E4553 /* Page5.swift in Sources */,
+				4CCB1BBF2EF31244007E4553 /* Page6.swift in Sources */,
+				4CCB1BC32EF3124E007E4553 /* Page8.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,30 +352,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		CFA884202EF07AA5007FF475 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 12.7.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		CFA884212EF07AA5007FF475 /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFA884202EF07AA5007FF475 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		CFA884232EF07AA5007FF475 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFA884202EF07AA5007FF475 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3F9C0DF2EF071DF0093900A /* Project object */;
 }
