@@ -11,3 +11,6 @@ struct diagnosticView4: View {
        Text("Hello, World!")
         }
     }
+#Preview {
+    diagnosticView4()
+}

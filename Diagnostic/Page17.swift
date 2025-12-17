@@ -5,3 +5,6 @@ struct diagnosticView17: View {
        Text("Hello, World!")
         }
     }
+#Preview {
+    diagnosticView17()
+}
