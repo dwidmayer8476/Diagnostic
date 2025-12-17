@@ -17,11 +17,20 @@ struct ContentView: View {
                     .imageScale(.large)
                     .foregroundStyle(.tint)
                 
-                VStack(spacing: 20) {
-                    NavigationLink("Start Diagnostic Report"){
+                VStack {
+                    
+                    NavigationLink {
                         diagnosticView1()
+                    } label: {
+                        Text("Start Diagnostic Report")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: 650)
+                            .frame(maxHeight: 100)
+                            .padding(.vertical, 18)
                     }
                     .buttonStyle(.borderedProminent)
+                    .padding(.horizontal, 30)
                 }
                 
             }
