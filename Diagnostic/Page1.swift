@@ -2,18 +2,33 @@
 import SwiftUI
 
 struct diagnosticView1: View {
-    @State var car = carInfoClass(carVin: "", make: "", year: "")
+    @State var status = statusClass(red: false, yellow: false, green: false)
     var body: some View {
        Text("Hello, World!")
         VStack{
-            TextField("Enter Vin", text: $car.carVin )
-            TextField("Enter make", text: $car.make )
-            TextField("Enter year", text: $car.year )
+//            TextField("Red", text: $status.red )
+//            TextField("Yellow", text: $status.yellow )
+//            TextField("Green", text: $status.green )
             
+          
         }
-        Text("Vin is \(car.carVin)")
-        Text("Make is \(car.make)")
-        Text("year is \(car.year)")
+        Button("red") {
+            status.red = true
+            status.yellow = false
+            status.green = false
+        }
+        Button("yellow") {
+            status.red = false
+            status.yellow = true
+            status.green = false
+        }
+        Button("green") {
+            status.red = false
+            status.yellow = false
+            status.green = true
+        }
+
+
        
         Button("Confirm?") {
             
