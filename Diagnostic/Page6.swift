@@ -4,4 +4,10 @@
 //
 //  Created by Nicholas C. Wiesneth on 12/17/25.
 //
+import SwiftUI
 
+struct diagnosticView6: View {
+    var body: some View {
+       Text("Hello, World!")
+        }
+    }
