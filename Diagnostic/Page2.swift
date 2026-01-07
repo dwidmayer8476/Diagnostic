@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct diagnosticView2: View {
-  
+    
     var body: some View {
-       Text("Hello, World!")
+        VStack{
+            Image("Rules")
         }
     }
-#Preview {
-    diagnosticView2()
 }
+    #Preview {
+        diagnosticView2()
+    }
+
