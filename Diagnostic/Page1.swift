@@ -1,42 +1,36 @@
-
 import SwiftUI
 
-struct diagnosticView1: View {
-    @State var status = statusClass(red: false, yellow: false, green: false)
+struct diagnosticView2: View {
+    @State private var car = carInfoClass(carVin: "", make: "", year: "")
+    
     var body: some View {
-       Text("Hello, World!")
-        VStack{
-//            TextField("Red", text: $status.red )
-//            TextField("Yellow", text: $status.yellow )
-//            TextField("Green", text: $status.green )
+        VStack(spacing: 20) {
             
-          
-        }
-        Button("red") {
-            status.red = true
-            status.yellow = false
-            status.green = false
-        }
-        Button("yellow") {
-            status.red = false
-            status.yellow = true
-            status.green = false
-        }
-        Button("green") {
-            status.red = false
-            status.yellow = false
-            status.green = true
-        }
-
-
-       
-        Button("Confirm?") {
+            Text("Car Information")
+                .font(.largeTitle)
+                .foregroundStyle(.red)
             
+            Button("Enter VIN") {
+                car.carVin = "VIN ENTERED"
+            }
+            
+            Button("Enter Make") {
+                car.make = "MAKE ENTERED"
+            }
+            
+            Button("Enter Year") {
+                car.year = "YEAR ENTERED"
+            }
+            
+            Button("Confirm") {
+                print("Confirmed:", car.carVin, car.make, car.year)
+            }
+            .buttonStyle(.borderedProminent)
         }
-        .font(.largeTitle)
-        .foregroundStyle(.red)
-        }
+        .padding()
     }
+}
+
 #Preview {
-    diagnosticView1()
+    diagnosticView2()
 }
