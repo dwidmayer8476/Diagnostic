@@ -6,15 +6,20 @@
 //
 import SwiftUI
 
+struct Status {
+    var red: Bool
+    var yellow: Bool
+    var green: Bool
+}
+
 struct diagnosticView2: View {
 
-    @State var status = Status(red: false, yellow: false, green: false)
+    @State private var status = Status(red: false, yellow: false, green: false)
 
     var body: some View {
         VStack(spacing: 20) {
-            
-                Image("Rules")
-            
+
+            Image("Rules")
 
             Button("Red") {
                 status.red = true
@@ -39,11 +44,10 @@ struct diagnosticView2: View {
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
-            .foregroundStyle(.red)
         }
     }
 }
-    #Preview {
-        diagnosticView2()
-    }
 
+#Preview {
+    diagnosticView2()
+}
