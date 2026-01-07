@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct diagnosticView2: View {
+struct diagnosticView1: View {
     @State private var car = carInfoClass(carVin: "", make: "", year: "")
     
     var body: some View {
