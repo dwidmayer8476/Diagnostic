@@ -10,18 +10,12 @@ struct diagnosticView1: View {
                 .font(.largeTitle)
                 .foregroundStyle(.red)
             
-            Button("Enter VIN") {
-                car.carVin = "VIN ENTERED"
-            }
+           TextField("enter vin", text: $car.carVin)
             
-            Button("Enter Make") {
-                car.make = "MAKE ENTERED"
-            }
             
-            Button("Enter Year") {
-                car.year = "YEAR ENTERED"
-            }
+            TextField("enter make", text: $car.make)
             
+            TextField("enter year ", text: $car.year)
             Button("Confirm") {
                 print("Confirmed:", car.carVin, car.make, car.year)
             }
