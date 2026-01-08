@@ -21,10 +21,5 @@ struct diagnosticView1: View {
             }
             .buttonStyle(.borderedProminent)
         }
-        .padding()
     }
-}
-
-#Preview {
-    diagnosticView2()
 }
