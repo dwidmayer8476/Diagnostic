@@ -18,7 +18,7 @@ struct carInfoClass: Identifiable{
         self.year = year
     }
 }
-struct statusClass: Identifiable {
+struct status: Identifiable {
     let id = UUID()
     var red:Bool
     var yellow:Bool

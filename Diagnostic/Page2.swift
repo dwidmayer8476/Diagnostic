@@ -8,7 +8,7 @@ import SwiftUI
 
 struct diagnosticView2: View {
 
-    @State private var status = Status(red: false, yellow: false, green: false)
+    @State private var status = status(red: false, yellow: false, green: false)
 
     var body: some View {
         VStack(spacing: 20) {
@@ -24,15 +24,15 @@ struct diagnosticView2: View {
             Image("Rules")
 
             Button("Red") {
-                status = Status(red: true, yellow: false, green: false)
+                status = status(red: true, yellow: false, green: false)
             }
 
             Button("Yellow") {
-                status = Status(red: false, yellow: true, green: false)
+                status = status(red: false, yellow: true, green: false)
             }
 
             Button("Green") {
-                status = Status(red: false, yellow: false, green: true)
+                status = status(red: false, yellow: false, green: true)
             }
 
             Button("Confirm?") {
