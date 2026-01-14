@@ -19,6 +19,8 @@ struct diagnosticView1: View {
                     .frame(width: 300, height: 50)
                 
                 TextField("enter year ", text: $car.year)
+                    .frame(width: 300, height: 50
+                    )
                 Button("Confirm") {
                     print("Confirmed:", car.carVin, car.make, car.year)
                 }
