@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct diagnosticView1: View {
-    @State private var car = carInfoClass(carVin: "", make: "", year: "")
+    @State private var car = carInfoClass(carVin: "", make: "", year: "", carOwner: "")
     
     var body: some View {
         HStack{
@@ -25,6 +25,10 @@ struct diagnosticView1: View {
                     print("Confirmed:", car.carVin, car.make, car.year)
                 }
                 .buttonStyle(.borderedProminent)
+                
+                NavigationLink("Next Page") {
+                    diagnosticView3()
+                }
             }
         }
     }   
