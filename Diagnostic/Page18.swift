@@ -1,24 +1,59 @@
-//import SwiftUI
-//import FirebaseFirestore
-//
-//struct HeaderView: View {
-//    @State var enteredCollege: String = ""
-//    @State var enteredCollegeLocation: String = ""
-//    @Environment(CBPViewModel.self) var viewModel
-//    var body: some View {
-//        HStack{
-//            TextField("Enter College", text: $enteredCollege)
-//            .textFieldStyle(RoundedBorderTextFieldStyle())
-//            TextField("Enter Location", text: $enteredCollegeLocation)
-//            .textFieldStyle(RoundedBorderTextFieldStyle())
-//                
-//            Button("+") {
-//                viewModel.addCollege(collegeName: enteredCollege, collegeLocation: enteredCollegeLocation)
-//                enteredCollege = ""
-//                enteredCollegeLocation = ""
-//            }
-//            .font(.largeTitle)
-//        }
-//        .padding()
-//    }
-//}
+
+import SwiftUI
+
+struct diagnosticView18: View {
+
+    struct DiagnosticStatus: CustomStringConvertible {
+        var red: Bool
+        var yellow: Bool
+        var green: Bool
+        var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
+    }
+
+    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
+    var body: some View {
+        VStack(spacing: 20) {
+
+            Text("Steering & Suspension")
+                .font(.largeTitle)
+                .foregroundStyle(.red)
+                .padding(10)
+
+            Text("Idler / Pitman Arm")
+                .font(.largeTitle)
+
+            Image("Rules")
+
+            Button("Red") {
+                status = DiagnosticStatus(red: true, yellow: false, green: false)
+            }
+
+            Button("Yellow") {
+                status = DiagnosticStatus(red: false, yellow: true, green: false)
+            }
+
+            Button("Green") {
+                status = DiagnosticStatus(red: false, yellow: false, green: true)
+            }
+
+            Button("Confirm?") {
+                print(status)
+            }
+            .font(.largeTitle)
+            .foregroundStyle(.red)
+
+            NavigationLink("Next Page") {
+                diagnosticView19()
+            }
+
+            NavigationLink("Previous Page") {
+                diagnosticView17()
+            }
+        }
+    }
+}
+
+
+
+
+
