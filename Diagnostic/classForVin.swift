@@ -10,10 +10,10 @@ struct carInfoClass: Identifiable{
     let id = UUID()
     var carVin:String
     var make:String
-    var year:String
+    var year:Int
     var carOwner:String
     
-    init(carVin: String, make: String, year: String, carOwner: String) {
+    init(carVin: String, make: String, year: Int, carOwner: String) {
         self.carVin = carVin
         self.make = make
         self.year = year
