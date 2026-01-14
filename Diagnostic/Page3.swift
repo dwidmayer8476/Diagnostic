@@ -8,8 +8,14 @@ import SwiftUI
 
 struct diagnosticView3: View {
 
-    @State private var status = status(red: false, yellow: false, green: false)
+    struct DiagnosticStatus: CustomStringConvertible {
+        var red: Bool
+        var yellow: Bool
+        var green: Bool
+        var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
+    }
 
+    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
         VStack(spacing: 20) {
 
@@ -24,15 +30,15 @@ struct diagnosticView3: View {
             Image("Rules")
 
             Button("Red") {
-                status = status(red: true, yellow: false, green: false)
+                status = DiagnosticStatus(red: true, yellow: false, green: false)
             }
 
             Button("Yellow") {
-                status = status(red: false, yellow: true, green: false)
+                status = DiagnosticStatus(red: false, yellow: true, green: false)
             }
 
             Button("Green") {
-                status = status(red: false, yellow: false, green: true)
+                status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
 
             Button("Confirm?") {
