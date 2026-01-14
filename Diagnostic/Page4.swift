@@ -24,7 +24,7 @@ struct diagnosticView4: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Wiper Blades")
+            Text("Air Filter")
                 .font(.largeTitle)
 
             Image("Rules")
