@@ -1,9 +1,4 @@
-//
-//  PageFour.swift
-//  Diagnostic
-//
-//  Created by Nicholas C. Wiesneth on 12/17/25.
-//
+
 import SwiftUI
 
 struct diagnosticView4: View {
@@ -24,7 +19,7 @@ struct diagnosticView4: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Wiper Blades")
+            Text("Air Filter")
                 .font(.largeTitle)
 
             Image("Rules")

@@ -1,9 +1,4 @@
-//
-//  PageThree.swift
-//  Diagnostic
-//
-//  Created by Nicholas C. Wiesneth on 12/17/25.
-//
+
 import SwiftUI
 
 struct diagnosticView3: View {
@@ -24,7 +19,7 @@ struct diagnosticView3: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Wiper Blades")
+            Text("Head Lights")
                 .font(.largeTitle)
 
             Image("Rules")
