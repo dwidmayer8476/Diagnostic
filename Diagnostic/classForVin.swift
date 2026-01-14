@@ -11,11 +11,13 @@ struct carInfoClass: Identifiable{
     var carVin:String
     var make:String
     var year:String
+    var carOwner:String
     
-    init(carVin: String, make: String, year: String) {
+    init(carVin: String, make: String, year: String, carOwner: String) {
         self.carVin = carVin
         self.make = make
         self.year = year
+        self.carOwner = carOwner
     }
 }
 struct status: Identifiable {
