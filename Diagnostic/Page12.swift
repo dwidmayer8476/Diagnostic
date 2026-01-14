@@ -11,7 +11,8 @@ struct diagnosticView12: View {
         VStack{
             Image("Rules")
         }
-        }
+     
+    }
     }
 #Preview {
     diagnosticView12()

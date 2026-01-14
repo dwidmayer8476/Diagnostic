@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct CameraExampleView: View {
-    @State private var showCamera = false
-    @State private var image: UIImage?
+    @State var showCamera = false
+    @State var image: UIImage?
     
     var body: some View {
         VStack {
