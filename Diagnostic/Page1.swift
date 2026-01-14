@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct diagnosticView1: View {
-    @State private var car = carInfoClass(carVin: "", make: "", year: "", carOwner: "")
+    @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
     
     var body: some View {
         HStack{
@@ -19,7 +19,7 @@ struct diagnosticView1: View {
                     .frame(width: 300, height: 50)
                     .textFieldStyle(.roundedBorder)
                 
-                TextField("enter year ", text: $car.year)
+                TextField("enter year", value: $car.year, format: .number)
                     .frame(width: 300, height: 50)
                     .textFieldStyle(.roundedBorder)
                 
@@ -31,9 +31,10 @@ struct diagnosticView1: View {
                     print("Confirmed:", car.carVin, car.make, car.year)
                 }
                 .buttonStyle(.borderedProminent)
-                
-                NavigationLink("Next Page") {
-                    diagnosticView2()
+                NavigationStack{
+                    NavigationLink("Next Page") {
+                        diagnosticView2()
+                    }
                 }
             }
         }
