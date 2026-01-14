@@ -27,7 +27,7 @@ struct diagnosticView1: View {
                 .buttonStyle(.borderedProminent)
                 
                 NavigationLink("Next Page") {
-                    diagnosticView3()
+                    diagnosticView2()
                 }
             }
         }
