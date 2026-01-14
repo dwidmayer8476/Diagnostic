@@ -8,19 +8,27 @@ import SwiftUI
 
 struct CameraExampleView: View {
     @State var showCamera = false
-    @State var image: UIImage?
+    @State var images: [UIImage] = []
     
     var body: some View {
         VStack {
-            if let image = image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 350)
-                    .padding()
-            } else {
+            if images.isEmpty {
                 Text("No Image Yet")
                     .foregroundColor(.gray)
+            } else {
+                ScrollView(.horizontal) {
+                    HStack(spacing: 12) {
+                        ForEach(Array(images.enumerated()), id: \.offset) { _, img in
+                            Image(uiImage: img)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 200)
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                .frame(height: 220)
             }
             
             Button("Take Picture") {
@@ -30,7 +38,7 @@ struct CameraExampleView: View {
             .font(.title2)
         }
         .sheet(isPresented: $showCamera) {
-            CameraPicker(image: $image)
+            CameraPicker(images: $images)
         }
     }
 }

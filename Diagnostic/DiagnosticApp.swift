@@ -12,6 +12,7 @@ struct DiagnosticApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            CameraExampleView()
         }
     }
 }
