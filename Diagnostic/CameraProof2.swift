@@ -35,11 +35,11 @@ struct CameraPicker: UIViewControllerRepresentable {
             _ picker: UIImagePickerController,
             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
         ) {
-            // Append captured image to the array
+           
             if let image = info[.originalImage] as? UIImage {
                 parent.images.append(image)
             }
-            // Close camera
+      
             picker.dismiss(animated: true)
         }
 
