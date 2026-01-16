@@ -14,12 +14,12 @@ struct diagnosticView23: View {
     var body: some View {
         VStack(spacing: 20) {
 
-            Text("Steering & Suspension")
+            Text("Under Hood / Maintenance Service")
                 .font(.largeTitle)
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Ball Joints")
+            Text("Power Steering Hose")
                 .font(.largeTitle)
 
             Image("Rules")

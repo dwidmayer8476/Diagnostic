@@ -19,7 +19,7 @@ struct diagnosticView14: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Coolant Hoses")
+            Text("Battery Test")
                 .font(.largeTitle)
 
             Image("Rules")

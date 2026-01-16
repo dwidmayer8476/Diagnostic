@@ -19,7 +19,7 @@ struct diagnosticView28: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Shocks    ")
+            Text("U-Joints")
                 .font(.largeTitle)
 
             Image("Rules")
@@ -43,7 +43,7 @@ struct diagnosticView28: View {
             .foregroundStyle(.red)
 
             NavigationLink("Next Page") {
-                diagnosticView28()
+                diagnosticView29()
             }
 
             NavigationLink("Previous Page") {
