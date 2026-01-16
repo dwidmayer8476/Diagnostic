@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct diagnosticView1: View {
+    @EnvironmentObject var photoStore: PhotoStore
+    
     @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
     @State private var checkInDate: Date = Date()
     @State private var useExplicitMeridiem: Bool = false
