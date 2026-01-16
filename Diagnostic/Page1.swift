@@ -2,7 +2,9 @@ import SwiftUI
 
 struct diagnosticView1: View {
     @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
-    
+    @State private var checkInDate: Date = Date()
+    @State private var useExplicitMeridiem: Bool = false
+    @State private var meridiemSelection: String = "AM"
     var body: some View {
         HStack{
             VStack(spacing: 20) {
@@ -11,32 +13,53 @@ struct diagnosticView1: View {
                     .font(.largeTitle)
                     .foregroundStyle(.red)
                 
-                TextField("enter vin", text: $car.carVin)
+                TextField("Enter Vin", text: $car.carVin)
                     .frame(width: 300, height: 50)
                     .textFieldStyle(.roundedBorder)
                 
-                TextField("enter make", text: $car.make)
+                TextField("Enter Make", text: $car.make)
                     .frame(width: 300, height: 50)
                     .textFieldStyle(.roundedBorder)
                 
-                TextField("enter year", value: $car.year, format: .number)
+                TextField("Enter Year", value: $car.year, format: .number)
                     .frame(width: 300, height: 50)
                     .textFieldStyle(.roundedBorder)
                 
-                TextField("enter owner", text:$car.carOwner)
+                TextField("Enter Owner", text:$car.carOwner)
                     .frame(width: 300, height: 50)
                     .textFieldStyle(.roundedBorder)
+                
+                DatePicker("Check-in Date", selection: $checkInDate, displayedComponents: .date)
+                    .datePickerStyle(.wheel)
+                    .frame(width: 300)
+                
+                DatePicker("Check-in Time", selection: $checkInDate, displayedComponents: .hourAndMinute)
+                    .datePickerStyle(.wheel)
+                    .frame(width: 300)
+                
+                // Optional explicit AM/PM control; set useExplicitMeridiem to true to show
+                if useExplicitMeridiem {
+                    Picker("AM/PM", selection: $meridiemSelection) {
+                        Text("AM").tag("AM")
+                        Text("PM").tag("PM")
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: 300)
+                }
                 
                 Button("Confirm") {
-                    print("Confirmed:", car.carVin, car.make, car.year)
+                    let formatter = DateFormatter()
+                    formatter.dateStyle = .medium
+                    formatter.timeStyle = .short
+                    print("Confirmed:", car.carVin, car.make, car.year, formatter.string(from: checkInDate))
                 }
                 .buttonStyle(.borderedProminent)
-                NavigationStack{
-                    NavigationLink("Next Page") {
-                        diagnosticView2()
-                    }
+                
+                NavigationLink("Next Page") {
+                    diagnosticView2()
                 }
             }
         }
     }
 }
+
