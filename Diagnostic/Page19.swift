@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct diagnosticView19: View {
-    
+    @EnvironmentObject var photoStore: PhotoStore
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
         var yellow: Bool
@@ -12,14 +12,17 @@ struct diagnosticView19: View {
     @State var date: String = "MM/DD/YYYY"
     @State var time: String = "00:00"
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
+    @State private var showCamera = false
+    private let photoKey = "page19"
+
     var body: some View {
         VStack(spacing: 20) {
-
+            
             Text("Under Hood / Maintenance Service")
                 .font(.largeTitle)
                 .foregroundStyle(.red)
                 .padding(10)
-
+            
             Text("Spark Plugs")
                 .font(.largeTitle)
             
@@ -49,6 +52,11 @@ struct diagnosticView19: View {
             
             NavigationLink("Previous Page") {
                 diagnosticView20()
+            }
+        }
+        .sheet(isPresented: $showCamera) {
+            CameraPicker(images: .constant([])) { captured in
+                photoStore.imagesByKey[photoKey] = captured
             }
         }
     }

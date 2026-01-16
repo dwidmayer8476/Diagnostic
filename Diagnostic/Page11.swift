@@ -2,13 +2,15 @@
 import SwiftUI
 
 struct diagnosticView11: View {
-
+    @EnvironmentObject var photoStore: PhotoStore
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
         var yellow: Bool
         var green: Bool
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
+    @State private var showCamera = false
+    private let photoKey = "page11"
 
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
@@ -50,7 +52,12 @@ struct diagnosticView11: View {
                 diagnosticView10()
             }
         }
-    }
+        .sheet(isPresented: $showCamera) {
+            CameraPicker(images: .constant([])) { captured in
+                photoStore.imagesByKey[photoKey] = captured
+            }
+        }
+        }
 }
 
 
