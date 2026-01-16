@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-struct diagnosticView19: View {
+struct diagnosticView21: View {
 
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
@@ -19,7 +19,7 @@ struct diagnosticView19: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Center Link")
+            Text("Link Pins")
                 .font(.largeTitle)
 
             Image("Rules")
@@ -43,7 +43,7 @@ struct diagnosticView19: View {
             .foregroundStyle(.red)
 
             NavigationLink("Next Page") {
-                diagnosticView19()
+                diagnosticView22()
             }
 
             NavigationLink("Previous Page") {
@@ -52,6 +52,7 @@ struct diagnosticView19: View {
         }
     }
 }
+
 
 
 

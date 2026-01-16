@@ -46,6 +46,9 @@ struct diagnosticView2: View {
             .font(.largeTitle)
             .foregroundStyle(.red)
             Text("status: \(selectedColor)")
+            
+            CameraExampleView()
+            
             NavigationLink("Next Page") {
                 diagnosticView3()
             }
