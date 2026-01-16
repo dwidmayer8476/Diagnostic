@@ -1,6 +1,12 @@
 import SwiftUI
 
 struct diagnosticView2: View {
+    @EnvironmentObject var photoStore: PhotoStore
+    
+    @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
+    @State private var showCamera = false
+    private let photoKey = "page2"
+    
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
         var yellow: Bool
@@ -46,15 +52,22 @@ struct diagnosticView2: View {
             .font(.largeTitle)
             .foregroundStyle(.red)
             Text("status: \(selectedColor)")
+            
+            
+            Button("Take Photo for Page 2") {
+                showCamera = true
+            }
+            .buttonStyle(.bordered)
+            
             NavigationLink("Next Page") {
                 diagnosticView3()
             }
-            
-            NavigationLink("Previous Page") {
-                diagnosticView1()
+        }
+        .sheet(isPresented: $showCamera) {
+            CameraPicker(images: .constant([])) { captured in
+                photoStore.imagesByKey[photoKey] = captured
             }
         }
-       
     }
 }
 
