@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import FirebaseFirestore
 @main
 struct DiagnosticApp: App {
     var body: some Scene {

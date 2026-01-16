@@ -19,7 +19,7 @@ struct diagnosticView15: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Engine Coolant")
+            Text("Battery Accessories")
                 .font(.largeTitle)
 
             Image("Rules")

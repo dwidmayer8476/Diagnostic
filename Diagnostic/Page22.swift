@@ -1,16 +1,15 @@
 
 import SwiftUI
 
-struct diagnosticView19: View {
-    
+struct diagnosticView22: View {
+
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
         var yellow: Bool
         var green: Bool
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
-    @State var date: String = "MM/DD/YYYY"
-    @State var time: String = "00:00"
+
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
         VStack(spacing: 20) {
@@ -20,39 +19,40 @@ struct diagnosticView19: View {
                 .foregroundStyle(.red)
                 .padding(10)
 
-            Text("Spark Plugs")
+            Text("Valve Cover Gasket")
                 .font(.largeTitle)
-            
+
             Image("Rules")
-            
+
             Button("Red") {
                 status = DiagnosticStatus(red: true, yellow: false, green: false)
             }
-            
+
             Button("Yellow") {
                 status = DiagnosticStatus(red: false, yellow: true, green: false)
             }
-            
+
             Button("Green") {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
-            
+
             Button("Confirm?") {
                 print(status)
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
-            
+
             NavigationLink("Next Page") {
-                diagnosticView19()
+                diagnosticView23()
             }
-            
+
             NavigationLink("Previous Page") {
-                diagnosticView20()
+                diagnosticView21()
             }
         }
     }
 }
+
 
 
 
