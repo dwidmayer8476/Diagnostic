@@ -2,6 +2,7 @@ import SwiftUI
 
 struct diagnosticView1: View {
     @EnvironmentObject var photoStore: PhotoStore
+    @EnvironmentObject var printStore: PrintStore
     
     @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
     @State private var checkInDate: Date = Date()
@@ -69,17 +70,21 @@ struct diagnosticView1: View {
             
             
             HStack(spacing: 30) {
-                Button("Confirm") {
-                    let formatter = DateFormatter()
-                    formatter.dateStyle = .medium
-                    formatter.timeStyle = .short
-                    print(
-                        "Confirmed:",
-                        car.carVin,
-                        car.make,
-                        car.year,
-                        formatter.string(from: checkInDate)
-                    )
+                            Button("Confirm") {
+                                let formatter = DateFormatter()
+                                formatter.dateStyle = .medium
+                                formatter.timeStyle = .short
+                                
+                                let message = """
+                                Confirmed Car:
+                                VIN: \(car.carVin)
+                                Make: \(car.make)
+                                Year: \(car.year)
+                                Owner: \(car.carOwner)
+                                Check-in: \(formatter.string(from: checkInDate))
+                                """
+                                
+                                printStore.log(message) 
                 }
                 .buttonStyle(.borderedProminent)
                 

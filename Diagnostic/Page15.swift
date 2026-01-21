@@ -3,6 +3,7 @@ import SwiftUI
 
 struct diagnosticView15: View {
     @EnvironmentObject var photoStore: PhotoStore
+    @EnvironmentObject var printStore: PrintStore
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
         var yellow: Bool
@@ -11,6 +12,13 @@ struct diagnosticView15: View {
     }
     @State private var showCamera = false
     private let photoKey = "page15"
+    
+    private var selectedColor: String {
+        if status.red { return "Red" }
+        if status.yellow { return "Yellow" }
+        if status.green { return "Green" }
+        return "None"
+    }
     
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
@@ -21,7 +29,7 @@ struct diagnosticView15: View {
                 .foregroundStyle(.red)
                 .padding(10)
             
-            Text("Battery Accessories")
+            Text("Start / Charge")
                 .font(.largeTitle)
             
             Image("Rules")
@@ -44,7 +52,7 @@ struct diagnosticView15: View {
             .font(.largeTitle)
             .foregroundStyle(.red)
             
-            Button("Take Photo for Page 13") {
+            Button("Take Photo for Page 15") {
                 showCamera = true
             }.buttonStyle(.bordered)
             
@@ -63,3 +71,8 @@ struct diagnosticView15: View {
         }
     }
 }
+
+
+
+
+

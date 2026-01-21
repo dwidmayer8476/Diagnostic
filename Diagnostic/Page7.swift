@@ -1,8 +1,8 @@
-
 import SwiftUI
 
 struct diagnosticView7: View {
     @EnvironmentObject var photoStore: PhotoStore
+    @EnvironmentObject var printStore: PrintStore
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
         var yellow: Bool
@@ -12,6 +12,14 @@ struct diagnosticView7: View {
     @State private var showCamera = false
     private let photoKey = "page7"
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
+    
+    private var selectedColor: String {
+        if status.red { return "Red" }
+        if status.yellow { return "Yellow" }
+        if status.green { return "Green" }
+        return "None"
+    }
+    
     var body: some View {
         VStack(spacing: 20) {
             
@@ -38,18 +46,19 @@ struct diagnosticView7: View {
             }
             
             Button("Confirm?") {
-                print(status)
+                let message = "page7: status=\(selectedColor)"
+                printStore.log(message)
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
             
-            Button("Take Photo for Page 6") {
+            Button("Take Photo for Page 7") {
                 showCamera = true
             }
             .buttonStyle(.bordered)
             
             NavigationLink("Next Page") {
-                diagnosticView9()
+                diagnosticView8()
             }
             
             NavigationLink("Previous Page") {

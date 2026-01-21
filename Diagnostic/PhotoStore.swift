@@ -3,6 +3,6 @@ import UIKit
 import Combine
 
 @MainActor
-final class PhotoStore: ObservableObject {
+    final class PhotoStore: ObservableObject {
     @Published var imagesByKey: [String: UIImage] = [:]
 }

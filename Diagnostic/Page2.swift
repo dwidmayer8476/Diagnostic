@@ -2,7 +2,7 @@ import SwiftUI
 
 struct diagnosticView2: View {
     @EnvironmentObject var photoStore: PhotoStore
-    
+    @EnvironmentObject var printStore: PrintStore
     @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
     @State private var showCamera = false
     private let photoKey = "page2"
@@ -47,14 +47,15 @@ struct diagnosticView2: View {
             }
             
             Button("Confirm?") {
-                print(status)
+                let message = "page2: status=\(selectedColor)"
+                printStore.log(message)
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
             Text("status: \(selectedColor)")
             
             
-            Button("Take Photo for Page 1") {
+            Button("Take Photo for Page 2") {
                 showCamera = true
             }
             .buttonStyle(.bordered)
