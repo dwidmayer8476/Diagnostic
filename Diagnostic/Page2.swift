@@ -54,7 +54,7 @@ struct diagnosticView2: View {
             Text("status: \(selectedColor)")
             
             
-            Button("Take Photo for Page 2") {
+            Button("Take Photo for Page 1") {
                 showCamera = true
             }
             .buttonStyle(.bordered)

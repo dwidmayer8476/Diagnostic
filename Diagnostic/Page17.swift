@@ -45,6 +45,10 @@ struct diagnosticView17: View {
             .font(.largeTitle)
             .foregroundStyle(.red)
             
+            Button("Take Photo for Page 15") {
+                showCamera = true
+            }
+            .buttonStyle(.bordered)
             NavigationLink("Next Page") {
                 diagnosticView18()
             }

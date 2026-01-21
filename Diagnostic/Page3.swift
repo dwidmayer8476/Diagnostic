@@ -43,6 +43,11 @@ struct diagnosticView3: View {
             .font(.largeTitle)
             .foregroundStyle(.red)
             
+            Button("Take Photo for Page 2") {
+                showCamera = true
+            }
+            .buttonStyle(.bordered)
+            
             NavigationLink("Next Page") {
                 diagnosticView4()
             }
@@ -50,10 +55,10 @@ struct diagnosticView3: View {
             NavigationLink("Previous Page") {
                 diagnosticView2()
             }
-            .sheet(isPresented: $showCamera) {
-                CameraPicker(images: .constant([])) { captured in
-                    photoStore.imagesByKey[photoKey] = captured
-                }
+        }
+        .sheet(isPresented: $showCamera) {
+            CameraPicker(images: .constant([])) { captured in
+                photoStore.imagesByKey[photoKey] = captured
             }
         }
     }
