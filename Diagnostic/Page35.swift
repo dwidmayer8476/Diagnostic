@@ -9,11 +9,11 @@ struct diagnosticView35: View {
         var green: Bool
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
-    
+
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     @State private var showCamera = false
-    private let photoKey = "page35"
-    
+    private let photoKey = "page36"
+
     var body: some View {
         VStack(spacing: 20) {
             
@@ -22,7 +22,7 @@ struct diagnosticView35: View {
                 .foregroundStyle(.red)
                 .padding(10)
             
-            Text("CV Boots/Joints")
+            Text("Wheel Bearings")
                 .font(.largeTitle)
             
             Image("Rules")

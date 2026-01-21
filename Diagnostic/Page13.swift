@@ -10,7 +10,7 @@ struct diagnosticView13: View {
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
     @State private var showCamera = false
-    private let photoKey = "page13"
+    private let photoKey = "page14"
     
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
@@ -21,7 +21,7 @@ struct diagnosticView13: View {
                 .foregroundStyle(.red)
                 .padding(10)
             
-            Text("Engine Coolant")
+            Text("Battery Test")
                 .font(.largeTitle)
             
             Image("Rules")
@@ -59,5 +59,7 @@ struct diagnosticView13: View {
         }
     }
 }
+
+
 
 

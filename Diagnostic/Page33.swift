@@ -12,7 +12,7 @@ struct diagnosticView33: View {
     
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     @State private var showCamera = false
-    private let photoKey = "page33"
+    private let photoKey = "page34"
     
     var body: some View {
         VStack(spacing: 20) {
@@ -22,7 +22,7 @@ struct diagnosticView33: View {
                 .foregroundStyle(.red)
                 .padding(10)
             
-            Text("Ball Joints")
+            Text("Rack & Pinion Assembly")
                 .font(.largeTitle)
             
             Image("Rules")
@@ -46,11 +46,11 @@ struct diagnosticView33: View {
             .foregroundStyle(.red)
             
             NavigationLink("Next Page") {
-                diagnosticView32()
+                diagnosticView34()
             }
             
             NavigationLink("Previous Page") {
-                diagnosticView30()
+                diagnosticView32()
             }
         }
         .sheet(isPresented: $showCamera) {

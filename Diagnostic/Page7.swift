@@ -44,7 +44,7 @@ struct diagnosticView7: View {
             .foregroundStyle(.red)
             
             NavigationLink("Next Page") {
-                diagnosticView9()
+                diagnosticView8()
             }
             
             NavigationLink("Previous Page") {

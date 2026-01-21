@@ -12,7 +12,7 @@ struct diagnosticView31: View {
     
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     @State private var showCamera = false
-    private let photoKey = "page31"
+    private let photoKey = "page32"
     
     var body: some View {
         VStack(spacing: 20) {
@@ -22,7 +22,7 @@ struct diagnosticView31: View {
                 .foregroundStyle(.red)
                 .padding(10)
             
-            Text("Link Pinks")
+            Text("Tie Rod Ends")
                 .font(.largeTitle)
             
             Image("Rules")

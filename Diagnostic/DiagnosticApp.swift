@@ -9,10 +9,16 @@ import SwiftUI
 import FirebaseFirestore
 @main
 struct DiagnosticApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+    @StateObject var printStore = PrintStore()
+       @StateObject var photoStore = PhotoStore()
 
-        }
-    }
-}
+       var body: some Scene {
+           WindowGroup {
+               NavigationStack {
+                   diagnosticView1()
+               }
+               .environmentObject(printStore)
+               .environmentObject(photoStore)
+           }
+       }
+   }

@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-struct diagnosticView38: View {
+struct diagnosticView8: View {
     @EnvironmentObject var photoStore: PhotoStore
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
@@ -9,20 +9,18 @@ struct diagnosticView38: View {
         var green: Bool
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
-    
-    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     @State private var showCamera = false
-    private let photoKey = "page38"
-    
+    private let photoKey = "page9"
+    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
         VStack(spacing: 20) {
             
-            Text("Steering & Suspension")
+            Text("Under Hood / Maintenance Service")
                 .font(.largeTitle)
                 .foregroundStyle(.red)
                 .padding(10)
             
-            Text("Shocks")
+            Text("Power Steering Fluid")
                 .font(.largeTitle)
             
             Image("Rules")
@@ -46,11 +44,11 @@ struct diagnosticView38: View {
             .foregroundStyle(.red)
             
             NavigationLink("Next Page") {
-                diagnosticView38()
+                diagnosticView9()
             }
             
             NavigationLink("Previous Page") {
-                diagnosticView37()
+                diagnosticView7()
             }
         }
         .sheet(isPresented: $showCamera) {
@@ -60,10 +58,3 @@ struct diagnosticView38: View {
         }
     }
 }
-
-
-
-
-
-
-
