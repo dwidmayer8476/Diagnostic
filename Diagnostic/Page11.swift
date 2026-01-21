@@ -46,7 +46,7 @@ struct diagnosticView11: View {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
             
-            BButton("Confirm?") {
+            Button("Confirm?") {
                 let message = "page11: status=\(selectedColor)"
                 printStore.log(message)
             }
