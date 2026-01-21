@@ -63,7 +63,3 @@ struct diagnosticView15: View {
         }
     }
 }
-
-
-
-
