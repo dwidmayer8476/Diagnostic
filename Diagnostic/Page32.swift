@@ -48,7 +48,8 @@ struct diagnosticView32: View {
             }
             
             Button("Confirm?") {
-                print(status)
+                let message = "page32: status=\(selectedColor)"
+                printStore.log(message)
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
