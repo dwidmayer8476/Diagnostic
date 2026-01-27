@@ -14,7 +14,6 @@ struct diagnosticView36: View {
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     @State private var showCamera = false
     private let photoKey = "page36"
-    
     private var selectedColor: String {
         if status.red { return "Red" }
         if status.yellow { return "Yellow" }

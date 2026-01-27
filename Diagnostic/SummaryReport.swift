@@ -2,7 +2,8 @@
 import SwiftUI
 struct PrintSummaryView: View {
     @EnvironmentObject var printStore: PrintStore
-
+    @EnvironmentObject var photoStore: PhotoStore
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {

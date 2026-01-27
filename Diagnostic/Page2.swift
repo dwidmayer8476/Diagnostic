@@ -13,7 +13,6 @@ struct diagnosticView2: View {
         var green: Bool
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
-    
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     private var selectedColor: String {
         if status.red { return "Red" }
