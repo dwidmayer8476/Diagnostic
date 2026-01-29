@@ -4,10 +4,11 @@ struct diagnosticView1: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
     
-    @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
+    @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "", carGmail: "")
     @State private var checkInDate: Date = Date()
     @State private var useExplicitMeridiem: Bool = false
     @State private var meridiemSelection: String = "AM"
+    
     
     var body: some View {
         VStack {
@@ -36,6 +37,10 @@ struct diagnosticView1: View {
                     TextField("Enter Owner", text: $car.carOwner)
                         .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
+                    TextField("Enter Car Owner's Gmail", text: $car.carGmail)
+                        .frame(width: 300, height: 50)
+                        .textFieldStyle(.roundedBorder)
+                    
                 }
                 
                 VStack(spacing: 20) {
