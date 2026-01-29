@@ -11,6 +11,7 @@ struct diagnosticView11: View {
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
     @State private var showCamera = false
+    @State var notes = StudentNotes(notes: "")
     private let photoKey = "page11"
     
     private var selectedColor: String {

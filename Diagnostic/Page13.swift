@@ -11,6 +11,7 @@ struct diagnosticView13: View {
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
     @State private var showCamera = false
+    @State var notes = StudentNotes(notes: "")
     private let photoKey = "page13"
     
     private var selectedColor: String {
@@ -47,7 +48,11 @@ struct diagnosticView13: View {
             }
             
             Button("Confirm?") {
-                let message = "page13: status=\(selectedColor)"
+                let message = """
+                page2: status=\(selectedColor)
+                notes: \(notes)
+                """
+                
                 printStore.log(message)
             }
             .font(.largeTitle)

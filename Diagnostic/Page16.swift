@@ -11,8 +11,9 @@ struct diagnosticView16: View {
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
     
-    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
+    
     @State private var showCamera = false
+    @State var notes = StudentNotes(notes: "")
     private let photoKey = "page16"
     
     private var selectedColor: String {
@@ -21,7 +22,7 @@ struct diagnosticView16: View {
         if status.green { return "Green" }
         return "None"
     }
-    
+    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
         VStack(spacing: 20) {
             
@@ -48,7 +49,11 @@ struct diagnosticView16: View {
             }
             
             Button("Confirm?") {
-                let message = "page16: status=\(selectedColor)"
+                let message = """
+                page2: status=\(selectedColor)
+                notes: \(notes)
+                """
+                
                 printStore.log(message)
             }
             .font(.largeTitle)

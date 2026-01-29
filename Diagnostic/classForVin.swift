@@ -33,4 +33,12 @@ struct status: Identifiable {
         self.yellow = yellow
         self.green = green
     }
+    struct studentNotes: Identifiable {
+        let id = UUID()
+        var notes:String
+        
+        init(notes: String) {
+            self.notes = notes
+        }
+    }
 }

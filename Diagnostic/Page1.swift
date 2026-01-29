@@ -4,7 +4,8 @@ struct diagnosticView1: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
     
-    @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "", carGmail: "")
+    @State var car = carInfoClass(carVin: "", make: "", year: 0, carOwner: "", carGmail: "")
+    @State var notes = StudentNotes(notes: "")
     @State private var checkInDate: Date = Date()
     @State private var useExplicitMeridiem: Bool = false
     @State private var meridiemSelection: String = "AM"
@@ -69,6 +70,10 @@ struct diagnosticView1: View {
                         .frame(width: 200)
                     }
                 }
+                
+                TextField("Enter Notes", text: $notes.notes)
+                    .frame(width: 300, height: 50)
+                    .textFieldStyle(.roundedBorder)
             }
             
             Spacer()
@@ -87,6 +92,7 @@ struct diagnosticView1: View {
                                 Year: \(car.year)
                                 Owner: \(car.carOwner)
                                 Check-in: \(formatter.string(from: checkInDate))
+                                Notes: \(notes.notes)
                                 """
                                 
                                 printStore.log(message) 
@@ -103,3 +109,4 @@ struct diagnosticView1: View {
         .padding()
     }
 }
+

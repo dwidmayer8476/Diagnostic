@@ -3,8 +3,8 @@ import SwiftUI
 struct diagnosticView2: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
-    @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "")
     @State private var showCamera = false
+    @State private var notes: String = ""
     private let photoKey = "page2"
     
     struct DiagnosticStatus: CustomStringConvertible {
@@ -45,8 +45,16 @@ struct diagnosticView2: View {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
             
+            TextField("Enter Notes", text: $notes)
+                .frame(width: 300, height: 50)
+                .textFieldStyle(.roundedBorder)
+            
             Button("Confirm?") {
-                let message = "page2: status=\(selectedColor)"
+                let message = """
+                page2: status=\(selectedColor)
+                notes: \(notes)
+                """
+                
                 printStore.log(message)
             }
             .font(.largeTitle)
