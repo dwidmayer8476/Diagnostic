@@ -10,9 +10,9 @@ import SwiftUI
 import MessageUI
 #endif
 
-struct MailComposerView: View {
+struct MailComposerSheet: View {
     var subject: String
-    var body: String
+    var messageBody: String
     var recipients: [String]?
     var attachmentURL: URL?
     var attachmentMimeType: String?
@@ -26,13 +26,13 @@ struct MailComposerView: View {
         Group {
             if canSendMail {
                 MailComposeViewControllerWrapper(subject: subject,
-                                                 body: body,
+                                                 messageBody: messageBody,
                                                  recipients: recipients,
                                                  attachmentURL: attachmentURL,
                                                  attachmentMimeType: attachmentMimeType,
                                                  attachmentFileName: attachmentFileName,
                                                  isPresented: $isShowingMailComposer,
-                                                 dismissAction: dismiss)
+                                                 dismissAction: { dismiss() })
                     .onAppear {
                         isShowingMailComposer = true
                     }
@@ -40,16 +40,16 @@ struct MailComposerView: View {
                         dismiss()
                     }) {
                         MailComposeViewControllerWrapper(subject: subject,
-                                                         body: body,
+                                                         messageBody: messageBody,
                                                          recipients: recipients,
                                                          attachmentURL: attachmentURL,
                                                          attachmentMimeType: attachmentMimeType,
                                                          attachmentFileName: attachmentFileName,
                                                          isPresented: $isShowingMailComposer,
-                                                         dismissAction: dismiss)
+                                                         dismissAction: { dismiss() })
                     }
             } else {
-                MailUnavailableView(dismiss: dismiss)
+                MailUnavailableView()
                     .onAppear {
                         dismiss()
                     }
@@ -68,7 +68,7 @@ struct MailComposerView: View {
 #if canImport(MessageUI)
 private struct MailComposeViewControllerWrapper: UIViewControllerRepresentable {
     var subject: String
-    var body: String
+    var messageBody: String
     var recipients: [String]?
     var attachmentURL: URL?
     var attachmentMimeType: String?
@@ -85,7 +85,7 @@ private struct MailComposeViewControllerWrapper: UIViewControllerRepresentable {
         let vc = MFMailComposeViewController()
         vc.mailComposeDelegate = context.coordinator
         vc.setSubject(subject)
-        vc.setMessageBody(body, isHTML: false)
+        vc.setMessageBody(messageBody, isHTML: false)
         if let recipients = recipients {
             vc.setToRecipients(recipients)
         }

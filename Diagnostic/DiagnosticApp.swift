@@ -13,9 +13,9 @@ struct DiagnosticApp: App {
 
        var body: some Scene {
            WindowGroup {
-               NavigationStack {
-                   diagnosticView1()
-               }
+            
+                   ContentView()
+               
                .environmentObject(printStore)
                .environmentObject(photoStore)
            }
