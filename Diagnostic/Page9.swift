@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct diagnosticView9: View {
@@ -12,8 +11,8 @@ struct diagnosticView9: View {
     }
     
     @State private var showCamera = false
+    @State var notes = StudentNotes(notes: "")
     private let photoKey = "page9"
-    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     
     private var selectedColor: String {
         if status.red { return "Red" }
@@ -21,6 +20,8 @@ struct diagnosticView9: View {
         if status.green { return "Green" }
         return "None"
     }
+    
+    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
         VStack(spacing: 20) {
             
@@ -46,8 +47,17 @@ struct diagnosticView9: View {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
             
+            TextField("Enter Notes", text: $notes.notes)
+                .frame(width: 300, height: 50)
+                .textFieldStyle(.roundedBorder)
+            
             Button("Confirm?") {
-                print(status)
+                let message = """
+                page9: status=\(selectedColor)
+                notes: \(notes)
+                """
+                
+                printStore.log(message)
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

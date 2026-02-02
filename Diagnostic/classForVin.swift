@@ -33,4 +33,8 @@ struct status: Identifiable {
         self.yellow = yellow
         self.green = green
     }
-}
+    struct studentNotes {
+        var notes: String
+    }
+
+        }

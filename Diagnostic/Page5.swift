@@ -10,9 +10,9 @@ struct diagnosticView5: View {
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
     @State private var showCamera = false
+    @State var notes = StudentNotes(notes: "")
     private let photoKey = "page5"
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
-    
     private var selectedColor: String {
         if status.red { return "Red" }
         if status.yellow { return "Yellow" }
@@ -44,8 +44,16 @@ struct diagnosticView5: View {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
             
+            TextField("Enter Notes", text: $notes.notes)
+                .frame(width: 300, height: 50)
+                .textFieldStyle(.roundedBorder)
+            
             Button("Confirm?") {
-                let message = "page5: status=\(selectedColor)"
+                let message = """
+                page5: status=\(selectedColor)
+                notes: \(notes)
+                """
+                
                 printStore.log(message)
             }
             .font(.largeTitle)

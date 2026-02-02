@@ -11,6 +11,7 @@ struct diagnosticView11: View {
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
     @State private var showCamera = false
+    @State var notes = StudentNotes(notes: "")
     private let photoKey = "page11"
     
     private var selectedColor: String {
@@ -45,9 +46,13 @@ struct diagnosticView11: View {
             Button("Green") {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
+            TextField("Enter Notes", text: $notes.notes)
+                .frame(width: 300, height: 50)
+                .textFieldStyle(.roundedBorder)
             
             Button("Confirm?") {
-                print(status)
+                let message = "page11: status=\(selectedColor)"
+                printStore.log(message)
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

@@ -4,7 +4,8 @@ struct diagnosticView1: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
     
-    @State var car = carInfoClass(carVin: "", make: "", year: 0000, carOwner: "", carGmail: "")
+    @State var car = carInfoClass(carVin: "", make: "", year: 0, carOwner: "", carGmail: "")
+    @State private var notes: String = ""
     @State private var checkInDate: Date = Date()
     @State private var useExplicitMeridiem: Bool = false
     @State private var meridiemSelection: String = "AM"
@@ -69,37 +70,47 @@ struct diagnosticView1: View {
                         .frame(width: 200)
                     }
                 }
+                TextField("Enter Notes", text: $notes)
+                    .frame(width: 300, height: 50)
+                    .textFieldStyle(.roundedBorder)
+                
             }
-            
-            Spacer()
-            
-            
-            HStack(spacing: 30) {
-                            Button("Confirm") {
-                                let formatter = DateFormatter()
-                                formatter.dateStyle = .medium
-                                formatter.timeStyle = .short
-                                
-                                let message = """
+        }
+        
+        Spacer()
+        
+        
+        HStack(spacing: 30) {
+            Button("Confirm") {
+                let formatter = DateFormatter()
+                formatter.dateStyle = .medium
+                formatter.timeStyle = .short
+                
+                let message = """
                                 Confirmed Car:
                                 VIN: \(car.carVin)
                                 Make: \(car.make)
                                 Year: \(car.year)
                                 Owner: \(car.carOwner)
                                 Check-in: \(formatter.string(from: checkInDate))
+                                Notes: \(notes)
                                 """
-                                
-                                printStore.log(message) 
-                }
-                .buttonStyle(.borderedProminent)
                 
-                NavigationLink("Next Page") {
-                    diagnosticView2()
-                }
-                .buttonStyle(.bordered)
+                printStore.log(message)
             }
-            .padding(.bottom, 30)
+            .buttonStyle(.borderedProminent)
+            
+            NavigationLink("Next Page") {
+                diagnosticView2()
+            }
+            .buttonStyle(.bordered)
         }
-        .padding()
+        .padding(.bottom, 30)
     }
+}
+
+#Preview {
+    diagnosticView1()
+        .environmentObject(PhotoStore())
+        .environmentObject(PrintStore())
 }
