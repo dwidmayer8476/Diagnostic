@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseFirestore
 @main
 struct DiagnosticApp: App {
     @StateObject var printStore = PrintStore()

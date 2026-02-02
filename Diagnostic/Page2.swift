@@ -70,6 +70,10 @@ struct diagnosticView2: View {
             NavigationLink("Next Page") {
                 diagnosticView3()
             }
+            NavigationLink("Previous Page") {
+                diagnosticView1()
+            }
+
         }
         .sheet(isPresented: $showCamera) {
             CameraPicker(images: .constant([])) { captured in
