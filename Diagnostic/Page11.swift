@@ -46,6 +46,9 @@ struct diagnosticView11: View {
             Button("Green") {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
+            TextField("Enter Notes", text: $notes.notes)
+                .frame(width: 300, height: 50)
+                .textFieldStyle(.roundedBorder)
             
             Button("Confirm?") {
                 let message = "page11: status=\(selectedColor)"
