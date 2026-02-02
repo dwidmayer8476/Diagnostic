@@ -1,7 +1,13 @@
-//
-//  UIAppview.swift
-//  Diagnostic
-//
-//  Created by Dylan J. Widmayer on 2/2/26.
-//
+import UIKit
+import SwiftUI
+import MessageUI
 
+class MailDelegate: NSObject, MFMailComposeViewControllerDelegate {
+    static let shared = MailDelegate()
+
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult,
+                               error: Error?) {
+        controller.dismiss(animated: true)
+    }
+}

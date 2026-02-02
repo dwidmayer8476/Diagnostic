@@ -1,7 +1,13 @@
-//
-//  MailDel.swift
-//  Diagnostic
-//
-//  Created by Dylan J. Widmayer on 2/2/26.
-//
+import UIKit
+import SwiftUI
+import MessageUI
 
+final class AppMailComposerDelegate: NSObject, MFMailComposeViewControllerDelegate {
+    static let shared = AppMailComposerDelegate()
+
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult,
+                               error: Error?) {
+        controller.dismiss(animated: true)
+    }
+}
