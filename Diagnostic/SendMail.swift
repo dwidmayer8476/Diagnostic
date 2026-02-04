@@ -4,9 +4,32 @@ import MessageUI
 
 
 struct ReportView: View {
+    var carInfo: carInfoClass? = nil
+    var statusLinesOverride: [String]? = nil
+
+    var notes: String
+    var statuses: [String]
+    var photos: [UIImage]
+
     @State private var pdfData: Data? = nil
     @State private var showMail = false
     @State private var showShare = false
+
+    init(carInfo: carInfoClass, stat: status, studentNotes: status.studentNotes, photos: [UIImage] = []) {
+        self.carInfo = carInfo
+        self.statusLinesOverride = ReportView.statusLines(from: stat)
+        self.notes = studentNotes.notes
+        self.statuses = self.statusLinesOverride ?? []
+        self.photos = photos
+    }
+
+    static func statusLines(from s: status) -> [String] {
+        var items: [String] = []
+        if s.red { items.append("Red: Issues detected") }
+        if s.yellow { items.append("Yellow: Warnings present") }
+        if s.green { items.append("Green: All checks passed") }
+        return items
+    }
 
     var body: some View {
         reportContent
@@ -47,8 +70,54 @@ struct ReportView: View {
             Text(Date().formatted(date: .abbreviated, time: .shortened))
                 .font(.subheadline).foregroundStyle(.secondary)
             Divider()
+
+            if let info = carInfo {
+                Text("Vehicle Info").font(.headline)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("VIN: \(info.carVin)")
+                    Text("Make: \(info.make)")
+                    Text("Year: \(info.year)")
+                    Text("Owner: \(info.carOwner)")
+                    Text("Gmail: \(info.carGmail)")
+                }
+                Divider()
+            }
+
             Text("Summary").font(.headline)
-            Text("• Item 1\n• Item 2\n• Item 3")
+            VStack(alignment: .leading, spacing: 6) {
+                let summaryStatuses = statusLinesOverride ?? statuses
+                if summaryStatuses.isEmpty {
+                    Text("No statuses provided.").foregroundStyle(.secondary)
+                } else {
+                    ForEach(summaryStatuses, id: \.self) { item in
+                        Text("• \(item)")
+                    }
+                }
+            }
+
+            Text("Notes").font(.headline).padding(.top, 8)
+            if notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Text("No notes provided.").foregroundStyle(.secondary)
+            } else {
+                Text(notes)
+            }
+
+            if !photos.isEmpty {
+                Text("Photos").font(.headline).padding(.top, 8)
+                let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+                LazyVGrid(columns: columns, spacing: 8) {
+                    ForEach(Array(photos.enumerated()), id: \.offset) { _, img in
+                        Image(uiImage: img)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 120)
+                            .clipped()
+                            .cornerRadius(6)
+                            .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.secondary.opacity(0.2)))
+                    }
+                }
+            }
+
             Spacer()
         }
         .padding()
@@ -79,7 +148,7 @@ func makePDF<Content: View>(from view: Content, pageSize: CGSize = .init(width: 
     #endif
 }
 
-// Minimal Mail composer wrapper
+
 struct MailComposer: UIViewControllerRepresentable {
     var subject: String
     var recipients: [String] = []
@@ -113,7 +182,7 @@ struct ShareSheet: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
-// Lightweight PDF preview
+
 struct PDFPreview: UIViewRepresentable {
     let data: Data
     func makeUIView(context: Context) -> PDFView { let v = PDFView(); v.autoScales = true; return v }
@@ -125,6 +194,10 @@ struct SendTheReportView: View {
     @State private var showMail = false
     @State private var showShare = false
 
+    let sampleStatuses = ["Battery: OK", "Storage: Low", "Network: Unstable"]
+    let sampleNotes = "User noted intermittent lag when launching app."
+    let samplePhotos: [UIImage] = []
+
     var body: some View {
         VStack(spacing: 16) {
             Group {
@@ -134,7 +207,7 @@ struct SendTheReportView: View {
 
             HStack(spacing: 12) {
                 Button {
-                    pdfData = makePDF(from: ReportView())
+                    pdfData = makePDF(from: ReportView(notes: sampleNotes, statuses: sampleStatuses, photos: samplePhotos))
                 } label: { Label("Generate PDF", systemImage: "doc.fill") }
                 .buttonStyle(.borderedProminent)
 
