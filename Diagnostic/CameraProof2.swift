@@ -81,12 +81,9 @@ struct CameraExampleView: View {
                 }
                 .padding()
                 .font(.title2)
-
-                NavigationLink(
-                    destination: ReviewPhotoView(image: lastCapturedImage),
-                    isActive: $navigateToReview
-                ) { EmptyView() }
-                .hidden()
+            }
+            .navigationDestination(isPresented: $navigateToReview) {
+                ReviewPhotoView(image: lastCapturedImage)
             }
             .navigationTitle("Camera")
             .sheet(isPresented: $showCamera) {
