@@ -21,6 +21,11 @@ struct PrintSummaryView: View {
             }
             .padding()
         }
+        NavigationStack {
+            NavigationLink("Send PDF"){
+                ReportView()
+            }
+        }
     }
 }
 
