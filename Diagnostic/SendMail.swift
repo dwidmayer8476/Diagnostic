@@ -11,6 +11,15 @@ struct ReportView: View {
     var statuses: [String]
     var photos: [UIImage]
 
+    // Convenience initializer used by previews and SendTheReportView
+    init(notes: String, statuses: [String], photos: [UIImage] = []) {
+        self.carInfo = nil
+        self.statusLinesOverride = nil
+        self.notes = notes
+        self.statuses = statuses
+        self.photos = photos
+    }
+
     @State private var pdfData: Data? = nil
     @State private var showMail = false
     @State private var showShare = false
@@ -240,6 +249,4 @@ struct SendTheReportView: View {
 #Preview {
     NavigationStack { SendTheReportView() }
 }
-
-
 
