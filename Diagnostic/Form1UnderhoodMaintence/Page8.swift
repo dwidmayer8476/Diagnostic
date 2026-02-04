@@ -46,7 +46,7 @@ struct diagnosticView8: View {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
             
-            TextField("Enter Notes", text: $notes.notes)
+            TextField("Enter Notes", text: $notes)
                 .frame(width: 300, height: 50)
                 .textFieldStyle(.roundedBorder)
             
