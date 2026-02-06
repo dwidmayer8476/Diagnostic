@@ -5,6 +5,7 @@ struct diagnosticView1: View {
     @EnvironmentObject var printStore: PrintStore
     
     @State var car = carInfoClass(carVin: "", make: "", year: 0, carOwner: "", carGmail: "")
+    @State private var yearText: String = ""
     @State private var notes: String = ""
     @State private var checkInDate: Date = Date()
     @State private var useExplicitMeridiem: Bool = false
@@ -31,7 +32,7 @@ struct diagnosticView1: View {
                         .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
                     
-                    TextField("Enter Year", value: $car.year, format: .number)
+                    TextField("Enter Year", text: $yearText)
                         .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
                     
@@ -86,6 +87,13 @@ struct diagnosticView1: View {
                 formatter.dateStyle = .medium
                 formatter.timeStyle = .short
                 
+                let trimmedYear = yearText.trimmingCharacters(in: .whitespacesAndNewlines)
+                if let parsedYear = Int(trimmedYear) {
+                    car.year = parsedYear
+                } else {
+                    car.year = 0
+                }
+                
                 let message = """
                                 Confirmed Car:
                                 VIN: \(car.carVin)
@@ -114,3 +122,4 @@ struct diagnosticView1: View {
         .environmentObject(PhotoStore())
         .environmentObject(PrintStore())
 }
+
