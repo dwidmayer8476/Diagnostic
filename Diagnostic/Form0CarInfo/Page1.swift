@@ -12,54 +12,62 @@ struct diagnosticView1: View {
     
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text("Car Information")
                 .font(.largeTitle)
                 .foregroundStyle(.red)
-                .padding(.bottom, 20)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.bottom, 40)
             
             
-            HStack(alignment: .top, spacing: 60) {
+            HStack(alignment: .top, spacing: 80) {
                 
                 
-                VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
                     TextField("Enter VIN", text: $car.carVin)
-                        .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                     TextField("Enter Make", text: $car.make)
-                        .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                     TextField("Enter Year", value: $car.year, format: .number)
-                        .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                     TextField("Enter Owner", text: $car.carOwner)
-                        .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     TextField("Enter Car Owner's Gmail", text: $car.carGmail)
-                        .frame(width: 300, height: 50)
                         .textFieldStyle(.roundedBorder)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                 }
                 
-                VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Check-in Date").font(.caption).foregroundStyle(.secondary).textFieldStyle(.roundedBorder).foregroundStyle(Color.black)
                     DatePicker(
                         "Check-in Date",
                         selection: $checkInDate,
                         displayedComponents: .date
                     )
                     .datePickerStyle(.wheel)
-                    .frame(width: 250)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
+                    Text("Check-in Time").font(.caption).foregroundStyle(.secondary).textFieldStyle(.roundedBorder).foregroundStyle(Color.black)
                     DatePicker(
                         "Check-in Time",
                         selection: $checkInDate,
                         displayedComponents: .hourAndMinute
                     )
                     .datePickerStyle(.wheel)
-                    .frame(width: 250)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     if useExplicitMeridiem {
                         Picker("AM/PM", selection: $meridiemSelection) {
@@ -67,13 +75,14 @@ struct diagnosticView1: View {
                             Text("PM").tag("PM")
                         }
                         .pickerStyle(.segmented)
-                        .frame(width: 200)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 TextField("Enter Notes", text: $notes)
-                    .frame(width: 300, height: 50)
                     .textFieldStyle(.roundedBorder)
+                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
                 
+                Spacer()
             }
         }
         
@@ -114,3 +123,4 @@ struct diagnosticView1: View {
         .environmentObject(PhotoStore())
         .environmentObject(PrintStore())
 }
+
