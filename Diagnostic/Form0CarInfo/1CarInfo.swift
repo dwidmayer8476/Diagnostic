@@ -24,35 +24,37 @@ struct diagnosticView1: View {
             HStack(alignment: .top, spacing: 80) {
                 
                 
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .center, spacing: 15) {
                     TextField("Enter VIN", text: $car.carVin)
                         .textFieldStyle(.roundedBorder)
-                        .frame(height: 50)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
                     
                     TextField("Enter Make", text: $car.make)
                         .textFieldStyle(.roundedBorder)
-                        .frame(height: 50)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
                     
                     TextField("Enter Year", text: $yearText)
                         .textFieldStyle(.roundedBorder)
-                        .frame(height: 50)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
                     
                     TextField("Enter Owner", text: $car.carOwner)
                         .textFieldStyle(.roundedBorder)
-                        .frame(height: 50)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        
                     TextField("Enter Car Owner's Gmail", text: $car.carGmail)
                         .textFieldStyle(.roundedBorder)
-                        .frame(height: 50)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
                     
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
                 
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("Check-in Date").font(.caption).foregroundStyle(.secondary).textFieldStyle(.roundedBorder).foregroundStyle(Color.black)
+                    Text("Check-in Date").font(.title3).textFieldStyle(.roundedBorder).foregroundStyle(Color.black).frame(maxWidth: .infinity, alignment: .center)
                     DatePicker(
                         "Check-in Date",
                         selection: $checkInDate,
@@ -61,7 +63,7 @@ struct diagnosticView1: View {
                     .datePickerStyle(.wheel)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("Check-in Time").font(.caption).foregroundStyle(.secondary).textFieldStyle(.roundedBorder).foregroundStyle(Color.black)
+                    Text("Check-in Time").font(.title3).textFieldStyle(.roundedBorder).foregroundStyle(Color.black).frame(maxWidth: .infinity, alignment: .center)
                     DatePicker(
                         "Check-in Time",
                         selection: $checkInDate,
@@ -79,10 +81,18 @@ struct diagnosticView1: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                TextField("Enter Notes", text: $notes)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
-                
+                VStack(alignment: .center, spacing: 8) {
+                    Text("Student Notes")
+                        .font(.title3)
+                        .foregroundStyle(Color.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    TextField("Enter Notes", text: $notes)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 300, height: 50)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .frame(maxWidth: .infinity)
+
                 Spacer()
             }
         }
