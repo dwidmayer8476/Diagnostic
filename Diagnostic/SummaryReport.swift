@@ -25,7 +25,7 @@ struct PrintSummaryView: View {
                 // Use the collected messages as status lines, empty notes by default, and any photos stored for summary if available
                 let statuses = printStore.messages
                 let notes = ""
-                let photos = photoStore.imagesByKey.values.flatMap { $0 }
+                let photos = photoStore.imagesByKey.values.compactMap { $0 }
                 ReportView(notes: notes, statuses: statuses, photos: photos)
             }
         }
