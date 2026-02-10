@@ -63,6 +63,9 @@ struct diagnosticView23: View {
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.roundedRectangle)
+            .controlSize(.large)
             
             Button("Take Photo for Page 23") {
                 showCamera = true

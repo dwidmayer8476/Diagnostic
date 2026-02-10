@@ -11,7 +11,7 @@ struct ReportView: View {
     var statuses: [String]
     var photos: [UIImage]
 
-
+    
     init(notes: String, statuses: [String], photos: [UIImage] = []) {
         self.carInfo = nil
         self.statusLinesOverride = nil

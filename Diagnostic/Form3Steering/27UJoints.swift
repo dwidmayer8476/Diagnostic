@@ -62,6 +62,10 @@ struct diagnosticView27: View {
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.roundedRectangle)
+            .controlSize(.large)
+            
             Text("status: \(selectedColor)")
             
             Button("Take Photo for Page 27") {
