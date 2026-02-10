@@ -95,12 +95,7 @@ struct diagnosticView1: View {
                 formatter.dateStyle = .medium
                 formatter.timeStyle = .short
                 
-                let trimmedYear = yearText.trimmingCharacters(in: .whitespacesAndNewlines)
-                if let parsedYear = Int(trimmedYear) {
-                    car.year = parsedYear
-                } else {
-                    car.year = 0
-                }
+                if car.year < 0 { car.year = 0 }
                 
                 let message = """
                                 Confirmed Car:

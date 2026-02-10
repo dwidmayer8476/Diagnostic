@@ -80,4 +80,3 @@ struct diagnosticView6: View {
         }
     }
 }
-

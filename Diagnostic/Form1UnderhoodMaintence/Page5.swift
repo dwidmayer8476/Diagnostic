@@ -80,5 +80,3 @@ struct diagnosticView5: View {
         }
     }
 }
-
-

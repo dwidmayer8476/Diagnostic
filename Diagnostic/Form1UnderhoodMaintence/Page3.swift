@@ -82,4 +82,3 @@ struct diagnosticView3: View {
         }
     }
 }
-
