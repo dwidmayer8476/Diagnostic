@@ -59,6 +59,9 @@ struct diagnosticView7: View {
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.roundedRectangle)
+            .controlSize(.large)
             
             Text("status: \(selectedColor)")
             
