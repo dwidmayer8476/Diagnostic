@@ -18,7 +18,11 @@ struct ContentView: View {
                     .foregroundStyle(.tint)
                 
                 VStack {
-                    
+                    Text("Welcome To Diagnostic")
+                        .font(.system(size: 48, weight: .heavy, design: .default))
+                        .foregroundStyle(.white)
+                        .shadow(color: .black.opacity(0.6), radius: 6, x: 0, y: 30)
+                        .padding(.bottom, 40)
                     NavigationLink {
                         diagnosticView1()
                     } label: {
@@ -31,6 +35,19 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .padding(.horizontal, 30)
+                   
+                    NavigationLink {
+                        PrintSummaryView()
+                    } label: {
+                        Text("See Past Reports")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: 650)
+                            .frame(maxHeight: 100)
+                            .padding(.vertical, 18)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding(15)
                 }
                 
             }

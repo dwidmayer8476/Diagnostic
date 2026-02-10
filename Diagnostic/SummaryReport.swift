@@ -22,7 +22,7 @@ struct PrintSummaryView: View {
         }
         NavigationStack {
             NavigationLink("Send PDF") {
-                // Use the collected messages as status lines, empty notes by default, and any photos stored for summary if available
+               
                 let statuses = printStore.messages
                 let notes = ""
                 let photos = photoStore.imagesByKey.values.compactMap { $0 }
