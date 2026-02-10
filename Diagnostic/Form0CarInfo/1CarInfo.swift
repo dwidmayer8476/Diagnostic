@@ -54,7 +54,7 @@ struct diagnosticView1: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("Check-in Date").font(.caption).textFieldStyle(.roundedBorder).foregroundStyle(Color.black).frame(maxWidth: .infinity, alignment: .center)
+                    Text("Check-in Date").font(.title3).textFieldStyle(.roundedBorder).foregroundStyle(Color.black).frame(maxWidth: .infinity, alignment: .center)
                     DatePicker(
                         "Check-in Date",
                         selection: $checkInDate,
@@ -63,7 +63,7 @@ struct diagnosticView1: View {
                     .datePickerStyle(.wheel)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("Check-in Time").font(.caption).textFieldStyle(.roundedBorder).foregroundStyle(Color.black).frame(maxWidth: .infinity, alignment: .center)
+                    Text("Check-in Time").font(.title3).textFieldStyle(.roundedBorder).foregroundStyle(Color.black).frame(maxWidth: .infinity, alignment: .center)
                     DatePicker(
                         "Check-in Time",
                         selection: $checkInDate,
@@ -83,7 +83,7 @@ struct diagnosticView1: View {
                 }
                 VStack(alignment: .center, spacing: 8) {
                     Text("Student Notes")
-                        .font(.caption)
+                        .font(.title3)
                         .foregroundStyle(Color.black)
                         .frame(maxWidth: .infinity, alignment: .center)
                     TextField("Enter Notes", text: $notes)

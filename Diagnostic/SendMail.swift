@@ -135,26 +135,64 @@ struct ReportView: View {
 }
 
 func makePDF<Content: View>(from view: Content, pageSize: CGSize = .init(width: 612, height: 792), margins: CGFloat = 24) -> Data? {
-    #if canImport(UIKit)
+#if canImport(UIKit)
+    // Measure the SwiftUI view to determine content size within the printable width
+    let printableWidth = pageSize.width - margins * 2
+    // Use a hosting controller to size the content
+    let host = UIHostingController(rootView: view)
+    host.view.backgroundColor = .systemBackground
+    // Constrain the width to printableWidth and ask Auto Layout for fitting height
+    host.view.translatesAutoresizingMaskIntoConstraints = false
+    let targetSize = CGSize(width: printableWidth, height: UIView.layoutFittingCompressedSize.height)
+
+    // Create a container to help systemLayoutSizeFitting resolve width constraints
+    let container = UIView(frame: CGRect(origin: .zero, size: CGSize(width: printableWidth, height: 10)))
+    container.addSubview(host.view)
+    NSLayoutConstraint.activate([
+        host.view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+        host.view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+        host.view.topAnchor.constraint(equalTo: container.topAnchor)
+    ])
+    // Ask for the best fitting size at the constrained width
+    let fittingSize = host.view.systemLayoutSizeFitting(
+        targetSize,
+        withHorizontalFittingPriority: .required,
+        verticalFittingPriority: .fittingSizeLevel
+    )
+
+    // Determine total content height and pagination parameters
+    let contentHeight = max(ceil(fittingSize.height), 1)
+    let printableHeight = pageSize.height - margins * 2
+
+    // Prepare PDF renderer
     let bounds = CGRect(origin: .zero, size: pageSize)
     let renderer = UIGraphicsPDFRenderer(bounds: bounds)
+
     let data = renderer.pdfData { ctx in
-        ctx.beginPage()
-        let cg = ctx.cgContext
-        cg.saveGState()
-        cg.translateBy(x: margins, y: margins)
-        let contentSize = CGSize(width: pageSize.width - margins*2, height: pageSize.height - margins*2)
-        let host = UIHostingController(rootView: view)
-        host.view.backgroundColor = .systemBackground
-        host.view.frame = CGRect(origin: .zero, size: contentSize)
-        host.view.layoutIfNeeded()
-        host.view.layer.render(in: cg)
-        cg.restoreGState()
+        // Render across as many pages as needed by vertically offsetting the layer
+        var yOffset: CGFloat = 0
+        let totalPages = max(Int(ceil(contentHeight / printableHeight)), 1)
+
+        for _ in 0..<totalPages {
+            ctx.beginPage()
+            let cg = ctx.cgContext
+            cg.saveGState()
+            // Translate into printable area and apply page offset
+            cg.translateBy(x: margins, y: margins - yOffset)
+
+            // Ensure the host view has the full content frame so we can offset-render
+            host.view.frame = CGRect(origin: .zero, size: CGSize(width: printableWidth, height: contentHeight))
+            host.view.layoutIfNeeded()
+            host.view.layer.render(in: cg)
+
+            cg.restoreGState()
+            yOffset += printableHeight
+        }
     }
     return data
-    #else
+#else
     return nil
-    #endif
+#endif
 }
 
 
