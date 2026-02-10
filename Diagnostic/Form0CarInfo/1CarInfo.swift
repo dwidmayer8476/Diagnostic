@@ -119,7 +119,7 @@ struct diagnosticView1: View {
                                 Confirmed Car:
                                 VIN: \(car.carVin)
                                 Make: \(car.make)
-                                Year: \(yearDisplay)
+                                Year: \(car.year)
                                 Owner: \(car.carOwner)
                                 Check-in: \(formatter.string(from: checkInDate))
                                 Notes: \(notes)

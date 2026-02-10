@@ -21,6 +21,7 @@ struct diagnosticView19: View {
         return "None"
     }
     
+    
     @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
         VStack(spacing: 20) {
@@ -46,11 +47,11 @@ struct diagnosticView19: View {
             Button("Green") {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
+            Text("status: \(selectedColor)")
             
             TextField("Enter Notes", text: $notes)
                 .frame(width: 300, height: 50)
                 .textFieldStyle(.roundedBorder)
-            Text("status: \(selectedColor)")
             
             Button("Confirm?") {
                 let message = """

@@ -45,6 +45,8 @@ struct diagnosticView7: View {
                 status = DiagnosticStatus(red: false, yellow: false, green: true)
             }
             
+            Text("status: \(selectedColor)")
+            
             TextField("Enter Notes", text: $notes)
                 .frame(width: 300, height: 50)
                 .textFieldStyle(.roundedBorder)
@@ -62,8 +64,6 @@ struct diagnosticView7: View {
             .buttonStyle(.bordered)
             .buttonBorderShape(.roundedRectangle)
             .controlSize(.large)
-            
-            Text("status: \(selectedColor)")
             
             Button("Take Photo for Page 7") {
                 showCamera = true
