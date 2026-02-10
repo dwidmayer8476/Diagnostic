@@ -5,10 +5,11 @@ struct diagnosticView1: View {
     @EnvironmentObject var printStore: PrintStore
     
     @State var car = carInfoClass(carVin: "", make: "", year: 0, carOwner: "", carGmail: "")
-    @State private var notes: String = ""
+    @State private var yearText: String = ""
     @State private var checkInDate: Date = Date()
     @State private var useExplicitMeridiem: Bool = false
     @State private var meridiemSelection: String = "AM"
+    @State private var notes: String = ""
     
     
     var body: some View {
@@ -34,7 +35,7 @@ struct diagnosticView1: View {
                         .frame(width: 200, height: 45)
                         .frame(maxWidth: .infinity, alignment: .center)
                     
-                    TextField("Enter Year", value: $car.year, format: .number)
+                    TextField("Enter Year", text: $yearText)
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 200, height: 45)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -105,13 +106,20 @@ struct diagnosticView1: View {
                 formatter.dateStyle = .medium
                 formatter.timeStyle = .short
                 
+                if let parsedYear = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
+                    car.year = parsedYear
+                } else {
+                    car.year = 0
+                }
+                
                 if car.year < 0 { car.year = 0 }
                 
+                let yearDisplay = car.year > 0 ? String(car.year) : "Enter Year"
                 let message = """
                                 Confirmed Car:
                                 VIN: \(car.carVin)
                                 Make: \(car.make)
-                                Year: \(car.year)
+                                Year: \(yearDisplay)
                                 Owner: \(car.carOwner)
                                 Check-in: \(formatter.string(from: checkInDate))
                                 Notes: \(notes)
