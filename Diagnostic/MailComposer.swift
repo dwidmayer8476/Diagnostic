@@ -17,17 +17,18 @@ struct MailComposerSheet: View {
     var attachmentURL: URL?
     var attachmentMimeType: String?
     var attachmentFileName: String?
-
+    var carOwnerGmail: String
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingMailComposer = false
     @State private var canSendMail = false
 
     var body: some View {
+        
         Group {
             if canSendMail {
                 MailComposeViewControllerWrapper(subject: subject,
                                                  messageBody: messageBody,
-                                                 recipients: recipients,
+                                                 recipients: recipients ?? [carOwnerGmail, "jim.vanbladel@d214.org"],
                                                  attachmentURL: attachmentURL,
                                                  attachmentMimeType: attachmentMimeType,
                                                  attachmentFileName: attachmentFileName,
@@ -41,7 +42,7 @@ struct MailComposerSheet: View {
                     }) {
                         MailComposeViewControllerWrapper(subject: subject,
                                                          messageBody: messageBody,
-                                                         recipients: recipients,
+                                                         recipients: recipients ?? [carOwnerGmail, "jim.vanbladel@d214.org"],
                                                          attachmentURL: attachmentURL,
                                                          attachmentMimeType: attachmentMimeType,
                                                          attachmentFileName: attachmentFileName,

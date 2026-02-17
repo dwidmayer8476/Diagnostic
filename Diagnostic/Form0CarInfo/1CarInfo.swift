@@ -142,4 +142,3 @@ struct diagnosticView1: View {
         .environmentObject(PhotoStore())
         .environmentObject(PrintStore())
 }
-
