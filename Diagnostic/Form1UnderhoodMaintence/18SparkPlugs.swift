@@ -84,9 +84,9 @@ struct diagnosticView18: View {
             }
         }
         .sheet(isPresented: $showCamera) {
-            CameraPicker(images: .constant([])) { captured in
+            CameraPicker(images: .constant([]), onConfirm:  { captured in
                 photoStore.imagesByKey[photoKey] = captured
-            }
+            })
         }
     }
 }
