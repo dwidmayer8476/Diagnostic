@@ -57,7 +57,7 @@ struct diagnosticView28: View {
             
             Button("Confirm?") {
                 let message = """
-                page12: status=\(selectedColor)
+                page28: status=\(selectedColor)
                 notes: \(notes)
                 """
                 

@@ -124,7 +124,7 @@ struct diagnosticView1: View {
                                 Notes: \(notes)
                                 """
                 
-                printStore.log(message, for: "page1")
+                printStore.log(message, for: <#String#>)
             }
             .buttonStyle(.borderedProminent)
             
