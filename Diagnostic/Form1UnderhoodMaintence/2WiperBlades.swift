@@ -1,11 +1,13 @@
 import SwiftUI
+import UIKit
 
 struct diagnosticView2: View {
-    @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
     @State private var showCamera = false
+    @State private var isShowingReview = false
+    @State private var pendingImage: UIImage?
+    @State private var savedImage: UIImage?
     @State private var notes: String = ""
-    private let photoKey = "page2"
     
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
@@ -68,7 +70,13 @@ struct diagnosticView2: View {
             .buttonBorderShape(.roundedRectangle)
             .controlSize(.large)
             
-            
+            if let savedImage {
+                Image(uiImage: savedImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 120)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
             
             Button("Take Photo for Page 2") {
                 showCamera = true
@@ -84,9 +92,27 @@ struct diagnosticView2: View {
 
         }
         .sheet(isPresented: $showCamera) {
-            CameraPicker(images: .constant([])) { captured in
-                photoStore.imagesByKey[photoKey] = captured
-            }
+            CameraPicker(images: .constant([]), onCapture: { captured in
+                pendingImage = captured
+                isShowingReview = true
+            })
+        }
+        .sheet(isPresented: $isShowingReview) {
+            ReviewPhotoActionSheet(
+                image: pendingImage,
+                onUse: {
+                    if let img = pendingImage {
+                        savedImage = img
+                    }
+                    pendingImage = nil
+                    isShowingReview = false
+                },
+                onRetake: {
+                    pendingImage = nil
+                    isShowingReview = false
+                    showCamera = true
+                }
+            )
         }
     }
 }
