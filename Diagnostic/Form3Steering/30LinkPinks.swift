@@ -26,6 +26,11 @@ struct diagnosticView30: View {
     var body: some View {
         VStack(spacing: 20) {
             
+            Image("Rules")
+                .resizable()
+                .scaledToFit()
+                .padding()
+            
             Text("Steering & Suspension")
                 .font(.largeTitle)
                 .foregroundStyle(.red)
@@ -34,18 +39,16 @@ struct diagnosticView30: View {
             Text("Link Pinks")
                 .font(.largeTitle)
             
-            Image("Rules")
-            
-            Button("Red") {
-                status = DiagnosticStatus(red: true, yellow: false, green: false)
-            }
-            
-            Button("Yellow") {
-                status = DiagnosticStatus(red: false, yellow: true, green: false)
-            }
-            
-            Button("Green") {
-                status = DiagnosticStatus(red: false, yellow: false, green: true)
+            HStack(spacing: 25) {
+                Button("Green") {
+                    status = DiagnosticStatus(red: false, yellow: false, green: true)
+                }
+                Button("Yellow") {
+                    status = DiagnosticStatus(red: false, yellow: true, green: false)
+                }
+                Button("Red") {
+                    status = DiagnosticStatus(red: true, yellow: false, green: false)
+                }
             }
             Text("status: \(selectedColor)")
             
@@ -55,11 +58,11 @@ struct diagnosticView30: View {
             
             Button("Confirm?") {
                 let message = """
-                page2: status=\(selectedColor)
+                page30: status=\(selectedColor)
                 notes: \(notes)
                 """
                 
-                printStore.log(message)
+                printStore.log(message,for: <#String#>)
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

@@ -22,6 +22,10 @@ struct diagnosticView3: View {
     
     var body: some View {
         VStack(spacing: 20) {
+            Image("Rules")
+                .resizable()
+                .scaledToFit()
+                .padding()
             
             Text("Under Hood / Maintenance Service")
                 .font(.largeTitle)
@@ -31,57 +35,56 @@ struct diagnosticView3: View {
             Text("Head Lights")
                 .font(.largeTitle)
             
-            Image("Rules")
-            
-            Button("Red") {
-                status = DiagnosticStatus(red: true, yellow: false, green: false)
+            HStack(spacing: 25) {
+                Button("Green") {
+                    status = DiagnosticStatus(red: false, yellow: false, green: true)
+                }
+                Button("Yellow") {
+                    status = DiagnosticStatus(red: false, yellow: true, green: false)
+                }
+                Button("Red") {
+                    status = DiagnosticStatus(red: true, yellow: false, green: false)
+                }
             }
-            
-            Button("Yellow") {
-                status = DiagnosticStatus(red: false, yellow: true, green: false)
-            }
-            
-            Button("Green") {
-                status = DiagnosticStatus(red: false, yellow: false, green: true)
-            }
-            
-            Text("status: \(selectedColor)")
-            
-            TextField("Enter Notes", text: $notes)
-                .frame(width: 300, height: 50)
-                .textFieldStyle(.roundedBorder)
-            
-            Button("Confirm?") {
-                let message = """
+                
+                Text("status: \(selectedColor)")
+                
+                TextField("Enter Notes", text: $notes)
+                    .frame(width: 300, height: 50)
+                    .textFieldStyle(.roundedBorder)
+                
+                Button("Confirm?") {
+                    let message = """
                 page3: status=\(selectedColor)
                 Notes: \(notes)
                 """
+                    
+                    printStore.log(message, for: <#String#>)
+                }
+                .font(.largeTitle)
+                .foregroundStyle(.red)
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.roundedRectangle)
+                .controlSize(.large)
                 
-                printStore.log(message)
+                Button("Take Photo for Page 3") {
+                    showCamera = true
+                }
+                .buttonStyle(.bordered)
+                
+                NavigationLink("Next Page") {
+                    diagnosticView4()
+                }
+                
+                NavigationLink("Previous Page") {
+                    diagnosticView2()
+                }
             }
-            .font(.largeTitle)
-            .foregroundStyle(.red)
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.roundedRectangle)
-            .controlSize(.large)
-            
-            Button("Take Photo for Page 3") {
-                showCamera = true
-            }
-            .buttonStyle(.bordered)
-            
-            NavigationLink("Next Page") {
-                diagnosticView4()
-            }
-            
-            NavigationLink("Previous Page") {
-                diagnosticView2()
-            }
-        }
-        .sheet(isPresented: $showCamera) {
-            CameraPicker(images: .constant([])) { captured in
-                photoStore.imagesByKey[photoKey] = captured
+            .sheet(isPresented: $showCamera) {
+                CameraPicker(images: .constant([])) { captured in
+                    photoStore.imagesByKey[photoKey] = captured
+                }
             }
         }
     }
-}
+
