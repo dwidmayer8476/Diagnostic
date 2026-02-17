@@ -11,6 +11,7 @@ import UIKit
 struct CameraPicker: UIViewControllerRepresentable {
     @Binding var images: [UIImage]
     var onCapture: ((UIImage) -> Void)? = nil
+    var onConfirm: ((UIImage) -> Void)? = nil
 
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
@@ -51,8 +52,8 @@ struct CameraPicker: UIViewControllerRepresentable {
 struct CameraExampleView: View {
     @State private var showCamera = false
     @State private var images: [UIImage] = []
-    @State private var navigateToReview = false
-    @State private var lastCapturedImage: UIImage?
+    @State private var isShowingReview = false
+    @State private var pendingImage: UIImage?
 
     var body: some View {
         NavigationStack {
@@ -82,36 +83,65 @@ struct CameraExampleView: View {
                 .padding()
                 .font(.title2)
             }
-            .navigationDestination(isPresented: $navigateToReview) {
-                ReviewPhotoView(image: lastCapturedImage)
-            }
             .navigationTitle("Camera")
             .sheet(isPresented: $showCamera) {
-                CameraPicker(images: $images) { captured in
-                    lastCapturedImage = captured
-                    navigateToReview = true
-                }
+                CameraPicker(images: $images, onCapture: { captured in
+                    pendingImage = captured
+                    isShowingReview = true
+                })
+            }
+            .sheet(isPresented: $isShowingReview) {
+                ReviewPhotoActionSheet(
+                    image: pendingImage,
+                    onUse: {
+                        if let img = pendingImage {
+                            // If needed, append to images or forward to a store
+                            images.append(img)
+                        }
+                        pendingImage = nil
+                        isShowingReview = false
+                    },
+                    onRetake: {
+                        pendingImage = nil
+                        isShowingReview = false
+                        showCamera = true
+                    }
+                )
             }
         }
     }
 }
 
-struct ReviewPhotoView: View {
+struct ReviewPhotoActionSheet: View {
     let image: UIImage?
+    let onUse: () -> Void
+    let onRetake: () -> Void
 
     var body: some View {
-        VStack {
-            if let image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .padding()
-            } else {
-                Text("No image to review")
-                    .foregroundColor(.secondary)
+        NavigationStack {
+            VStack(spacing: 16) {
+                if let image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding()
+                } else {
+                    Text("No image to review")
+                        .foregroundColor(.secondary)
+                }
+
+                HStack {
+                    Button("Retake", role: .destructive, action: onRetake)
+                    Spacer()
+                    Button("Use Photo", action: onUse)
+                        .buttonStyle(.borderedProminent)
+                }
+                .padding(.horizontal)
             }
+            .navigationTitle("Review Photo")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle("Review")
     }
 }
 

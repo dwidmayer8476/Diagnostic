@@ -38,3 +38,8 @@ struct status: Identifiable {
     }
 
         }
+import Foundation
+
+struct StudentNotes {
+    var notes: String
+}
