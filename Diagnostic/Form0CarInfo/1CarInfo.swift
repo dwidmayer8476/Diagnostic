@@ -114,7 +114,6 @@ struct diagnosticView1: View {
                 
                 if car.year < 0 { car.year = 0 }
                 
-                let yearDisplay = car.year > 0 ? String(car.year) : "Enter Year"
                 let message = """
                                 Confirmed Car:
                                 VIN: \(car.carVin)
@@ -125,7 +124,7 @@ struct diagnosticView1: View {
                                 Notes: \(notes)
                                 """
                 
-                printStore.log(message)
+                printStore.log(message, for: "CarInfo")
             }
             .buttonStyle(.borderedProminent)
             
@@ -143,4 +142,3 @@ struct diagnosticView1: View {
         .environmentObject(PhotoStore())
         .environmentObject(PrintStore())
 }
-

@@ -25,6 +25,11 @@ struct diagnosticView23: View {
     
     var body: some View {
         VStack(spacing: 20) {
+           
+            Image("Rules")
+                .resizable()
+                .scaledToFit()
+                .padding()
             
             Text("Under Hood / Maintenance Service")
                 .font(.largeTitle)
@@ -34,18 +39,16 @@ struct diagnosticView23: View {
             Text("Timing Belt")
                 .font(.largeTitle)
             
-            Image("Rules")
-            
-            Button("Red") {
-                status = DiagnosticStatus(red: true, yellow: false, green: false)
-            }
-            
-            Button("Yellow") {
-                status = DiagnosticStatus(red: false, yellow: true, green: false)
-            }
-            
-            Button("Green") {
-                status = DiagnosticStatus(red: false, yellow: false, green: true)
+            HStack(spacing: 25) {
+                Button("Green") {
+                    status = DiagnosticStatus(red: false, yellow: false, green: true)
+                }
+                Button("Yellow") {
+                    status = DiagnosticStatus(red: false, yellow: true, green: false)
+                }
+                Button("Red") {
+                    status = DiagnosticStatus(red: true, yellow: false, green: false)
+                }
             }
             Text("status: \(selectedColor)")
             
@@ -55,11 +58,11 @@ struct diagnosticView23: View {
             
             Button("Confirm?") {
                 let message = """
-                page2: status=\(selectedColor)
+                page23: status=\(selectedColor)
                 notes: \(notes)
                 """
                 
-                printStore.log(message)
+                printStore.log(message,for: "TimingBelt")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

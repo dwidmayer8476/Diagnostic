@@ -25,6 +25,11 @@ struct diagnosticView11: View {
     var body: some View {
         VStack(spacing: 20) {
             
+            Image("Rules")
+                .resizable()
+                .scaledToFit()
+                .padding()
+            
             Text("Under Hood / Maintenance Service")
                 .font(.largeTitle)
                 .foregroundStyle(.red)
@@ -32,19 +37,18 @@ struct diagnosticView11: View {
             
             Text("Coolant Hoses")
                 .font(.largeTitle)
+        
             
-            Image("Rules")
-            
-            Button("Red") {
-                status = DiagnosticStatus(red: true, yellow: false, green: false)
-            }
-            
-            Button("Yellow") {
-                status = DiagnosticStatus(red: false, yellow: true, green: false)
-            }
-            
-            Button("Green") {
-                status = DiagnosticStatus(red: false, yellow: false, green: true)
+            HStack(spacing: 25) {
+                Button("Green") {
+                    status = DiagnosticStatus(red: false, yellow: false, green: true)
+                }
+                Button("Yellow") {
+                    status = DiagnosticStatus(red: false, yellow: true, green: false)
+                }
+                Button("Red") {
+                    status = DiagnosticStatus(red: true, yellow: false, green: false)
+                }
             }
             
             Text("status: \(selectedColor)")
@@ -54,8 +58,12 @@ struct diagnosticView11: View {
                 .textFieldStyle(.roundedBorder)
             
             Button("Confirm?") {
-                let message = "page11: status=\(selectedColor)"
-                printStore.log(message)
+                let message = """
+                page11: status=\(selectedColor)
+                notes: \(notes)
+                """
+                
+                printStore.log(message,for: "CoolantHoses")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
