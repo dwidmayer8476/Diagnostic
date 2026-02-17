@@ -57,10 +57,10 @@ struct diagnosticView2: View {
             Button("Confirm?") {
                 let message = """
                 page2: status=\(selectedColor)
-                notes: \(notes)
+                Notes: \(notes)
                 """
                 
-                printStore.log(message, for: "WiperBlades")
+                printStore.log(message,for: "WiperBlades")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
