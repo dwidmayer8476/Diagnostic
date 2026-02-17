@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct diagnosticView37: View {
@@ -61,7 +60,7 @@ struct diagnosticView37: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message, for: "Shocks")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
@@ -84,3 +83,4 @@ struct diagnosticView37: View {
         }
     }
 }
+

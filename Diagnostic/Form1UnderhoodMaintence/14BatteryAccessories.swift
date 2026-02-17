@@ -61,7 +61,7 @@ struct diagnosticView14: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "BatteryAccessories")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

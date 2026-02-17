@@ -65,7 +65,7 @@ struct diagnosticView22: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "PowerSteeringHose")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

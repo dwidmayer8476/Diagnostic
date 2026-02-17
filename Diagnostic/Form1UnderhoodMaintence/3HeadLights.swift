@@ -59,7 +59,7 @@ struct diagnosticView3: View {
                 Notes: \(notes)
                 """
                     
-                    printStore.log(message, for: <#String#>)
+                    printStore.log(message, for: "HeadLights")
                 }
                 .font(.largeTitle)
                 .foregroundStyle(.red)
@@ -87,4 +87,5 @@ struct diagnosticView3: View {
             }
         }
     }
+
 

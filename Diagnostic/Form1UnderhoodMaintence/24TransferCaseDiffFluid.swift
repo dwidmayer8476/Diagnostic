@@ -62,7 +62,7 @@ struct diagnosticView24: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "TransferCaseDiffFluid")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

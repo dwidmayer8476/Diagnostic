@@ -63,7 +63,7 @@ struct diagnosticView16: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "Belts")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

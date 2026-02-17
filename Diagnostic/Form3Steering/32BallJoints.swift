@@ -63,7 +63,7 @@ struct diagnosticView32: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "BallJoints")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

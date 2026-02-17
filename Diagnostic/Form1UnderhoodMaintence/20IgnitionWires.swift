@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-struct diagnosticView30: View {
+struct diagnosticView20: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
     struct DiagnosticStatus: CustomStringConvertible {
@@ -10,11 +10,9 @@ struct diagnosticView30: View {
         var green: Bool
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
-    
-    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     @State private var showCamera = false
     @State private var notes: String = ""
-    private let photoKey = "page30"
+    private let photoKey = "page20"
     
     private var selectedColor: String {
         if status.red { return "Red" }
@@ -23,6 +21,7 @@ struct diagnosticView30: View {
         return "None"
     }
     
+    @State private var status = DiagnosticStatus(red: false, yellow: false, green: false)
     var body: some View {
         VStack(spacing: 20) {
             
@@ -31,12 +30,12 @@ struct diagnosticView30: View {
                 .scaledToFit()
                 .padding()
             
-            Text("Steering & Suspension")
+            Text("Under Hood / Maintenance Service")
                 .font(.largeTitle)
                 .foregroundStyle(.red)
                 .padding(10)
             
-            Text("Link Pinks")
+            Text("Igniton Wires")
                 .font(.largeTitle)
             
             HStack(spacing: 25) {
@@ -58,11 +57,11 @@ struct diagnosticView30: View {
             
             Button("Confirm?") {
                 let message = """
-                page30: status=\(selectedColor)
+                page20: status=\(selectedColor)
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "IgnitionWires")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
@@ -70,17 +69,16 @@ struct diagnosticView30: View {
             .buttonBorderShape(.roundedRectangle)
             .controlSize(.large)
             
-            
-            Button("Take Photo for Page 30") {
+            Button("Take Photo for Page 20") {
                 showCamera = true
             }
             .buttonStyle(.bordered)
             NavigationLink("Next Page") {
-                diagnosticView31()
+                diagnosticView21()
             }
             
             NavigationLink("Previous Page") {
-                diagnosticView29()
+                diagnosticView19()
             }
         }
         .sheet(isPresented: $showCamera) {

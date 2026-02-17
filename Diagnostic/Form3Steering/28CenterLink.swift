@@ -61,7 +61,7 @@ struct diagnosticView28: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "CenterLink")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

@@ -64,7 +64,7 @@ struct diagnosticView31: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "TieRodEnds")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

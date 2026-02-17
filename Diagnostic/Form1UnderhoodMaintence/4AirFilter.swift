@@ -59,7 +59,7 @@ struct diagnosticView4: View {
                 notes: \(notes)
                 """
                     
-                    printStore.log(message, for: <#String#>)
+                    printStore.log(message, for: "AirFilter")
                 }
                 .font(.largeTitle)
                 .foregroundStyle(.red)

@@ -63,7 +63,7 @@ struct diagnosticView33: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message,for: <#String#>)
+                printStore.log(message,for: "RackPinionAssembly")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)

@@ -59,7 +59,7 @@ struct diagnosticView5: View {
                 notes: \(notes)
                 """
                 
-                printStore.log(message, for: <#String#>)
+                printStore.log(message, for: "PCVValve")
             }
             .font(.largeTitle)
             .foregroundStyle(.red)
