@@ -112,6 +112,10 @@ struct diagnosticView1: View {
                 formatter.dateStyle = .medium
                 formatter.timeStyle = .short
                 
+                let timeFormatter = DateFormatter()
+                timeFormatter.dateStyle = .none
+                timeFormatter.timeStyle = .short
+                
                 if let parsedYear = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
                     car.year = parsedYear
                 } else {
@@ -126,7 +130,8 @@ struct diagnosticView1: View {
                                 Make: \(car.make)
                                 Year: \(car.year)
                                 Owner: \(car.carOwner)
-                                Check-in: \(formatter.string(from: checkInDate))
+                                Check-in Date: \(formatter.string(from: checkInDate))
+                                Check-in Time: \(timeFormatter.string(from: checkInDate))
                                 Notes: \(notes)
                                 """
                 
