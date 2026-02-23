@@ -1,9 +1,15 @@
-//
-//  LogStore.swift
-//  Diagnostic
-//
-//  Created by Nicholas C. Wiesneth on 1/21/26.
-//
+import SwiftUI
+import UIKit
+import Combine
+
+// PhotoStore
+
+@MainActor
+    final class PhotoStore: ObservableObject {
+    @Published var imagesByKey: [String: UIImage] = [:]
+}
+
+// PrintStore
 import SwiftUI
 import Combine
 
@@ -22,4 +28,3 @@ class PrintStore: ObservableObject {
         messagesByKey[newKey] = message
     }
 }
-
