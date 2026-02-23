@@ -54,6 +54,23 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .padding(15)
+                    
+                    NavigationLink {
+                        CarMap()
+                    } label: {
+                        Text("See Car Map")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: 650)
+                            .frame(maxHeight: 100)
+                            .padding(.vertical, 18)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding(1)
+                    
+                    
+                    
+                    
                 }
                 .padding(.top, 40)
                 
