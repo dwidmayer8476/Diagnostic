@@ -221,24 +221,22 @@ struct diagnosticView1: View {
                 timeFormatter.dateStyle = .none
                 timeFormatter.timeStyle = .short
                 
-                if let parsedYear = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
-                    car.year = parsedYear
-                } else {
-                    car.year = 0
+                var parsedYear = 0
+                if let yearInt = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
+                    parsedYear = yearInt
                 }
-                
-                if car.year < 0 { car.year = 0 }
+                if parsedYear < 0 { parsedYear = 0 }
                 
                 let message = """
-                                Confirmed Car:
-                                VIN: \(car.carVin)
-                                Make: \(car.make)
-                                Year: \(car.year)
-                                Owner: \(car.carOwner)
-                                Check-in Date: \(formatter.string(from: checkInDate))
-                                Check-in Time: \(timeFormatter.string(from: checkInDate))
-                                Notes: \(notes)
-                                """
+                Confirmed Car:
+                VIN: \(carVin)
+                Make: \(make)
+                Year: \(parsedYear)
+                Owner: \(carOwner)
+                Check-in Date: \(formatter.string(from: checkInDate))
+                Check-in Time: \(timeFormatter.string(from: checkInDate))
+                Notes: \(notes)
+                """
                 
                 printStore.log(message, for: "CarInfo")
             }
@@ -309,4 +307,5 @@ struct diagnosticView1: View {
         .environmentObject(PrintStore())
         .environmentObject(ReportStore())
 }
+
 
