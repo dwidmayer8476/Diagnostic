@@ -206,7 +206,43 @@ struct diagnosticView1: View {
                 .frame(maxWidth: .infinity)
                 Spacer()
             }
-            Spacer()
+        }
+        
+        Spacer()
+        
+        
+        HStack(spacing: 30) {
+            Button("Confirm") {
+                let formatter = DateFormatter()
+                formatter.dateStyle = .medium
+                formatter.timeStyle = .short
+                
+                let timeFormatter = DateFormatter()
+                timeFormatter.dateStyle = .none
+                timeFormatter.timeStyle = .short
+                
+                if let parsedYear = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
+                    car.year = parsedYear
+                } else {
+                    car.year = 0
+                }
+                
+                if car.year < 0 { car.year = 0 }
+                
+                let message = """
+                                Confirmed Car:
+                                VIN: \(car.carVin)
+                                Make: \(car.make)
+                                Year: \(car.year)
+                                Owner: \(car.carOwner)
+                                Check-in Date: \(formatter.string(from: checkInDate))
+                                Check-in Time: \(timeFormatter.string(from: checkInDate))
+                                Notes: \(notes)
+                                """
+                
+                printStore.log(message, for: "CarInfo")
+            }
+            .buttonStyle(.borderedProminent)
             
             HStack(spacing: 30) {
                 Button("Confirm") {
