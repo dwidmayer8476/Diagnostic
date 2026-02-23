@@ -4,10 +4,6 @@ import UIKit
 struct diagnosticView3: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
-  
-    
-    
-    
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
         var yellow: Bool
