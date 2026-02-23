@@ -14,6 +14,7 @@ struct ContentView: View {
                 Image("BackGround")
                     .resizable()
                     .scaledToFill()
+                    .ignoresSafeArea()
                     .imageScale(.large)
                     .foregroundStyle(.tint)
                 
@@ -25,6 +26,9 @@ struct ContentView: View {
                         .padding(.bottom, 40)
                     NavigationLink {
                         diagnosticView1()
+                            .environmentObject(PhotoStore())
+                            .environmentObject(PrintStore())
+                            .environmentObject(ReportStore())
                     } label: {
                         Text("Start Diagnostic Report")
                             .font(.largeTitle)
@@ -38,6 +42,8 @@ struct ContentView: View {
                    
                     NavigationLink {
                         PrintSummaryView()
+                            .environmentObject(PrintStore())
+                            .environmentObject(ReportStore())
                     } label: {
                         Text("See Past Reports")
                             .font(.largeTitle)
@@ -49,6 +55,7 @@ struct ContentView: View {
                     .buttonStyle(.borderedProminent)
                     .padding(15)
                 }
+                .padding(.top, 40)
                 
             }
         }

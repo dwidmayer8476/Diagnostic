@@ -13,6 +13,14 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
     let next: Next
     let previous: Previous
 
+    
+    struct DiagnosticStatus: CustomStringConvertible {
+        var red: Bool
+        var yellow: Bool
+        var green: Bool
+        var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
+    }
+
     @State private var showCamera = false
     @State private var notes: String = ""
     @State private var status: DiagnosticColor = .none
@@ -70,4 +78,6 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
         }
     }
 }
+
+
 

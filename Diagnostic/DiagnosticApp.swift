@@ -10,12 +10,9 @@ import SwiftUI
 struct DiagnosticApp: App {
     @StateObject var printStore = PrintStore()
        @StateObject var photoStore = PhotoStore()
-
        var body: some Scene {
            WindowGroup {
-            
                    ContentView()
-               
                .environmentObject(printStore)
                .environmentObject(photoStore)
            }
