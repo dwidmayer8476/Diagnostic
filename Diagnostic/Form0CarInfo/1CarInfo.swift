@@ -78,6 +78,7 @@ struct diagnosticView1: View {
     @State private var notes: String = ""
     @State private var useExplicitMeridiem: Bool = false
     @State private var meridiemSelection: String = "AM"
+    @State private var goNext: Bool = false
     
     
     var body: some View {
@@ -217,15 +218,24 @@ struct diagnosticView1: View {
                 formatter.dateStyle = .medium
                 formatter.timeStyle = .short
                 
-                let timeFormatter = DateFormatter()
-                timeFormatter.dateStyle = .none
-                timeFormatter.timeStyle = .short
-                
                 var parsedYear = 0
                 if let yearInt = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
                     parsedYear = yearInt
                 }
                 if parsedYear < 0 { parsedYear = 0 }
+                
+                let newReport = CarReport(
+                    carVin: carVin,
+                    make: make,
+                    year: parsedYear,
+                    carOwner: carOwner,
+                    carGmail: carGmail,
+                    checkInDate: checkInDate,
+                    notes: notes
+                )
+                
+                reportStore.reports.append(newReport)
+                reportStore.save()
                 
                 let message = """
                 Confirmed Car:
@@ -233,71 +243,31 @@ struct diagnosticView1: View {
                 Make: \(make)
                 Year: \(parsedYear)
                 Owner: \(carOwner)
-                Check-in Date: \(formatter.string(from: checkInDate))
-                Check-in Time: \(timeFormatter.string(from: checkInDate))
+                Check-in: \(formatter.string(from: checkInDate))
                 Notes: \(notes)
                 """
-                
                 printStore.log(message, for: "CarInfo")
+                
+                // clear form
+                carVin = ""
+                make = ""
+                yearText = ""
+                carOwner = ""
+                carGmail = ""
+                notes = ""
+                checkInDate = Date()
+                useExplicitMeridiem = false
+                meridiemSelection = "AM"
+                
+                // navigate to next page
+                goNext = true
             }
             .buttonStyle(.borderedProminent)
             
-            HStack(spacing: 30) {
-                Button("Confirm") {
-                    let formatter = DateFormatter()
-                    formatter.dateStyle = .medium
-                    formatter.timeStyle = .short
-                    
-                    var parsedYear = 0
-                    if let yearInt = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
-                        parsedYear = yearInt
-                    }
-                    if parsedYear < 0 { parsedYear = 0 }
-                    
-                    let newReport = CarReport(
-                        carVin: carVin,
-                        make: make,
-                        year: parsedYear,
-                        carOwner: carOwner,
-                        carGmail: carGmail,
-                        checkInDate: checkInDate,
-                        notes: notes
-                    )
-                    
-                    reportStore.reports.append(newReport)
-                    reportStore.save()
-                    
-                    let message = """
-                    Confirmed Car:
-                    VIN: \(carVin)
-                    Make: \(make)
-                    Year: \(parsedYear)
-                    Owner: \(carOwner)
-                    Check-in: \(formatter.string(from: checkInDate))
-                    Notes: \(notes)
-                    """
-                    printStore.log(message, for: "CarInfo")
-                    
-                    
-                    carVin = ""
-                    make = ""
-                    yearText = ""
-                    carOwner = ""
-                    carGmail = ""
-                    notes = ""
-                    checkInDate = Date()
-                    useExplicitMeridiem = false
-                    meridiemSelection = "AM"
-                }
-                .buttonStyle(.borderedProminent)
-                
-                NavigationLink("Next Page") {
-                    diagnosticView2()
-                }
-                .buttonStyle(.bordered)
-            }
-            .padding(.bottom, 30)
+            NavigationLink(destination: diagnosticView2(), isActive: $goNext) { EmptyView() }
+                .hidden()
         }
+        .padding(.bottom, 30)
     }
 }
 
