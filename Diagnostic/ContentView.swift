@@ -38,10 +38,10 @@ struct ContentView: View {
                             .padding(.vertical, 18)
                     }
                     .buttonStyle(.borderedProminent)
-                    .padding(.horizontal, 30)
+                    .padding(15)
                    
                     NavigationLink {
-                        PrintSummaryView()
+                       PastReportsPage()
                             .environmentObject(PrintStore())
                             .environmentObject(ReportStore())
                     } label: {
@@ -54,8 +54,26 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .padding(15)
+                    
+                    NavigationLink {
+                       PrintSummaryView()
+                            .environmentObject(PrintStore())
+                            .environmentObject(ReportStore())
+                    } label: {
+                        Text("Summary")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: 650)
+                            .frame(maxHeight: 100)
+                            .padding(.vertical, 18)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding(15)
                 }
-                .padding(.top, 40)
+                .buttonStyle(.borderedProminent)
+                .padding(15)
+                
+                
                 
             }
         }
