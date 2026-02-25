@@ -452,10 +452,10 @@ struct ReportView: View {
     @State private var showMail = false
     @State private var showShare = false
 
-    init(carInfo: carInfoClass, stat: status, studentNotes: status.studentNotes, photos: [UIImage] = []) {
+    init(carInfo: carInfoClass, stat: status, studentNotes: String, photos: [UIImage] = []) {
         self.carInfo = carInfo
         self.statusLinesOverride = ReportView.statusLines(from: stat)
-        self.notes = studentNotes.notes
+        self.notes = studentNotes
         self.statuses = self.statusLinesOverride ?? []
         self.photos = photos
     }
@@ -715,6 +715,5 @@ struct SendTheReportView: View {
 #Preview {
     NavigationStack { SendTheReportView() }
 }
-
 
 

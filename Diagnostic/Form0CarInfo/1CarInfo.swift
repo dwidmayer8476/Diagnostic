@@ -223,8 +223,9 @@ struct diagnosticView1: View {
                 goNext = true
             }
             .buttonStyle(.borderedProminent)
-            
-            NavigationLink(destination: diagnosticView2(), isActive: $goNext) { EmptyView() }
+        }
+        .navigationDestination(isPresented: $goNext) {
+            diagnosticView2()
         }
         .padding(.bottom, 30)
     }
@@ -236,5 +237,4 @@ struct diagnosticView1: View {
         .environmentObject(PrintStore())
         .environmentObject(ReportStore())
 }
-
 
