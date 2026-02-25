@@ -4,6 +4,7 @@ import UIKit
 struct diagnosticView26: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Steering Components",
             logKey: "SteeringComponents",
             logLabel: "SteeringComponents",
@@ -19,6 +20,7 @@ struct diagnosticView26: View {
 struct diagnosticView27: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Suspension Components",
             logKey: "SuspensionComponents",
             logLabel: "SuspensionComponents",
@@ -33,6 +35,7 @@ struct diagnosticView27: View {
 struct diagnosticView28: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Shocks/Struts",
             logKey: "ShocksStruts",
             logLabel: "ShocksStruts",
@@ -48,6 +51,7 @@ struct diagnosticView28: View {
 struct diagnosticView29: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Ball Joints",
             logKey: "BallJoints",
             logLabel: "BallJoints",
@@ -63,6 +67,7 @@ struct diagnosticView29: View {
 struct diagnosticView30: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Tie Rod Ends",
             logKey: "TieRodEnds",
             logLabel: "TieRodEnds",
@@ -78,6 +83,7 @@ struct diagnosticView30: View {
 struct diagnosticView31: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Control Arms",
             logKey: "ControlArms",
             logLabel: "ControlArms",
@@ -93,6 +99,7 @@ struct diagnosticView31: View {
 struct diagnosticView32: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Bushings",
             logKey: "Bushings",
             logLabel: "Bushings",
@@ -108,6 +115,7 @@ struct diagnosticView32: View {
 struct diagnosticView33: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Sway Bar Links",
             logKey: "SwayBarLinks",
             logLabel: "SwayBarLinks",
@@ -123,6 +131,7 @@ struct diagnosticView33: View {
 struct diagnosticView34: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Wheel Bearings",
             logKey: "WheelBearings",
             logLabel: "WheelBearings",
@@ -138,6 +147,7 @@ struct diagnosticView34: View {
 struct diagnosticView35: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "CV Joints/Boots",
             logKey: "CVJointsBoots",
             logLabel: "CVJointsBoots",
@@ -153,6 +163,7 @@ struct diagnosticView35: View {
 struct diagnosticView36: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Rack and Pinion",
             logKey: "RackAndPinion",
             logLabel: "RackAndPinion",
@@ -168,6 +179,7 @@ struct diagnosticView36: View {
 struct diagnosticView37: View {
     var body: some View {
         DiagnosticPage(
+            category: .steeringSuspension,
             sectionTitle: "Power Steering Pump",
             logKey: "PowerSteeringPump",
             logLabel: "PowerSteeringPump",

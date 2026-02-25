@@ -23,7 +23,9 @@ struct ContentView: View {
                         .font(.system(size: 48, weight: .heavy, design: .default))
                         .foregroundStyle(.white)
                         .shadow(color: .black.opacity(0.6), radius: 6, x: 0, y: 30)
-                        .padding(.bottom, 40)
+                        .shadow(color: .red.opacity(0.3), radius: 5, x: 0, y: 20)
+                        .padding(.bottom, 30)
+                    
                     NavigationLink {
                         diagnosticView1()
                             .environmentObject(PhotoStore())
@@ -66,11 +68,7 @@ struct ContentView: View {
                             .padding(.vertical, 18)
                     }
                     .buttonStyle(.borderedProminent)
-                    .padding(1)
-                    
-                    
-                    
-                    
+                    .padding(15)
                 }
                 .padding(.top, 40)
                 

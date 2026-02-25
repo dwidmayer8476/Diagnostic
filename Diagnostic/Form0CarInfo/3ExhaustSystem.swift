@@ -1,17 +1,18 @@
 import SwiftUI
 import UIKit
 
-// Transmission Fluid - Page 25
+// Exhaust System - Page 25
 struct diagnosticView25: View {
     var body: some View {
         DiagnosticPage(
-            sectionTitle: "Transmission Fluid",
-            logKey: "TransmissionFluid",
-            logLabel: "TransmissionFluid",
-            photoKey: "page24",
-            photoButtonTitle: "Take Photo for Page 24",
+            category: .exhaust,
+            sectionTitle: "Exhaust System",
+            logKey: "ExhaustSystem",
+            logLabel: "ExhaustSystem",
+            photoKey: "page25",
+            photoButtonTitle: "Take Photo for Page 25",
             next: diagnosticView26(),
-            previous: diagnosticView25()
+            previous: diagnosticView24()
         )
     }
 }
