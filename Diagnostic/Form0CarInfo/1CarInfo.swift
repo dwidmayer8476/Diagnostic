@@ -89,46 +89,6 @@ struct diagnosticView1: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.bottom, 40)
             
-            //Past Reports
-            if !reportStore.reports.isEmpty {
-                Text("Past Reports")
-                    .font(.title2)
-                    .padding(.bottom, 5)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                List(reportStore.reports) { report in
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("VIN:")
-                                .bold()
-                            Text(report.carVin)
-                        }
-                        HStack {
-                            Text("Make:")
-                                .bold()
-                            Text(report.make)
-                        }
-                        HStack {
-                            Text("Year:")
-                                .bold()
-                            Text(String(report.year))
-                        }
-                        HStack {
-                            Text("Owner:")
-                                .bold()
-                            Text(report.carOwner)
-                        }
-                        HStack {
-                            Text("Check-in:")
-                                .bold()
-                            Text(report.checkInDate, style: .date)
-                        }
-                    }
-                    .padding(.vertical, 4)
-                }
-                .frame(height: 200)
-                .listStyle(.plain)
-                .padding(.bottom, 30)
-            }
             
             HStack(alignment: .top, spacing: 80) {
                 VStack(alignment: .center, spacing: 15) {
@@ -265,7 +225,6 @@ struct diagnosticView1: View {
             .buttonStyle(.borderedProminent)
             
             NavigationLink(destination: diagnosticView2(), isActive: $goNext) { EmptyView() }
-                .hidden()
         }
         .padding(.bottom, 30)
     }

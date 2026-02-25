@@ -38,10 +38,10 @@ struct ContentView: View {
                             .padding(.vertical, 18)
                     }
                     .buttonStyle(.borderedProminent)
-                    .padding(.horizontal, 30)
+                    .padding(15)
                    
                     NavigationLink {
-                        PrintSummaryView()
+                       PastReportsPage()
                             .environmentObject(PrintStore())
                             .environmentObject(ReportStore())
                     } label: {
