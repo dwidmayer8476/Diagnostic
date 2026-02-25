@@ -56,11 +56,9 @@ struct ContentView: View {
                     .padding(15)
                     
                     NavigationLink {
-                       PrintSummaryView()
-                            .environmentObject(PrintStore())
-                            .environmentObject(ReportStore())
+                        CarMap()
                     } label: {
-                        Text("Summary")
+                        Text("See Car Map")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .frame(maxWidth: 650)
@@ -68,12 +66,13 @@ struct ContentView: View {
                             .padding(.vertical, 18)
                     }
                     .buttonStyle(.borderedProminent)
-                    .padding(15)
+                    .padding(1)
+                    
+                    
+                    
+                    
                 }
-                .buttonStyle(.borderedProminent)
-                .padding(15)
-                
-                
+                .padding(.top, 40)
                 
             }
         }
