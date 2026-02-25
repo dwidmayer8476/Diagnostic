@@ -1,10 +1,25 @@
 import SwiftUI
 import UIKit
 
+enum DiagnosticCategory {
+    case underHood
+    case exhaust
+    case steeringSuspension
+
+    var headerTitle: String {
+        switch self {
+        case .underHood: return "Under Hood / Maintenance Service"
+        case .exhaust: return "Exhaust System"
+        case .steeringSuspension: return "Steering & Suspension"
+        }
+    }
+}
+
 struct DiagnosticPage<Next: View, Previous: View>: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
 
+    let category: DiagnosticCategory
     let sectionTitle: String
     let logKey: String
     let logLabel: String
@@ -32,7 +47,7 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
                 .scaledToFit()
                 .padding()
 
-            Text("Under Hood / Maintenance Service")
+            Text(category.headerTitle)
                 .font(.largeTitle)
                 .foregroundStyle(.red)
                 .padding(10)
@@ -78,6 +93,4 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
         }
     }
 }
-
-
 

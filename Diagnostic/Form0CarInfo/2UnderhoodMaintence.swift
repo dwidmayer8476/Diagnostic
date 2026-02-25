@@ -5,6 +5,7 @@ import UIKit
 struct diagnosticView2: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Wiper Blades",
             logKey: "WiperBlades",
             logLabel: "WiperBlades",
@@ -20,6 +21,7 @@ struct diagnosticView2: View {
 struct diagnosticView3: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Head Lights",
             logKey: "HeadLights",
             logLabel: "HeadLights",
@@ -35,6 +37,7 @@ struct diagnosticView3: View {
 struct diagnosticView4: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Air Filter",
             logKey: "AirFilter",
             logLabel: "AirFilter",
@@ -50,6 +53,7 @@ struct diagnosticView4: View {
 struct diagnosticView5: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "PCV Valve",
             logKey: "PCVValve",
             logLabel: "PCVValve",
@@ -64,6 +68,7 @@ struct diagnosticView5: View {
 struct diagnosticView6: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Washer Fluid",
             logKey: "WasherFluid",
             logLabel: "WasherFluid",
@@ -79,6 +84,7 @@ struct diagnosticView6: View {
 struct diagnosticView7: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Engine Oil",
             logKey: "EngineOil",
             logLabel: "EngineOil",
@@ -94,6 +100,7 @@ struct diagnosticView7: View {
 struct diagnosticView8: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Power Steering Fluid",
             logKey: "PowerSteeringFluid",
             logLabel: "PowerSteeringFluid",
@@ -109,6 +116,7 @@ struct diagnosticView8: View {
 struct diagnosticView9: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Master Cylinder Fluid Level",
             logKey: "MasterCylFluidLevel",
             logLabel: "MasterCylFluidLevel",
@@ -124,6 +132,7 @@ struct diagnosticView9: View {
 struct diagnosticView10: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Brake Fluid",
             logKey: "BrakeFluid",
             logLabel: "BrakeFluid",
@@ -139,6 +148,7 @@ struct diagnosticView10: View {
 struct diagnosticView11: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Coolant Hoses",
             logKey: "CoolantHoses",
             logLabel: "CoolantHoses",
@@ -154,6 +164,7 @@ struct diagnosticView11: View {
 struct diagnosticView12: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Engine Coolant",
             logKey: "EngineCoolant",
             logLabel: "EngineCoolant",
@@ -169,6 +180,7 @@ struct diagnosticView12: View {
 struct diagnosticView13: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Battery Test",
             logKey: "BatteryTest",
             logLabel: "BatteryTest",
@@ -184,6 +196,7 @@ struct diagnosticView13: View {
 struct diagnosticView14: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Battery Accessories",
             logKey: "BatteryAccessories",
             logLabel: "BatteryAccessories",
@@ -199,6 +212,7 @@ struct diagnosticView14: View {
 struct diagnosticView15: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Start/Charge",
             logKey: "StartCharge",
             logLabel: "StartCharge",
@@ -214,6 +228,7 @@ struct diagnosticView15: View {
 struct diagnosticView16: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Belts",
             logKey: "Belts",
             logLabel: "Belts",
@@ -229,6 +244,7 @@ struct diagnosticView16: View {
 struct diagnosticView17: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Spark Plugs",
             logKey: "SparkPlugs",
             logLabel: "SparkPlugs",
@@ -244,6 +260,7 @@ struct diagnosticView17: View {
 struct diagnosticView18: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Fuel Filter",
             logKey: "FuelFilter",
             logLabel: "FuelFilter",
@@ -259,6 +276,7 @@ struct diagnosticView18: View {
 struct diagnosticView19: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Ignition Wires",
             logKey: "IgnitionWires",
             logLabel: "IgnitionWires",
@@ -274,6 +292,7 @@ struct diagnosticView19: View {
 struct diagnosticView20: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Valve Cover Gasket",
             logKey: "ValveCoverGasket",
             logLabel: "ValveCoverGasket",
@@ -289,6 +308,7 @@ struct diagnosticView20: View {
 struct diagnosticView21: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Power Steering Hose",
             logKey: "PowerSteeringHose",
             logLabel: "PowerSteeringHose",
@@ -304,6 +324,7 @@ struct diagnosticView21: View {
 struct diagnosticView22: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Timing Belt",
             logKey: "TimingBelt",
             logLabel: "TimingBelt",
@@ -319,6 +340,7 @@ struct diagnosticView22: View {
 struct diagnosticView23: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Transfer Case / Diff Fluid",
             logKey: "TransferCaseDiffFluid",
             logLabel: "TransferCaseDiffFluid",
@@ -334,6 +356,7 @@ struct diagnosticView23: View {
 struct diagnosticView24: View {
     var body: some View {
         DiagnosticPage(
+            category: .underHood,
             sectionTitle: "Transmission Fluid",
             logKey: "TransmissionFluid",
             logLabel: "TransmissionFluid",
