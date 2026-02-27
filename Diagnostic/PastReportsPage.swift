@@ -28,23 +28,25 @@ struct PastReportsPage: View {
                     .font(.title2)
                     .padding(.bottom, 5)
                     .frame(maxWidth: .infinity, alignment: .center)
-                List(sortedReports) { report in
-                    VStack(alignment: .leading) {
-                        Text("\(report.year) \(report.make) (VIN \(report.carVin))")
-                            .font(.headline)
-                        Text("\(report.carOwner) • \(report.checkInDate, style: .date) \(report.checkInDate, style: .time)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        if let carInfo = report.carInfo as? carInfoClass, let latestNote = notesStore.notes(for: carInfo).first {
-                            Text(latestNote.notes)
-                                .font(.body)
-                        } else {
-                            Text("No student notes")
-                                .font(.body)
+                List {
+                    ForEach(sortedReports, id: \.carVin) { report in
+                        VStack(alignment: .leading) {
+                            Text("\(report.year) \(report.make) (VIN \(report.carVin))")
+                                .font(.headline)
+                            Text("\(report.carOwner) • \(report.checkInDate, style: .date) \(report.checkInDate, style: .time)")
+                                .font(.subheadline)
                                 .foregroundColor(.secondary)
+                            if let latestNote = notesStore.notes(forCarVin: report.carVin).first {
+                                Text(latestNote.notes)
+                                    .font(.body)
+                            } else {
+                                Text("No student notes")
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
                         }
+                        .padding(.vertical, 4)
                     }
-                    .padding(.vertical, 4)
                 }
                 .listStyle(.plain)
                 .padding(.bottom, 30)
