@@ -186,20 +186,69 @@ final class StudentNotesAppStorage: ObservableObject {
 
    //Migration for pre-existing notes
     private func migrateNotesIfNeeded() {
-        // If any note lacks a reportID in da persisted JSON we weill make a new ID
-        let changed = false
-        for (index, note) in notes.enumerated() {
-            // assume notes already have reportID if they exist.
-            _ = index; _ = note
+        // If any legacy notes are missing a reportID, assign them to a per-car legacy report
+        var changed = false
+
+        // Build a map of the most recent report per car for convenience
+        var mostRecentReportForCar: [String: StudentCarReport] = [:]
+        for report in reports {
+            let current = mostRecentReportForCar[report.carVin]
+            if let current, current.createdAt >= report.createdAt {
+                continue
+            }
+            mostRecentReportForCar[report.carVin] = report
         }
-        if changed { persist() }
+
+        // Ensure a legacy report ID exists per car to attach migrated notes to
+        func legacyReportID(for vin: String) -> UUID {
+            if let existing = legacyReportIDForCar[vin] {
+                return existing
+            }
+            // Prefer the most recent existing report for this car; otherwise create one
+            if let existingReport = mostRecentReportForCar[vin] {
+                legacyReportIDForCar[vin] = existingReport.id
+                return existingReport.id
+            } else {
+                let newReport = StudentCarReport(carVin: vin, title: "Report 1")
+                reports.append(newReport)
+                mostRecentReportForCar[vin] = newReport
+                legacyReportIDForCar[vin] = newReport.id
+                persistReports()
+                return newReport.id
+            }
+        }
+
+        // Migrate notes that may be missing a reportID from older persisted data
+        // (If all notes already have reportIDs, this loop simply does nothing.)
+        for index in notes.indices {
+            // In current model, StudentNote always has reportID. This section handles older data where reportID may have been absent in storage.
+            // Detect a placeholder/mismatched report by checking if the reportID doesn't belong to any report for the same car VIN.
+            let vin = notes[index].carVin
+            let noteReportID = notes[index].reportID
+            let reportMatchesCar = reports.contains { $0.id == noteReportID && $0.carVin == vin }
+            if !reportMatchesCar {
+                let targetReportID = legacyReportID(for: vin)
+                if notes[index].reportID != targetReportID {
+                    notes[index].reportID = targetReportID
+                    changed = true
+                }
+            }
+        }
+
+        if changed {
+            persist()
+            persistLegacyMap()
+        }
+
         // Ensure there is at least one report per car if there are notes but no reports
         let carsWithNotes = Set(notes.map { $0.carVin })
         for vin in carsWithNotes {
             if !reports.contains(where: { $0.carVin == vin }) {
                 let report = StudentCarReport(carVin: vin, title: "Report 1")
                 reports.append(report)
+                legacyReportIDForCar[vin] = report.id
                 persistReports()
+                persistLegacyMap()
             }
         }
     }
@@ -250,3 +299,12 @@ final class StudentNotesAppStorage: ObservableObject {
     }
 }
 
+struct ReportViewHelper {
+    static func statusLines(from s: status) -> [String] {
+        var items: [String] = []
+        if s.red { items.append("Status: Red") }
+        if s.yellow { items.append("Status: Yellow") }
+        if s.green { items.append("Status: Green") }
+        return items
+    }
+}
