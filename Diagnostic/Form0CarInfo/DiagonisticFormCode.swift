@@ -57,7 +57,7 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
 
             StatusPicker(selection: $status)
 
-            Text("status: \(status.rawValue)")
+            Text("Status: \(status.rawValue)")
 
             TextField("Enter Notes", text: $notes)
                 .frame(width: 300, height: 50)
@@ -65,7 +65,7 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
 
             Button("Confirm?") {
                 let message = """
-                \(logLabel): status=\(status.rawValue)
+                \(logLabel): Status: \(status.rawValue)
                 Notes: \(notes)
                 """
                 printStore.log(message, for: logKey)

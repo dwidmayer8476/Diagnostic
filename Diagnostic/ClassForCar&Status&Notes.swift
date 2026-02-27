@@ -117,3 +117,12 @@ final class SimpleStudentNotesAppStorage: ObservableObject {
     }
 }
 
+struct ReportViewHelper {
+    static func statusLines(from s: status) -> [String] {
+        var items: [String] = []
+        if s.red { items.append("Status: Red") }
+        if s.yellow { items.append("Status: Yellow") }
+        if s.green { items.append("Status: Green") }
+        return items
+    }
+}
