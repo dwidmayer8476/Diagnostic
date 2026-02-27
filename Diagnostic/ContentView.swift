@@ -22,8 +22,8 @@ struct ContentView: View {
                     Text("Welcome To Diagnostic")
                         .font(.system(size: 48, weight: .heavy, design: .default))
                         .foregroundStyle(.white)
-                        .shadow(color: .black.opacity(0.6), radius: 6, x: 0, y: 30)
-                        .shadow(color: .red.opacity(0.3), radius: 5, x: 0, y: 20)
+                        .shadow(color: .black.opacity(0.9), radius: 6.5, x: 0, y: -5)
+                    
                         .padding(.bottom, 30)
                     
                     NavigationLink {

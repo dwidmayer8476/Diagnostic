@@ -527,7 +527,7 @@ struct ReportView: View {
                     Text("No statuses provided.").foregroundStyle(.secondary)
                 } else {
                     ForEach(summaryStatuses, id: \.self) { item in
-                        Text("• \(item)")
+                        Text(item)
                     }
                 }
             }
@@ -536,7 +536,14 @@ struct ReportView: View {
             if notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Text("No notes provided.").foregroundStyle(.secondary)
             } else {
-                Text(notes)
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(notes
+                        .components(separatedBy: CharacterSet.newlines)
+                        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                        .filter { !$0.isEmpty }, id: \.self) { line in
+                        Text("• \(line)")
+                    }
+                }
             }
 
             if !photos.isEmpty {

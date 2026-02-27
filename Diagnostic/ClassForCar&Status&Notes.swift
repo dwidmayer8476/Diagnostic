@@ -187,7 +187,7 @@ final class StudentNotesAppStorage: ObservableObject {
    //Migration for pre-existing notes
     private func migrateNotesIfNeeded() {
         // If any note lacks a reportID in da persisted JSON we weill make a new ID
-        var changed = false
+        let changed = false
         for (index, note) in notes.enumerated() {
             // assume notes already have reportID if they exist.
             _ = index; _ = note
