@@ -9,6 +9,11 @@ import SwiftUI
 struct PastReportsPage: View {
     
     @EnvironmentObject var reportStore: ReportStore
+    @EnvironmentObject var notesStore: SimpleStudentNotesAppStorage
+    //store by date part
+    private var sortedReports: [CarReport] {
+        reportStore.reports.sorted { $0.checkInDate > $1.checkInDate }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -23,40 +28,28 @@ struct PastReportsPage: View {
                     .font(.title2)
                     .padding(.bottom, 5)
                     .frame(maxWidth: .infinity, alignment: .center)
-                List(reportStore.reports) { report in
+                List(sortedReports) { report in
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text("VIN:")
-                                .bold()
-                            Text(report.carVin)
-                        }
-                        HStack {
-                            Text("Make:")
-                                .bold()
-                            Text(report.make)
-                        }
-                        HStack {
-                            Text("Year:")
-                                .bold()
-                            Text(String(report.year))
-                        }
-                        HStack {
-                            Text("Owner:")
-                                .bold()
-                            Text(report.carOwner)
-                        }
-                        HStack {
-                            Text("Check-in:")
-                                .bold()
-                            Text(report.checkInDate, style: .date)
+                        Text("\(report.year) \(report.make) (VIN \(report.carVin))")
+                            .font(.headline)
+                        Text("\(report.carOwner) • \(report.checkInDate, style: .date) \(report.checkInDate, style: .time)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        if let carInfo = report.carInfo as? carInfoClass, let latestNote = notesStore.notes(for: carInfo).first {
+                            Text(latestNote.notes)
+                                .font(.body)
+                        } else {
+                            Text("No student notes")
+                                .font(.body)
+                                .foregroundColor(.secondary)
                         }
                     }
                     .padding(.vertical, 4)
                 }
-                .frame(height: 200)
                 .listStyle(.plain)
                 .padding(.bottom, 30)
             }
         }
     }
 }
+

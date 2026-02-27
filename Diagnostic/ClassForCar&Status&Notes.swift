@@ -1,8 +1,8 @@
 //
-//  classForVin.swift
+//  ClassForCar&Status&Notes.swift
 //  Diagnostic
 //
-//  Created by Dylan J. Widmayer on 12/17/25.
+//  Simplified student notes storage
 //
 import SwiftUI
 import Foundation
@@ -38,90 +38,69 @@ struct status: Identifiable {
     }
 }
 
-// A report for a specific car (e.g., "Report 1", "Report 2")
-struct StudentCarReport: Identifiable, Codable, Equatable {
-    let id: UUID
-    let createdAt: Date
-    var carVin: String
-    var title: String
-
-    init(carVin: String, title: String) {
-        self.id = UUID()
-        self.createdAt = Date()
-        self.carVin = carVin
-        self.title = title
-    }
-}
-
-//student noteholder
-struct StudentNote: Identifiable, Codable, Equatable {
+// A very simple note model (renamed to avoid conflicts)
+struct SimpleStudentNote: Identifiable, Codable, Equatable {
     let id: UUID
     let timestamp: Date
     var notes: String
     var carVin: String
-    var reportID: UUID // ties this note to a specific report for the car
 
-    init(notes: String, carVin: String, reportID: UUID) {
+    init(notes: String, carVin: String) {
         self.id = UUID()
         self.timestamp = Date()
         self.notes = notes
         self.carVin = carVin
-        self.reportID = reportID
     }
 }
 
-//jsondata app storage
-final class StudentNotesAppStorage: ObservableObject {
-    // JSON blob of all notes
+//stores notes
+final class SimpleStudentNotesAppStorage: ObservableObject {
+    // We keep everything in one list and save it as JSON
     @AppStorage("student_notes_json") private var raw: String = ""
-    @AppStorage("car_reports_json") private var rawReports: String = ""
-    @AppStorage("legacy_report_map_json") private var rawLegacyReportMap: String = ""
 
-    @Published private(set) var notes: [StudentNote] = []
-    @Published private(set) var reports: [StudentCarReport] = []
-    // creates an id to match with our past Reports
-    private var legacyReportIDForCar: [String: UUID] = [:]
-//loads our persited dta here
+    @Published private(set) var notes: [SimpleStudentNote] = []
+
     init() {
         loadFromRaw()
-        loadReportsFromRaw()
-        loadLegacyMapFromRaw()
-        migrateNotesIfNeeded()
     }
 
-    func add(_ note: StudentNote) {
+    // Add a new note
+    func add(_ note: SimpleStudentNote) {
         notes.append(note)
         persist()
     }
-//finds note id & replaces
-    func update(_ note: StudentNote) {
+
+    // Update an existing note by id
+    func update(_ note: SimpleStudentNote) {
         if let idx = notes.firstIndex(where: { $0.id == note.id }) {
             notes[idx] = note
             persist()
         }
     }
-//deletes matches
+
+    // Delete a note by id
     func delete(id: UUID) {
         notes.removeAll { $0.id == id }
         persist()
     }
-//sorts by most recent to first
-    func notes(forCarVin vin: String) -> [StudentNote] {
+
+    // Get notes for a specific car VIN, newest first
+    func notes(forCarVin vin: String) -> [SimpleStudentNote] {
         notes
             .filter { $0.carVin == vin }
             .sorted { $0.timestamp > $1.timestamp }
     }
-//decodes reports and makes empty array on failiure
+
+    // Persistence helpers
     private func loadFromRaw() {
         guard !raw.isEmpty, let data = raw.data(using: .utf8) else {
             notes = []
             return
         }
         do {
-            let decoded = try JSONDecoder().decode([StudentNote].self, from: data)
-            notes = decoded
+            notes = try JSONDecoder().decode([SimpleStudentNote].self, from: data)
         } catch {
-            // If decoding fails, reset to empty to avoid crashes
+            // If decoding fails, start fresh
             notes = []
         }
     }
@@ -133,120 +112,17 @@ final class StudentNotesAppStorage: ObservableObject {
                 raw = string
             }
         } catch {
-            // Handle encoding errors if necessary
+            // Ignore encoding errors i guess
         }
-    }
-
-    //reports for the memory
-    private func loadReportsFromRaw() {
-        guard !rawReports.isEmpty, let data = rawReports.data(using: .utf8) else {
-            reports = []
-            return
-        }
-        do {
-            reports = try JSONDecoder().decode([StudentCarReport].self, from: data)
-        } catch {
-            reports = []
-        }
-    }
-    private func persistReports() {
-        do {
-            let data = try JSONEncoder().encode(reports)
-            if let string = String(data: data, encoding: .utf8) {
-                rawReports = string
-            }
-        } catch {
-            // Handle encoding errors if necessary
-        }
-    }
-
-    // MARK: - Legacy map persistence
-    private func loadLegacyMapFromRaw() {
-        guard !rawLegacyReportMap.isEmpty, let data = rawLegacyReportMap.data(using: .utf8) else {
-            legacyReportIDForCar = [:]
-            return
-        }
-        do {
-            legacyReportIDForCar = try JSONDecoder().decode([String: UUID].self, from: data)
-        } catch {
-            legacyReportIDForCar = [:]
-        }
-    }
-
-    private func persistLegacyMap() {
-        do {
-            let data = try JSONEncoder().encode(legacyReportIDForCar)
-            if let string = String(data: data, encoding: .utf8) {
-                rawLegacyReportMap = string
-            }
-        } catch {
-            // Handle encoding errors if necessary
-        }
-    }
-
-   //Migration for pre-existing notes
-    private func migrateNotesIfNeeded() {
-        // If any note lacks a reportID in da persisted JSON we weill make a new ID
-        let changed = false
-        for (index, note) in notes.enumerated() {
-            // assume notes already have reportID if they exist.
-            _ = index; _ = note
-        }
-        if changed { persist() }
-        // Ensure there is at least one report per car if there are notes but no reports
-        let carsWithNotes = Set(notes.map { $0.carVin })
-        for vin in carsWithNotes {
-            if !reports.contains(where: { $0.carVin == vin }) {
-                let report = StudentCarReport(carVin: vin, title: "Report 1")
-                reports.append(report)
-                persistReports()
-            }
-        }
-    }
-
- //create the report
-    func createNewReport(forCarVin vin: String, title: String? = nil, seedFromMostRecent: Bool = true) -> StudentCarReport {
-        let countForCar = reports.filter { $0.carVin == vin }.count
-        let newTitle = title ?? "Report \(countForCar + 1)"
-        let newReport = StudentCarReport(carVin: vin, title: newTitle)
-        reports.append(newReport)
-        persistReports()
-
-        if seedFromMostRecent {
-            // Find most recent existing report for this car (excluding the new one)
-            let existing = reports.filter { $0.carVin == vin && $0.id != newReport.id }
-                .sorted { $0.createdAt > $1.createdAt }
-                .first
-            if let sourceReport = existing {
-                // Copy notes from sourceReport into the new report
-                let sourceNotes = notes.filter { $0.carVin == vin && $0.reportID == sourceReport.id }
-                if !sourceNotes.isEmpty {
-                    let cloned = sourceNotes.map { old in
-                        StudentNote(notes: old.notes, carVin: vin, reportID: newReport.id)
-                    }
-                    notes.append(contentsOf: cloned)
-                    persist()
-                }
-            }
-        }
-        return newReport
-    }
-
-    func notes(forReportID reportID: UUID) -> [StudentNote] {
-        notes
-            .filter { $0.reportID == reportID }
-            .sorted { $0.timestamp > $1.timestamp }
-    }
-
-    func notesForMostRecentReport(forCarVin vin: String) -> [StudentNote] {
-        guard let report = reports.filter({ $0.carVin == vin }).sorted(by: { $0.createdAt > $1.createdAt }).first else {
-            return []
-        }
-        return notes(forReportID: report.id)
-    }
-
-    func mostRecentReport(forCarVin vin: String) -> StudentCarReport? {
-        reports.filter { $0.carVin == vin }.sorted { $0.createdAt > $1.createdAt }.first
     }
 }
 
+struct ReportViewHelper {
+    static func statusLines(from s: status) -> [String] {
+        var items: [String] = []
+        if s.red { items.append("Status: Red") }
+        if s.yellow { items.append("Status: Yellow") }
+        if s.green { items.append("Status: Green") }
+        return items
+    }
+}

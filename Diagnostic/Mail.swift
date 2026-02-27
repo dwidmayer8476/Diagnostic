@@ -527,7 +527,31 @@ struct ReportView: View {
                     Text("No statuses provided.").foregroundStyle(.secondary)
                 } else {
                     ForEach(summaryStatuses, id: \.self) { item in
-                        Text(item)
+                        // Support two patterns:
+                        // 1) "Name: Status: Value" -> split on ": Status:" and render on two lines
+                        // 2) "Name: Value" -> split on first ":" and render "Name" then "Status: Value"
+                        if item.contains(": Status:") {
+                            let parts = item.components(separatedBy: ": Status:")
+                            if parts.count == 2 {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(parts[0])
+                                    Text("Status: \(parts[1])")
+                                        .foregroundStyle(.secondary)
+                                }
+                            } else {
+                                Text(item)
+                            }
+                        } else if let firstColonRange = item.range(of: ":") {
+                            let name = String(item[..<firstColonRange.lowerBound]).trimmingCharacters(in: .whitespaces)
+                            let value = String(item[firstColonRange.upperBound...]).trimmingCharacters(in: .whitespaces)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(name)
+                                Text("Status: \(value)")
+                                    .foregroundStyle(.secondary)
+                            }
+                        } else {
+                            Text(item)
+                        }
                     }
                 }
             }
@@ -722,5 +746,4 @@ struct SendTheReportView: View {
 #Preview {
     NavigationStack { SendTheReportView() }
 }
-
 
