@@ -36,14 +36,9 @@ struct PastReportsPage: View {
                             Text("\(report.carOwner) • \(report.checkInDate, style: .date) \(report.checkInDate, style: .time)")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
-                            if let latestNote = notesStore.notes(forCarVin: report.carVin).first {
-                                Text(latestNote.notes)
-                                    .font(.body)
-                            } else {
-                                Text("No student notes")
-                                    .font(.body)
-                                    .foregroundColor(.secondary)
-                            }
+                            Text("Notes unavailable for this report")
+                                .font(.body)
+                                .foregroundColor(.secondary)
                         }
                         .padding(.vertical, 4)
                     }
