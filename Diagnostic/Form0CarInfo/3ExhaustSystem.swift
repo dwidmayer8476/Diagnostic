@@ -7,14 +7,12 @@ struct diagnosticView25: View {
         DiagnosticPage(
             category: .exhaust,
             sectionTitle: "Exhaust System",
-            logKey: "ExhaustSystem",
-            logLabel: "ExhaustSystem",
+            logKey: "Exhaust System",
+            logLabel: "Exhaust System",
             photoKey: "page25",
-            photoButtonTitle: "Take Photo for Page 25",
+            photoButtonTitle: "Take Photo for Exhaust System",
             next: diagnosticView26(),
             previous: diagnosticView24()
         )
     }
 }
-
-
