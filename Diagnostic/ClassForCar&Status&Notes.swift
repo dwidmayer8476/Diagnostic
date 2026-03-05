@@ -2,7 +2,7 @@
 //  ClassForCar&Status&Notes.swift
 //  Diagnostic
 //
-//  Simplified student notes storage
+
 //
 import SwiftUI
 import Foundation

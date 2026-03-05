@@ -296,6 +296,18 @@ struct SendTheReportView: View {
             }
             .padding(.horizontal)
             Spacer()
+            NavigationStack{
+                NavigationLink {
+                    ContentView()
+                } label: {
+                    Text("Finished")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: 650)
+                        .frame(maxHeight: 100)
+                        .padding(.vertical, 18)
+                }
+            }
         }
         .navigationTitle("Send Report")
         .sheet(isPresented: $showMail) {
