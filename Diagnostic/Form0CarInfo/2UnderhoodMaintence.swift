@@ -1,18 +1,34 @@
 import SwiftUI
 import UIKit
 
+// Under Hood Overview - Page 1
+struct diagnosticView1: View {
+    var body: some View {
+        DiagnosticPage(
+            category: .underHood,
+            sectionTitle: "Under Hood Overview",
+            logKey: "Under Hood Overview",
+            logLabel: "Under Hood Overview",
+            photoKey: "page1",
+            photoButtonTitle: "Take Photo for Under Hood Overview",
+            next: AnyView(diagnosticView2()),
+            previous: AnyView(EmptyView())
+        )
+    }
+}
+
 // Wiper Blades - Page 2
 struct diagnosticView2: View {
     var body: some View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Wiper Blades",
-            logKey: "WiperBlades",
-            logLabel: "WiperBlades",
+            logKey: "Wiper Blades",
+            logLabel: "Wiper Blades",
             photoKey: "page2",
-            photoButtonTitle: "Take Photo for Page 2",
-            next: diagnosticView3(),
-            previous: diagnosticView1()
+            photoButtonTitle: "Take Photo for Wiper Blades",
+            next: AnyView(diagnosticView3()),
+            previous: AnyView(diagnosticView1())
         )
     }
 }
@@ -23,12 +39,12 @@ struct diagnosticView3: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Head Lights",
-            logKey: "HeadLights",
-            logLabel: "HeadLights",
+            logKey: "Head Lights",
+            logLabel: "Head Lights",
             photoKey: "page3",
-            photoButtonTitle: "Take Photo for Page 3",
-            next: diagnosticView4(),
-            previous: diagnosticView2()
+            photoButtonTitle: "Take Photo for Head Lights",
+            next: AnyView(diagnosticView4()),
+            previous: AnyView(diagnosticView2())
         )
     }
 }
@@ -39,12 +55,12 @@ struct diagnosticView4: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Air Filter",
-            logKey: "AirFilter",
-            logLabel: "AirFilter",
+            logKey: "Air Filter",
+            logLabel: "Air Filter",
             photoKey: "page4",
-            photoButtonTitle: "Take Photo for Page 4",
-            next: diagnosticView5(),
-            previous: diagnosticView3()
+            photoButtonTitle: "Take Photo for Air Filter",
+            next: AnyView(diagnosticView5()),
+            previous: AnyView(diagnosticView3())
         )
     }
 }
@@ -55,12 +71,12 @@ struct diagnosticView5: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "PCV Valve",
-            logKey: "PCVValve",
-            logLabel: "PCVValve",
+            logKey: "PCV Valve",
+            logLabel: "PCV Valve",
             photoKey: "page5",
-            photoButtonTitle: "Take Photo for Page 5",
-            next: diagnosticView6(),
-            previous: diagnosticView4()
+            photoButtonTitle: "Take Photo for PCV Valve",
+            next: AnyView(diagnosticView6()),
+            previous: AnyView(diagnosticView4())
         )
     }
 }
@@ -70,12 +86,12 @@ struct diagnosticView6: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Washer Fluid",
-            logKey: "WasherFluid",
-            logLabel: "WasherFluid",
+            logKey: "Washer Fluid",
+            logLabel: "Washer Fluid",
             photoKey: "page6",
-            photoButtonTitle: "Take Photo for Page 6",
-            next: diagnosticView7(),
-            previous: diagnosticView5()
+            photoButtonTitle: "Take Photo for Washer Fluid",
+            next: AnyView(diagnosticView7()),
+            previous: AnyView(diagnosticView5())
         )
     }
 }
@@ -86,12 +102,12 @@ struct diagnosticView7: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Engine Oil",
-            logKey: "EngineOil",
-            logLabel: "EngineOil",
+            logKey: "Engine Oil",
+            logLabel: "Engine Oil",
             photoKey: "page7",
-            photoButtonTitle: "Take Photo for Page 7",
-            next: diagnosticView8(),
-            previous: diagnosticView6()
+            photoButtonTitle: "Take Photo for Engine Oil",
+            next: AnyView(diagnosticView8()),
+            previous: AnyView(diagnosticView6())
         )
     }
 }
@@ -102,12 +118,12 @@ struct diagnosticView8: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Power Steering Fluid",
-            logKey: "PowerSteeringFluid",
-            logLabel: "PowerSteeringFluid",
+            logKey: "Power Steering Fluid",
+            logLabel: "Power Steering Fluid",
             photoKey: "page8",
-            photoButtonTitle: "Take Photo for Page 8",
-            next: diagnosticView9(),
-            previous: diagnosticView7()
+            photoButtonTitle: "Take Photo for Power Steering Fluid",
+            next: AnyView(diagnosticView9()),
+            previous: AnyView(diagnosticView7())
         )
     }
 }
@@ -118,12 +134,12 @@ struct diagnosticView9: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Master Cylinder Fluid Level",
-            logKey: "MasterCylFluidLevel",
-            logLabel: "MasterCylFluidLevel",
+            logKey: "Master Cylinder Fluid Level",
+            logLabel: "Master Cylinder Fluid Level",
             photoKey: "page9",
-            photoButtonTitle: "Take Photo for Page 9",
-            next: diagnosticView10(),
-            previous: diagnosticView8()
+            photoButtonTitle: "Take Photo for Master Cylinder Fluid Level",
+            next: AnyView(diagnosticView10()),
+            previous: AnyView(diagnosticView8())
         )
     }
 }
@@ -134,12 +150,12 @@ struct diagnosticView10: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Brake Fluid",
-            logKey: "BrakeFluid",
-            logLabel: "BrakeFluid",
+            logKey: "Brake Fluid",
+            logLabel: "Brake Fluid",
             photoKey: "page10",
-            photoButtonTitle: "Take Photo for Page 10",
-            next: diagnosticView11(),
-            previous: diagnosticView9()
+            photoButtonTitle: "Take Photo for Brake Fluid",
+            next: AnyView(diagnosticView11()),
+            previous: AnyView(diagnosticView9())
         )
     }
 }
@@ -150,12 +166,12 @@ struct diagnosticView11: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Coolant Hoses",
-            logKey: "CoolantHoses",
-            logLabel: "CoolantHoses",
+            logKey: "Coolant Hoses",
+            logLabel: "Coolant Hoses",
             photoKey: "page11",
-            photoButtonTitle: "Take Photo for Page 11",
-            next: diagnosticView12(),
-            previous: diagnosticView10()
+            photoButtonTitle: "Take Photo for Collant Hoses",
+            next: AnyView(diagnosticView12()),
+            previous: AnyView(diagnosticView10())
         )
     }
 }
@@ -166,12 +182,12 @@ struct diagnosticView12: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Engine Coolant",
-            logKey: "EngineCoolant",
-            logLabel: "EngineCoolant",
+            logKey: "Engine Coolant",
+            logLabel: "Engine Coolant",
             photoKey: "page12",
-            photoButtonTitle: "Take Photo for Page 12",
-            next: diagnosticView13(),
-            previous: diagnosticView11()
+            photoButtonTitle: "Take Photo for Engine Coolant",
+            next: AnyView(diagnosticView13()),
+            previous: AnyView(diagnosticView11())
         )
     }
 }
@@ -182,12 +198,12 @@ struct diagnosticView13: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Battery Test",
-            logKey: "BatteryTest",
-            logLabel: "BatteryTest",
+            logKey: "Battery Test",
+            logLabel: "Battery Test",
             photoKey: "page13",
-            photoButtonTitle: "Take Photo for Page 13",
-            next: diagnosticView14(),
-            previous: diagnosticView12()
+            photoButtonTitle: "Take Photo for Battery Test",
+            next: AnyView(diagnosticView14()),
+            previous: AnyView(diagnosticView12())
         )
     }
 }
@@ -198,12 +214,12 @@ struct diagnosticView14: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Battery Accessories",
-            logKey: "BatteryAccessories",
-            logLabel: "BatteryAccessories",
+            logKey: "Battery Accessories",
+            logLabel: "Battery Accessories",
             photoKey: "page14",
-            photoButtonTitle: "Take Photo for Page 14",
-            next: diagnosticView15(),
-            previous: diagnosticView13()
+            photoButtonTitle: "Take Photo for Battery Accessories",
+            next: AnyView(diagnosticView15()),
+            previous: AnyView(diagnosticView13())
         )
     }
 }
@@ -214,12 +230,12 @@ struct diagnosticView15: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Start/Charge",
-            logKey: "StartCharge",
-            logLabel: "StartCharge",
+            logKey: "Start/Charge",
+            logLabel: "Start/Charge",
             photoKey: "page15",
-            photoButtonTitle: "Take Photo for Page 15",
-            next: diagnosticView16(),
-            previous: diagnosticView14()
+            photoButtonTitle: "Take Photo for Start/Charge",
+            next: AnyView(diagnosticView16()),
+            previous: AnyView(diagnosticView14())
         )
     }
 }
@@ -233,9 +249,9 @@ struct diagnosticView16: View {
             logKey: "Belts",
             logLabel: "Belts",
             photoKey: "page16",
-            photoButtonTitle: "Take Photo for Page 16",
-            next: diagnosticView17(),
-            previous: diagnosticView15()
+            photoButtonTitle: "Take Photo for Belts",
+            next: AnyView(diagnosticView17()),
+            previous: AnyView(diagnosticView15())
         )
     }
 }
@@ -246,12 +262,12 @@ struct diagnosticView17: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Spark Plugs",
-            logKey: "SparkPlugs",
-            logLabel: "SparkPlugs",
+            logKey: "Spark Plugs",
+            logLabel: "Spark Plugs",
             photoKey: "page17",
-            photoButtonTitle: "Take Photo for Page 17",
-            next: diagnosticView18(),
-            previous: diagnosticView16()
+            photoButtonTitle: "Take Photo for Spark Plugs",
+            next: AnyView(diagnosticView18()),
+            previous: AnyView(diagnosticView16())
         )
     }
 }
@@ -262,12 +278,12 @@ struct diagnosticView18: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Fuel Filter",
-            logKey: "FuelFilter",
-            logLabel: "FuelFilter",
+            logKey: "Fuel Filter",
+            logLabel: "Fuel Filter",
             photoKey: "page18",
-            photoButtonTitle: "Take Photo for Page 18",
-            next: diagnosticView19(),
-            previous: diagnosticView17()
+            photoButtonTitle: "Take Photo for Fuel Filter",
+            next: AnyView(diagnosticView19()),
+            previous: AnyView(diagnosticView17())
         )
     }
 }
@@ -278,12 +294,12 @@ struct diagnosticView19: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Ignition Wires",
-            logKey: "IgnitionWires",
-            logLabel: "IgnitionWires",
+            logKey: "Ignition Wires",
+            logLabel: "Ignition Wires",
             photoKey: "page19",
-            photoButtonTitle: "Take Photo for Page 19",
-            next: diagnosticView20(),
-            previous: diagnosticView18()
+            photoButtonTitle: "Take Photo for Ignition Wires",
+            next: AnyView(diagnosticView20()),
+            previous: AnyView(diagnosticView18())
         )
     }
 }
@@ -294,12 +310,12 @@ struct diagnosticView20: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Valve Cover Gasket",
-            logKey: "ValveCoverGasket",
-            logLabel: "ValveCoverGasket",
+            logKey: "Valve Cover Gasket",
+            logLabel: "Valve Cover Gasket",
             photoKey: "page20",
-            photoButtonTitle: "Take Photo for Page 20",
-            next: diagnosticView21(),
-            previous: diagnosticView19()
+            photoButtonTitle: "Take Photo for Valve Cover Gasket",
+            next: AnyView(diagnosticView21()),
+            previous: AnyView(diagnosticView19())
         )
     }
 }
@@ -310,12 +326,12 @@ struct diagnosticView21: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Power Steering Hose",
-            logKey: "PowerSteeringHose",
-            logLabel: "PowerSteeringHose",
+            logKey: "Power Steering Hose",
+            logLabel: "Power Steering Hose",
             photoKey: "page21",
-            photoButtonTitle: "Take Photo for Page 21",
-            next: diagnosticView22(),
-            previous: diagnosticView20()
+            photoButtonTitle: "Take Photo for Power Steering Hose",
+            next: AnyView(diagnosticView22()),
+            previous: AnyView(diagnosticView20())
         )
     }
 }
@@ -326,28 +342,28 @@ struct diagnosticView22: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Timing Belt",
-            logKey: "TimingBelt",
-            logLabel: "TimingBelt",
+            logKey: "Timing Belt",
+            logLabel: "Timing Belt",
             photoKey: "page22",
-            photoButtonTitle: "Take Photo for Page 22",
-            next: diagnosticView23(),
-            previous: diagnosticView21()
+            photoButtonTitle: "Take Photo for Timing Belt",
+            next: AnyView(diagnosticView23()),
+            previous: AnyView(diagnosticView21())
         )
     }
 }
 
-// Transfer Case / Diff Fluid - Page 23
+// Transfer Case/Differential Fluid - Page 23
 struct diagnosticView23: View {
     var body: some View {
         DiagnosticPage(
             category: .underHood,
-            sectionTitle: "Transfer Case / Diff Fluid",
-            logKey: "TransferCaseDiffFluid",
-            logLabel: "TransferCaseDiffFluid",
+            sectionTitle: "Transfer Case/Differential Fluid",
+            logKey: "Transfer Case/Differential Fluid",
+            logLabel: "Transfer Case/Differential Fluid",
             photoKey: "page23",
-            photoButtonTitle: "Take Photo for Page 23",
-            next: diagnosticView24(),
-            previous: diagnosticView22()
+            photoButtonTitle: "Take Photo for Transfer Case/Differential Fluid",
+            next: AnyView(diagnosticView24()),
+            previous: AnyView(diagnosticView22())
         )
     }
 }
@@ -358,14 +374,13 @@ struct diagnosticView24: View {
         DiagnosticPage(
             category: .underHood,
             sectionTitle: "Transmission Fluid",
-            logKey: "TransmissionFluid",
-            logLabel: "TransmissionFluid",
+            logKey: "Transmission Fluid",
+            logLabel: "Transmission Fluid",
             photoKey: "page24",
-            photoButtonTitle: "Take Photo for Page 24",
-            next: diagnosticView25(),
-            previous: diagnosticView23()
+            photoButtonTitle: "Take Photo for Transmission Fluid",
+            next: AnyView(diagnosticView25()),
+            previous: AnyView(diagnosticView23())
         )
     }
 }
-
 

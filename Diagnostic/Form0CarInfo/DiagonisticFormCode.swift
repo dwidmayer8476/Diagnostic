@@ -8,7 +8,7 @@ enum DiagnosticCategory {
     
     var headerTitle: String {
         switch self {
-        case .underHood: return "Under Hood / Maintenance Service"
+        case .underHood: return "Under Hood/Maintenance Service"
         case .exhaust: return "Exhaust System"
         case .steeringSuspension: return "Steering & Suspension"
         }

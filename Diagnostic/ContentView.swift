@@ -27,7 +27,7 @@ struct ContentView: View {
                         .padding(.bottom, 30)
                     
                     NavigationLink {
-                        diagnosticView1()
+                        DiagnosticView1()
                             .environmentObject(PhotoStore())
                             .environmentObject(PrintStore())
                             .environmentObject(ReportStore())

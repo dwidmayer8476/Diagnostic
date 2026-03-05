@@ -63,10 +63,10 @@ class ReportStore: ObservableObject {
     }
 }
 
-struct diagnosticView1: View {
+struct DiagnosticView1: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
-    @StateObject var reportStore = ReportStore()
+    @StateObject private var reportStore = ReportStore()
     
     // inputs for buttons
     @State private var carVin: String = ""
@@ -80,159 +80,211 @@ struct diagnosticView1: View {
     @State private var meridiemSelection: String = "AM"
     @State private var goNext: Bool = false
     
+    private func inputCard<Content: View>(title: String, systemImage: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(spacing: 10) {
+                Image(systemName: systemImage)
+                    .font(.title3)
+                    .foregroundStyle(Color.accentColor)
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+            }
+            content()
+        }
+        .padding(16)
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
+    }
     
     var body: some View {
-        //        ZStack{
-        //            Image("3background")
-        
-        VStack(alignment: .center) {
-            Text("Car Information")
-                .font(.largeTitle)
-                .foregroundStyle(.red)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.bottom, 40)
+        ZStack {
+            LinearGradient(colors: [Color(.systemBackground), Color(.secondarySystemBackground)], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
-            
-            
-            HStack(alignment: .top, spacing: 40) {
-                VStack(alignment: .center, spacing: 15) {
-                    TextField("Enter VIN", text: $carVin)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 200, height: 45)
-                        .frame(maxWidth: .infinity, alignment: .center)
+            ScrollView {
+                VStack(spacing: 24) {
+                    VStack(spacing: 8) {
+                        Text("Car Information")
+                            .font(.largeTitle.bold())
+                            .foregroundStyle(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("Enter details to check in a vehicle and capture notes.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 8)
                     
-                    TextField("Enter Make", text: $make)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 200, height: 45)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    TextField("Enter Year", text: $yearText)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 200, height: 45)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    TextField("Enter Owner", text: $carOwner)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 200, height: 45)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    TextField("Enter Car Owner's Gmail", text: $carGmail)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 200, height: 45)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .frame(maxWidth: .infinity, alignment: .center)
-                
-                VStack(alignment: .center, spacing: 20) {
-                    Text("Check-in Date")
-                        .font(.title3).textFieldStyle(.roundedBorder)
-                        .foregroundStyle(Color.black)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    DatePicker(
-                        "Check-in Date",
-                        selection: $checkInDate,
-                        displayedComponents: .date
-                    )
-                    .datePickerStyle(.wheel)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    Text("Check-in Time")
-                        .font(.title3)
-                        .textFieldStyle(.roundedBorder)
-                        .foregroundStyle(Color.black)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    DatePicker(
-                        "Check-in Time",
-                        selection: $checkInDate,
-                        displayedComponents:.hourAndMinute
-                    )
-                    .datePickerStyle(.wheel)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    if useExplicitMeridiem {
-                        Picker("AM/PM", selection: $meridiemSelection) {
-                            Text("AM").tag("AM")
-                            Text("PM").tag("PM")
+                    inputCard(title: "Vehicle Details", systemImage: "car.fill") {
+                        VStack(spacing: 12) {
+                            LabeledContent("VIN") {
+                                TextField("1HGCM82633A004352", text: $carVin)
+                                    .textFieldStyle(.roundedBorder)
+                                    .textInputAutocapitalization(.characters)
+                                    .autocorrectionDisabled()
+                                    .font(.body)
+                                    .frame(maxWidth: 480)
+                            }
+                            LabeledContent("Make") {
+                                TextField("e.g. Toyota", text: $make)
+                                    .textFieldStyle(.roundedBorder)
+                                    .autocorrectionDisabled()
+                                    .font(.body)
+                                    .frame(maxWidth: 480)
+                            }
+                            LabeledContent("Year") {
+                                TextField("e.g. 2018", text: $yearText)
+                                    .keyboardType(.numberPad)
+                                    .textFieldStyle(.roundedBorder)
+                                    .font(.body)
+                                    .frame(maxWidth: 200)
+                            }
                         }
-                        .pickerStyle(.segmented)
-                        .frame(maxWidth: .infinity, alignment: .center)
                     }
-                }
-                VStack(alignment: .center, spacing: 8) {
-                    Text("Student Notes")
-                        .font(.title3)
-                        .foregroundStyle(Color.black)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    TextField("Enter Notes", text: $notes)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 300, height: 50)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .frame(maxWidth: .infinity)
-            }
-            
-           
-            
-            HStack {
-                Spacer()
-                Button("Confirm") {
-                    let formatter = DateFormatter()
-                    formatter.dateStyle = .medium
-                    formatter.timeStyle = .short
+                    .padding(.horizontal)
                     
-                    var parsedYear = 0
-                    if let yearInt = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
-                        parsedYear = yearInt
+                    inputCard(title: "Owner", systemImage: "person.crop.circle.fill") {
+                        VStack(spacing: 12) {
+                            LabeledContent("Name") {
+                                TextField("Owner name", text: $carOwner)
+                                    .textFieldStyle(.roundedBorder)
+                                    .font(.body)
+                                    .frame(maxWidth: 480)
+                            }
+                            LabeledContent("Gmail") {
+                                TextField("owner@gmail.com", text: $carGmail)
+                                    .textFieldStyle(.roundedBorder)
+                                    .textInputAutocapitalization(.never)
+                                    .keyboardType(.emailAddress)
+                                    .autocorrectionDisabled()
+                                    .font(.body)
+                                    .frame(maxWidth: 480)
+                            }
+                        }
                     }
-                    if parsedYear < 0 { parsedYear = 0 }
+                    .padding(.horizontal)
                     
-                    let newReport = CarReport(
-                        carVin: carVin,
-                        make: make,
-                        year: parsedYear,
-                        carOwner: carOwner,
-                        carGmail: carGmail,
-                        checkInDate: checkInDate,
-                        notes: notes
-                    )
+                    inputCard(title: "Check-in", systemImage: "calendar.badge.clock") {
+                        VStack(spacing: 12) {
+                            LabeledContent("Date") {
+                                DatePicker("Date", selection: $checkInDate, displayedComponents: .date)
+                                    .datePickerStyle(.compact)
+                                    .labelsHidden()
+                            }
+                            LabeledContent("Time") {
+                                HStack(spacing: 12) {
+                                    DatePicker("Time", selection: $checkInDate, displayedComponents: .hourAndMinute)
+                                        .datePickerStyle(.compact)
+                                        .labelsHidden()
+                                    if useExplicitMeridiem {
+                                        Picker("AM/PM", selection: $meridiemSelection) {
+                                            Text("AM").tag("AM")
+                                            Text("PM").tag("PM")
+                                        }
+                                        .pickerStyle(.segmented)
+                                        .frame(maxWidth: 180)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
                     
-                    reportStore.reports.append(newReport)
-                    reportStore.save()
+                    inputCard(title: "Student Notes", systemImage: "note.text") {
+                        VStack(spacing: 12) {
+                            TextField("Enter notes...", text: $notes, axis: .vertical)
+                                .textFieldStyle(.roundedBorder)
+                                .lineLimit(3, reservesSpace: true)
+                                .frame(minHeight: 60)
+                                .font(.body)
+                        }
+                    }
+                    .padding(.horizontal)
                     
-                    let message = """
-                Confirmed Car:
-                VIN: \(carVin)
-                Make: \(make)
-                Year: \(parsedYear)
-                Owner: \(carOwner)
-                Check-in: \(formatter.string(from: checkInDate))
-                Notes: \(notes)
-                """
-                    printStore.log(message, for: "CarInfo")
-                    
-                    // clear form
-                    carVin = ""
-                    make = ""
-                    yearText = ""
-                    carOwner = ""
-                    carGmail = ""
-                    notes = ""
-                    checkInDate = Date()
-                    useExplicitMeridiem = false
-                    meridiemSelection = "AM"
-                    
-                    // navigate to next page
-                    goNext = true
+                    // Footer button
+                    VStack {
+                        Button(action: confirmAction) {
+                            HStack {
+                                Image(systemName: "checkmark.circle.fill")
+                                Text("Confirm")
+                                    .fontWeight(.semibold)
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.accentColor)
+                        .controlSize(.large)
+                        .padding(.horizontal)
+                    }
+                    .padding(.bottom, 24)
                 }
-                .buttonStyle(.borderedProminent)
-                Spacer()
             }
-            //    }
-            .navigationDestination(isPresented: $goNext) {
-                diagnosticView2()
-            }
-            .padding(.bottom, 30)
         }
+        .navigationDestination(isPresented: $goNext) {
+            diagnosticView2()
+        }
+    }
+    
+    private func confirmAction() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        
+        var parsedYear = 0
+        if let yearInt = Int(yearText.trimmingCharacters(in: .whitespacesAndNewlines)) {
+            parsedYear = yearInt
+        }
+        if parsedYear < 0 { parsedYear = 0 }
+        
+        let newReport = CarReport(
+            carVin: carVin,
+            make: make,
+            year: parsedYear,
+            carOwner: carOwner,
+            carGmail: carGmail,
+            checkInDate: checkInDate,
+            notes: notes
+        )
+        
+        reportStore.reports.append(newReport)
+        reportStore.save()
+        
+        let message = """
+        Confirmed Car:
+        VIN: \(carVin)
+        Make: \(make)
+        Year: \(parsedYear)
+        Owner: \(carOwner)
+        Check-in: \(formatter.string(from: checkInDate))
+        Notes: \(notes)
+        """
+        printStore.log(message, for: "CarInfo")
+        
+        // clear form
+        carVin = ""
+        make = ""
+        yearText = ""
+        carOwner = ""
+        carGmail = ""
+        notes = ""
+        checkInDate = Date()
+        useExplicitMeridiem = false
+        meridiemSelection = "AM"
+        
+        // navigate to next page
+        goNext = true
+    }
+}
+
+struct DiagnosticView1_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            DiagnosticView1()
+        }
+        .environmentObject(PhotoStore())
+        .environmentObject(PrintStore())
     }
 }
     
