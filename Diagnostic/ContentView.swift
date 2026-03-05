@@ -20,10 +20,10 @@ struct ContentView: View {
                 
                 VStack {
                     Text("Welcome To Diagnostic")
+                        .transition(.move(edge: .top))
                         .font(.system(size: 48, weight: .heavy, design: .default))
                         .foregroundStyle(.white)
                         .shadow(color: .black.opacity(0.9), radius: 6.5, x: 0, y: -5)
-                    
                         .padding(.bottom, 30)
                     
                     NavigationLink {
