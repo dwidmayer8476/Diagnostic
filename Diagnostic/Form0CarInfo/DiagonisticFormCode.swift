@@ -5,7 +5,7 @@ enum DiagnosticCategory {
     case underHood
     case exhaust
     case steeringSuspension
-
+    
     var headerTitle: String {
         switch self {
         case .underHood: return "Under Hood / Maintenance Service"
@@ -18,7 +18,7 @@ enum DiagnosticCategory {
 struct DiagnosticPage<Next: View, Previous: View>: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
-
+    
     let category: DiagnosticCategory
     let sectionTitle: String
     let logKey: String
@@ -27,7 +27,7 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
     let photoButtonTitle: String?
     let next: Next
     let previous: Previous
-
+    
     
     struct DiagnosticStatus: CustomStringConvertible {
         var red: Bool
@@ -35,34 +35,34 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
         var green: Bool
         var description: String { "DiagnosticStatus(red: \(red), yellow: \(yellow), green: \(green))" }
     }
-
+    
     @State private var showCamera = false
     @State private var notes: String = ""
     @State private var status: DiagnosticColor = .none
-
+    
     var body: some View {
         VStack(spacing: 20) {
             Image("Rules")
                 .resizable()
                 .scaledToFit()
                 .padding()
-
+            
             Text(category.headerTitle)
                 .font(.largeTitle)
                 .foregroundStyle(.red)
                 .padding(10)
-
+            
             Text(sectionTitle)
                 .font(.largeTitle)
-
+            
             StatusPicker(selection: $status)
-
+            
             Text("Status: \(status.rawValue)")
-
+            
             TextField("Enter Notes", text: $notes)
                 .frame(width: 300, height: 50)
                 .textFieldStyle(.roundedBorder)
-
+            
             Button("Confirm?") {
                 let message = """
                 \(logLabel): Status: \(status.rawValue)
@@ -75,7 +75,7 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
             .buttonStyle(.bordered)
             .buttonBorderShape(.roundedRectangle)
             .controlSize(.large)
-
+            
             if let photoKey, let photoButtonTitle {
                 Button(photoButtonTitle) {
                     showCamera = true
@@ -87,7 +87,11 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
                     })
                 }
             }
-
+            NavigationLink {
+                CarMap()
+            } label: {
+                Text("See Car Map")
+            }
             NavigationLink("Next Page") { next }
             NavigationLink("Previous Page") { previous }
         }

@@ -82,101 +82,99 @@ struct diagnosticView1: View {
     
     
     var body: some View {
-//        ZStack{
-//            Image("3background")
+        //        ZStack{
+        //            Image("3background")
+        
+        VStack(alignment: .center) {
+            Text("Car Information")
+                .font(.largeTitle)
+                .foregroundStyle(.red)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.bottom, 40)
             
-            VStack(alignment: .leading) {
-                Text("Car Information")
-                    .font(.largeTitle)
-                    .foregroundStyle(.red)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.bottom, 40)
+            
+            
+            HStack(alignment: .top, spacing: 40) {
+                VStack(alignment: .center, spacing: 15) {
+                    TextField("Enter VIN", text: $carVin)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    TextField("Enter Make", text: $make)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    TextField("Enter Year", text: $yearText)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    TextField("Enter Owner", text: $carOwner)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    TextField("Enter Car Owner's Gmail", text: $carGmail)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 200, height: 45)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
                 
-                
-                
-                HStack(alignment: .top, spacing: 80) {
-                    VStack(alignment: .center, spacing: 15) {
-                        TextField("Enter VIN", text: $carVin)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 200, height: 45)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        
-                        TextField("Enter Make", text: $make)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 200, height: 45)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        
-                        TextField("Enter Year", text: $yearText)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 200, height: 45)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        
-                        TextField("Enter Owner", text: $carOwner)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 200, height: 45)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        
-                        TextField("Enter Car Owner's Gmail", text: $carGmail)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 200, height: 45)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
+                VStack(alignment: .center, spacing: 20) {
+                    Text("Check-in Date")
+                        .font(.title3).textFieldStyle(.roundedBorder)
+                        .foregroundStyle(Color.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    DatePicker(
+                        "Check-in Date",
+                        selection: $checkInDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(.wheel)
                     .frame(maxWidth: .infinity, alignment: .center)
                     
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("Check-in Date")
-                            .font(.title3).textFieldStyle(.roundedBorder)
-                            .foregroundStyle(Color.black)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        DatePicker(
-                            "Check-in Date",
-                            selection: $checkInDate,
-                            displayedComponents: .date
-                        )
-                        .datePickerStyle(.wheel)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text("Check-in Time")
-                            .font(.title3)
-                            .textFieldStyle(.roundedBorder)
-                            .foregroundStyle(Color.black)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        DatePicker(
-                            "Check-in Time",
-                            selection: $checkInDate,
-                            displayedComponents:.hourAndMinute
-                        )
-                        .datePickerStyle(.wheel)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        if useExplicitMeridiem {
-                            Picker("AM/PM", selection: $meridiemSelection) {
-                                Text("AM").tag("AM")
-                                Text("PM").tag("PM")
-                            }
-                            .pickerStyle(.segmented)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Check-in Time")
+                        .font(.title3)
+                        .textFieldStyle(.roundedBorder)
+                        .foregroundStyle(Color.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    DatePicker(
+                        "Check-in Time",
+                        selection: $checkInDate,
+                        displayedComponents:.hourAndMinute
+                    )
+                    .datePickerStyle(.wheel)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    if useExplicitMeridiem {
+                        Picker("AM/PM", selection: $meridiemSelection) {
+                            Text("AM").tag("AM")
+                            Text("PM").tag("PM")
                         }
+                        .pickerStyle(.segmented)
+                        .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    VStack(alignment: .center, spacing: 8) {
-                        Text("Student Notes")
-                            .font(.title3)
-                            .foregroundStyle(Color.black)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        TextField("Enter Notes", text: $notes)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 300, height: 50)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                    .frame(maxWidth: .infinity)
-                    Spacer()
                 }
+                VStack(alignment: .center, spacing: 8) {
+                    Text("Student Notes")
+                        .font(.title3)
+                        .foregroundStyle(Color.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    TextField("Enter Notes", text: $notes)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 300, height: 50)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .frame(maxWidth: .infinity)
             }
             
-            Spacer()
+           
             
-            
-            HStack(spacing: 30) {
+            HStack {
+                Spacer()
                 Button("Confirm") {
                     let formatter = DateFormatter()
                     formatter.dateStyle = .medium
@@ -227,20 +225,22 @@ struct diagnosticView1: View {
                     goNext = true
                 }
                 .buttonStyle(.borderedProminent)
+                Spacer()
             }
-    //    }
+            //    }
             .navigationDestination(isPresented: $goNext) {
                 diagnosticView2()
             }
             .padding(.bottom, 30)
         }
     }
-
-
-#Preview {
-    diagnosticView1()
-        .environmentObject(PhotoStore())
-        .environmentObject(PrintStore())
-        .environmentObject(ReportStore())
 }
+    
+    
+    #Preview {
+        diagnosticView1()
+            .environmentObject(PhotoStore())
+            .environmentObject(PrintStore())
+            .environmentObject(ReportStore())
+    }
 
