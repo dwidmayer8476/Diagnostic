@@ -68,6 +68,18 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
                         }
                         .padding(.vertical, 8)
                         
+                        HStack(alignment: .center) {
+                            NavigationLink {
+                                CarMap()
+                            } label: {
+                                Label("Open Car Map", systemImage: "map")
+                                    .font(.title3)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 6)
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                        .padding(.horizontal)
                         VStack(spacing: 20) {
                             // Rules
                             RoundedRectangle(cornerRadius: 16, style: .continuous)
@@ -182,4 +194,3 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
         }
     }
 }
-
