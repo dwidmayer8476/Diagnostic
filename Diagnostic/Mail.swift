@@ -7,7 +7,7 @@ import MessageUI
 #endif
 import PDFKit
 
-/// This shows the Apple Mail screen. You can set a subject, message,
+// This shows the Apple Mail screen. You can set a subject, message,
 // recipients, and add one optional attachment.
 struct SimpleMailComposer: UIViewControllerRepresentable {
     var subject: String
