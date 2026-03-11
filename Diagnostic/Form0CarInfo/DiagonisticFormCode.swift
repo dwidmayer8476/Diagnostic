@@ -157,7 +157,7 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
                                     \(logLabel): Status: \(status.rawValue)
                                     Notes: \(notes)
                                     """
-                                    print(message)
+                                    printStore.log(message, for: logKey)
                                 } label: {
                                     Label("Confirm", systemImage: "checkmark.circle.fill")
                                         .font(.title3.weight(.semibold))
