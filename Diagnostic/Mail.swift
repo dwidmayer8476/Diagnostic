@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 import UIKit
 #if canImport(MessageUI)
@@ -140,46 +138,9 @@ struct ReportView: View {
         self.statuses = statuses
         self.photos = photos
     }
-
-    @State private var pdfData: Data? = nil
-    @State private var showMail = false
-    @State private var showShare = false
-
+    
     var body: some View {
         content
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        if let data = makePDF(from: content) {
-                            pdfData = data
-#if canImport(MessageUI)
-                            if MFMailComposeViewController.canSendMail() {
-                                showMail = true
-                            } else {
-                                showShare = true
-                            }
-#else
-                            showShare = true
-#endif
-                        }
-                    } label: {
-                        Label("Send", systemImage: "envelope")
-                    }
-                }
-            }
-            .sheet(isPresented: $showMail) {
-                if let data = pdfData {
-                    SimpleMailComposer(
-                        subject: "Diagnostic Report",
-                        message: "Please find the diagnostic report attached.",
-                        recipients: [],
-                        attachment: (data, "application/pdf", "DiagnosticReport.pdf")
-                    )
-                }
-            }
-            .sheet(isPresented: $showShare) {
-                if let data = pdfData { SimpleShareSheet(items: [data]) }
-            }
     }
 
     // What the report looks like on screen (also what we turn into a PDF)
@@ -262,7 +223,15 @@ struct SendTheReportView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Group {
+            VStack(spacing: 12) {
+                // Live report preview
+                ReportView(notes: exampleNotes, statuses: exampleStatuses, photos: examplePhotos)
+                    .frame(maxHeight: 360)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(.secondarySystemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                // PDF preview (if generated)
                 if let data = pdfData {
                     PDFPreviewView(data: data)
                         .frame(height: 360)
@@ -270,7 +239,7 @@ struct SendTheReportView: View {
                 } else {
                     Text("No PDF yet. Tap Generate.")
                         .foregroundStyle(.secondary)
-                        .frame(height: 360)
+                        .frame(height: 120)
                         .frame(maxWidth: .infinity)
                         .background(Color(.secondarySystemBackground))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -296,17 +265,13 @@ struct SendTheReportView: View {
             }
             .padding(.horizontal)
             Spacer()
-            NavigationStack{
-                NavigationLink {
-                    ContentView()
-                } label: {
-                    Text("Finished")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: 650)
-                        .frame(maxHeight: 100)
-                        .padding(.vertical, 18)
-                }
+            NavigationLink(destination: ContentView()) {
+                Text("Finished")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: 650)
+                    .frame(maxHeight: 100)
+                    .padding(.vertical, 18)
             }
         }
         .navigationTitle("Send Report")
