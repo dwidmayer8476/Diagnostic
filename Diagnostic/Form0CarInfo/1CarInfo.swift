@@ -6,6 +6,7 @@ struct CarReport: Identifiable, Codable {
     let id: UUID
     var carVin: String
     var make: String
+    
     var year: Int
     var carOwner: String
     var carGmail: String
