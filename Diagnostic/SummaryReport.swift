@@ -44,6 +44,13 @@ struct PrintSummaryView: View {
                     }
                 }
             }
+            NavigationLink {
+                ContentView()
+            } label: {
+                Text("Go Back To Start")
+                    .font(.largeTitle)
+                   
+            }
         }
     }
 }
