@@ -131,7 +131,7 @@ struct ReportView: View {
     var photos: [UIImage]
 
     // Optional car info (can be nil)
-    var carInfo: carInfoClass? = nil
+    var carInfo: CarReport? = nil
 
     init(notes: String, statuses: [String], photos: [UIImage] = []) {
         self.notes = notes

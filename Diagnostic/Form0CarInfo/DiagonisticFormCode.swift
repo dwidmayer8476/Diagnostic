@@ -15,7 +15,7 @@ enum DiagnosticCategory {
     }
 }
 
-struct DiagnosticPage<Next: View, Previous: View>: View {
+struct DiagnosticPage: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
     
@@ -25,8 +25,6 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
     let logLabel: String
     let photoKey: String?
     let photoButtonTitle: String?
-    let next: Next
-    let previous: Previous
     
     
     struct DiagnosticStatus: CustomStringConvertible {
@@ -45,7 +43,6 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
             ZStack {
                 LinearGradient(colors: [Color(.systemBackground), Color(.secondarySystemBackground)], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
-                // Header
                 ScrollView {
                     VStack(spacing: 16) {
                         VStack(spacing: 8) {
@@ -164,24 +161,6 @@ struct DiagnosticPage<Next: View, Previous: View>: View {
                                         .frame(maxWidth: .infinity)
                                 }
                                 .buttonStyle(.borderedProminent)
-                                // Page movement
-                                HStack(spacing: 12) {
-                                    NavigationLink {
-                                        previous
-                                    } label: {
-                                        Label("Previous", systemImage: "chevron.left.2")
-                                            .frame(maxWidth: .infinity)
-                                    }
-                                    .buttonStyle(.bordered)
-                                    
-                                    NavigationLink {
-                                        next
-                                    } label: {
-                                        Label("Next", systemImage: "chevron.right.2")
-                                            .frame(maxWidth: .infinity)
-                                    }
-                                    .buttonStyle(.bordered)
-                                }
                             }
                         }
                         .padding()
