@@ -72,12 +72,12 @@ func makePDF<Content: View>(from view: Content,
 #if canImport(UIKit)
     let printableWidth = pageSize.width - margins * 2
 
-    // Put the SwiftUI view inside a hosting controller so we can lay it out
+    // Put the SwiftUI view inside a hosting controller so it can lay it out
     let host = UIHostingController(rootView: view)
     host.view.backgroundColor = .systemBackground
     host.view.translatesAutoresizingMaskIntoConstraints = false
 
-    // Create a container to help size the view at the given width
+    // Creates a container to hlp size the view at the given width
     let container = UIView(frame: CGRect(origin: .zero, size: CGSize(width: printableWidth, height: 10)))
     container.addSubview(host.view)
     NSLayoutConstraint.activate([
