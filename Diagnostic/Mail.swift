@@ -40,7 +40,7 @@ struct SimpleMailComposer: UIViewControllerRepresentable {
 }
 
 // Share Sheet
-// If Mail is not set up on the device, we can still share the PDF
+// If Mail is not set up on the device, itshares the PDF
 // through other apps (Files, AirDrop, etc.).
 struct SimpleShareSheet: UIViewControllerRepresentable {
     let items: [Any]
