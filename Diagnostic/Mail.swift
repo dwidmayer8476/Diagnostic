@@ -145,71 +145,79 @@ struct ReportView: View {
 
     // What the report looks like on screen (also what we turn into a PDF)
     private var content: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Diagnostic Report").font(.title).bold()
-            Text(Date().formatted(date: .abbreviated, time: .shortened))
-                .font(.subheadline).foregroundStyle(.secondary)
-            Divider()
-
-            if let info = carInfo {
-                Text("Vehicle Info").font(.headline)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("VIN: \(info.carVin)")
-                    Text("Make: \(info.make)")
-                    Text("Year: \(info.year)")
-                    Text("Owner: \(info.carOwner)")
-                    Text("Gmail: \(info.carGmail)")
-                }
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Diagnostic Report").font(.title).bold()
+                Text(Date().formatted(date: .abbreviated, time: .shortened))
+                    .font(.subheadline).foregroundStyle(.secondary)
                 Divider()
-            }
-
-            Text("Summary").font(.headline)
-            if statuses.isEmpty {
-                Text("No statuses provided.").foregroundStyle(.secondary)
-            } else {
-                VStack(alignment: .leading, spacing: 6) {
-                    ForEach(statuses, id: \.self) { item in
-                        Text("• \(item)")
+                
+                if let info = carInfo {
+                    Text("Vehicle Info").font(.headline)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("VIN: \(info.carVin)")
+                        Text("Make: \(info.make)")
+                        Text("Year: \(info.year)")
+                        Text("Owner: \(info.carOwner)")
+                        Text("Gmail: \(info.carGmail)")
+                    }
+                    Divider()
+                }
+                
+                Text("Summary").font(.headline)
+                if statuses.isEmpty {
+                    Text("No statuses provided.").foregroundStyle(.secondary)
+                } else {
+                    VStack(alignment: .leading, spacing: 6) {
+                        ForEach(statuses, id: \.self) { item in
+                            Text("• \(item)")
+                        }
                     }
                 }
-            }
-
-            Text("Notes").font(.headline).padding(.top, 8)
-            if notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                Text("No notes provided.").foregroundStyle(.secondary)
-            } else {
-                VStack(alignment: .leading, spacing: 4) {
-                    ForEach(notes
-                        .components(separatedBy: CharacterSet.newlines)
-                        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                        .filter { !$0.isEmpty }, id: \.self) { line in
-                        Text("• \(line)")
+                
+                Text("Notes").font(.headline).padding(.top, 8)
+                if notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Text("No notes provided.").foregroundStyle(.secondary)
+                } else {
+                    VStack(alignment: .leading, spacing: 4) {
+                        ForEach(notes
+                            .components(separatedBy: CharacterSet.newlines)
+                            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                            .filter { !$0.isEmpty }, id: \.self) { line in
+                                Text("• \(line)")
+                            }
                     }
                 }
-            }
-
-            if !photos.isEmpty {
-                Text("Photos").font(.headline).padding(.top, 8)
-                let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-                LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(Array(photos.enumerated()), id: \.offset) { _, img in
-                        Image(uiImage: img)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 120)
-                            .clipped()
-                            .cornerRadius(6)
-                            .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.secondary.opacity(0.2)))
+                
+                if !photos.isEmpty {
+                    Text("Photos").font(.headline).padding(.top, 8)
+                    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        ForEach(Array(photos.enumerated()), id: \.offset) { _, img in
+                            Image(uiImage: img)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 120)
+                                .clipped()
+                                .cornerRadius(6)
+                                .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.secondary.opacity(0.2)))
+                        }
                     }
                 }
+                NavigationLink {
+                    ContentView()
+                } label: {
+                    Text("Go Back To Start")
+                        .font(.largeTitle)
+                    
+                    Spacer()
+                }
             }
-
-            Spacer()
+            .padding()
+            .background(Color(.systemBackground))
         }
-        .padding()
-        .background(Color(.systemBackground))
     }
-}
+} // <-- Close ReportView
 
 // demo
 struct SendTheReportView: View {

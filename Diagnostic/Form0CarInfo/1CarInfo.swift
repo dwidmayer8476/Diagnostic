@@ -156,7 +156,7 @@ struct DiagnosticView1: View {
                                     .frame(maxWidth: 480)
                             }
                             LabeledContent("Gmail") {
-                                TextField("owner@gmail.com", text: $carGmail)
+                                TextField("owner@mail.com", text: $carGmail)
                                     .textFieldStyle(.roundedBorder)
                                     .textInputAutocapitalization(.never)
                                     .keyboardType(.emailAddress)
