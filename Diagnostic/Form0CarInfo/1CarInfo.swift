@@ -6,6 +6,7 @@ struct CarReport: Identifiable, Codable {
     let id: UUID
     var carVin: String
     var make: String
+    
     var year: Int
     var carOwner: String
     var carGmail: String
@@ -66,6 +67,7 @@ class ReportStore: ObservableObject {
 struct DiagnosticView1: View {
     @EnvironmentObject var photoStore: PhotoStore
     @EnvironmentObject var printStore: PrintStore
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var reportStore = ReportStore()
     
     // inputs for buttons
@@ -154,7 +156,7 @@ struct DiagnosticView1: View {
                                     .frame(maxWidth: 480)
                             }
                             LabeledContent("Gmail") {
-                                TextField("owner@gmail.com", text: $carGmail)
+                                TextField("owner@mail.com", text: $carGmail)
                                     .textFieldStyle(.roundedBorder)
                                     .textInputAutocapitalization(.never)
                                     .keyboardType(.emailAddress)
@@ -202,8 +204,6 @@ struct DiagnosticView1: View {
                         }
                     }
                     .padding(.horizontal)
-                    
-                    // Footer button
                     VStack {
                         Button(action: confirmAction) {
                             HStack {
@@ -222,8 +222,14 @@ struct DiagnosticView1: View {
                 }
             }
         }
-        .navigationDestination(isPresented: $goNext) {
-            diagnosticView2()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("Back to List", systemImage: "chevron.left")
+                }
+            }
         }
     }
     
@@ -272,9 +278,6 @@ struct DiagnosticView1: View {
         checkInDate = Date()
         useExplicitMeridiem = false
         meridiemSelection = "AM"
-        
-        // navigate to next page
-        goNext = true
     }
 }
 
@@ -287,12 +290,3 @@ struct DiagnosticView1_Previews: PreviewProvider {
         .environmentObject(PrintStore())
     }
 }
-    
-    
-    #Preview {
-        diagnosticView1()
-            .environmentObject(PhotoStore())
-            .environmentObject(PrintStore())
-            .environmentObject(ReportStore())
-    }
-
