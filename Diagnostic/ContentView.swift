@@ -52,10 +52,7 @@ struct ContentView: View {
                     .padding(.bottom, 30)
                     
                     NavigationLink {
-                        DiagnosticView1()
-                            .environmentObject(PhotoStore())
-                            .environmentObject(PrintStore())
-                            .environmentObject(ReportStore())
+                        GiantDiagnosticList()
                     } label: {
                         Text("Start Diagnostic Report")
                             .font(.largeTitle)

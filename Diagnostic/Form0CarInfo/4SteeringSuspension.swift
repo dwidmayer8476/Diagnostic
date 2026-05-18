@@ -10,8 +10,6 @@ struct diagnosticView26: View {
             logLabel: "Steering Components",
             photoKey: "page26",
             photoButtonTitle: "Take Photo for Steering Components",
-            next: diagnosticView27(),
-            previous: diagnosticView25()
         )
     }
 }
@@ -26,8 +24,6 @@ struct diagnosticView27: View {
             logLabel: "Suspension Components",
             photoKey: "page27",
             photoButtonTitle: "Take Photo for Suspension Components",
-            next: diagnosticView28(),
-            previous: diagnosticView26()
         )
     }
 }
@@ -41,8 +37,6 @@ struct diagnosticView28: View {
             logLabel: "Shocks/Struts",
             photoKey: "page28",
             photoButtonTitle: "Take Photo for Shocks/Struts",
-            next: diagnosticView29(),
-            previous: diagnosticView27()
         )
     }
 }
@@ -57,8 +51,6 @@ struct diagnosticView29: View {
             logLabel: "Ball Joints",
             photoKey: "page29",
             photoButtonTitle: "Take Photo for Ball Joints",
-            next: diagnosticView30(),
-            previous: diagnosticView28()
         )
     }
 }
@@ -73,8 +65,6 @@ struct diagnosticView30: View {
             logLabel: "Tie Rod Ends",
             photoKey: "page30",
             photoButtonTitle: "Take Photo for Tie Rod Ends",
-            next: diagnosticView31(),
-            previous: diagnosticView29()
         )
     }
 }
@@ -89,8 +79,6 @@ struct diagnosticView31: View {
             logLabel: "Control Arms",
             photoKey: "page31",
             photoButtonTitle: "Take Photo for Control Arms",
-            next: diagnosticView32(),
-            previous: diagnosticView30()
         )
     }
 }
@@ -105,8 +93,6 @@ struct diagnosticView32: View {
             logLabel: "Bushings",
             photoKey: "page32",
             photoButtonTitle: "Take Photo for Bushings",
-            next: diagnosticView33(),
-            previous: diagnosticView31()
         )
     }
 }
@@ -121,8 +107,6 @@ struct diagnosticView33: View {
             logLabel: "Sway Bar Links",
             photoKey: "page33",
             photoButtonTitle: "Take Photo for Sway Bar Links",
-            next: diagnosticView34(),
-            previous: diagnosticView32()
         )
     }
 }
@@ -137,8 +121,6 @@ struct diagnosticView34: View {
             logLabel: "Wheel Bearings",
             photoKey: "page34",
             photoButtonTitle: "Take Photo for Wheel Bearings",
-            next: diagnosticView35(),
-            previous: diagnosticView33()
         )
     }
 }
@@ -153,8 +135,6 @@ struct diagnosticView35: View {
             logLabel: "CV Joints/Boots",
             photoKey: "page35",
             photoButtonTitle: "CV Joints/Boots",
-            next: diagnosticView36(),
-            previous: diagnosticView34()
         )
     }
 }
@@ -169,8 +149,6 @@ struct diagnosticView36: View {
             logLabel: "Rack & Pinion",
             photoKey: "page36",
             photoButtonTitle: "Take Photo for Rack & Pinion",
-            next: diagnosticView37(),
-            previous: diagnosticView35()
         )
     }
 }
@@ -185,8 +163,6 @@ struct diagnosticView37: View {
             logLabel: "Power Steering Pump",
             photoKey: "page37",
             photoButtonTitle: "Take Photo for Power Steering Pump",
-            next: PrintSummaryView(),
-            previous: diagnosticView36()
         )
     }
 }

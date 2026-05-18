@@ -1,8 +1,13 @@
 import SwiftUI
+import MessageUI
 
 struct PrintSummaryView: View {
     @EnvironmentObject var printStore: PrintStore
     @EnvironmentObject var photoStore: PhotoStore
+
+    @State private var pdfData: Data?
+    @State private var showMail = false
+    @State private var showShare = false
 
     var body: some View {
         NavigationStack {
@@ -34,14 +39,41 @@ struct PrintSummaryView: View {
             .navigationTitle("Summary")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
+                    Button {
                         let statuses = printStore.messages
+                        let photos: [UIImage] = photoStore.imagesByKey.values.compactMap { $0 as? UIImage }
+                        // Notes are separate from statuses; provide empty or fetch from your store
                         let notes = ""
-                        let photos = photoStore.imagesByKey.values.compactMap { $0 }
-                        ReportView(notes: notes, statuses: statuses, photos: photos)
+                        if let data = makePDF(from: ReportView(notes: notes, statuses: statuses, photos: photos)) {
+                            pdfData = data
+#if canImport(MessageUI)
+                            if MFMailComposeViewController.canSendMail() {
+                                showMail = true
+                            } else {
+                                showShare = true
+                            }
+#else
+                            showShare = true
+#endif
+                        }
                     } label: {
                         Label("Send PDF", systemImage: "paperplane")
                     }
+                }
+            }
+            .sheet(isPresented: $showMail) {
+                if let data = pdfData {
+                    SimpleMailComposer(
+                        subject: "Diagnostic Report",
+                        message: "Please find the diagnostic report attached.",
+                        recipients: [],
+                        attachment: (data, "application/pdf", "DiagnosticReport.pdf")
+                    )
+                }
+            }
+            .sheet(isPresented: $showShare) {
+                if let data = pdfData {
+                    SimpleShareSheet(items: [data])
                 }
             }
         }

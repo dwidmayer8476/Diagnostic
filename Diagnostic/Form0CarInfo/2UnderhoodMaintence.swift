@@ -11,8 +11,6 @@ struct diagnosticView1: View {
             logLabel: "Under Hood Overview",
             photoKey: "page1",
             photoButtonTitle: "Take Photo for Under Hood Overview",
-            next: AnyView(diagnosticView2()),
-            previous: AnyView(EmptyView())
         )
     }
 }
@@ -27,8 +25,6 @@ struct diagnosticView2: View {
             logLabel: "Wiper Blades",
             photoKey: "page2",
             photoButtonTitle: "Take Photo for Wiper Blades",
-            next: AnyView(diagnosticView3()),
-            previous: AnyView(diagnosticView1())
         )
     }
 }
@@ -43,8 +39,6 @@ struct diagnosticView3: View {
             logLabel: "Head Lights",
             photoKey: "page3",
             photoButtonTitle: "Take Photo for Head Lights",
-            next: AnyView(diagnosticView4()),
-            previous: AnyView(diagnosticView2())
         )
     }
 }
@@ -59,8 +53,6 @@ struct diagnosticView4: View {
             logLabel: "Air Filter",
             photoKey: "page4",
             photoButtonTitle: "Take Photo for Air Filter",
-            next: AnyView(diagnosticView5()),
-            previous: AnyView(diagnosticView3())
         )
     }
 }
@@ -75,8 +67,6 @@ struct diagnosticView5: View {
             logLabel: "PCV Valve",
             photoKey: "page5",
             photoButtonTitle: "Take Photo for PCV Valve",
-            next: AnyView(diagnosticView6()),
-            previous: AnyView(diagnosticView4())
         )
     }
 }
@@ -90,8 +80,6 @@ struct diagnosticView6: View {
             logLabel: "Washer Fluid",
             photoKey: "page6",
             photoButtonTitle: "Take Photo for Washer Fluid",
-            next: AnyView(diagnosticView7()),
-            previous: AnyView(diagnosticView5())
         )
     }
 }
@@ -106,8 +94,6 @@ struct diagnosticView7: View {
             logLabel: "Engine Oil",
             photoKey: "page7",
             photoButtonTitle: "Take Photo for Engine Oil",
-            next: AnyView(diagnosticView8()),
-            previous: AnyView(diagnosticView6())
         )
     }
 }
@@ -122,8 +108,6 @@ struct diagnosticView8: View {
             logLabel: "Power Steering Fluid",
             photoKey: "page8",
             photoButtonTitle: "Take Photo for Power Steering Fluid",
-            next: AnyView(diagnosticView9()),
-            previous: AnyView(diagnosticView7())
         )
     }
 }
@@ -138,8 +122,6 @@ struct diagnosticView9: View {
             logLabel: "Master Cylinder Fluid Level",
             photoKey: "page9",
             photoButtonTitle: "Take Photo for Master Cylinder Fluid Level",
-            next: AnyView(diagnosticView10()),
-            previous: AnyView(diagnosticView8())
         )
     }
 }
@@ -154,8 +136,6 @@ struct diagnosticView10: View {
             logLabel: "Brake Fluid",
             photoKey: "page10",
             photoButtonTitle: "Take Photo for Brake Fluid",
-            next: AnyView(diagnosticView11()),
-            previous: AnyView(diagnosticView9())
         )
     }
 }
@@ -170,8 +150,6 @@ struct diagnosticView11: View {
             logLabel: "Coolant Hoses",
             photoKey: "page11",
             photoButtonTitle: "Take Photo for Collant Hoses",
-            next: AnyView(diagnosticView12()),
-            previous: AnyView(diagnosticView10())
         )
     }
 }
@@ -186,8 +164,6 @@ struct diagnosticView12: View {
             logLabel: "Engine Coolant",
             photoKey: "page12",
             photoButtonTitle: "Take Photo for Engine Coolant",
-            next: AnyView(diagnosticView13()),
-            previous: AnyView(diagnosticView11())
         )
     }
 }
@@ -202,8 +178,6 @@ struct diagnosticView13: View {
             logLabel: "Battery Test",
             photoKey: "page13",
             photoButtonTitle: "Take Photo for Battery Test",
-            next: AnyView(diagnosticView14()),
-            previous: AnyView(diagnosticView12())
         )
     }
 }
@@ -218,8 +192,6 @@ struct diagnosticView14: View {
             logLabel: "Battery Accessories",
             photoKey: "page14",
             photoButtonTitle: "Take Photo for Battery Accessories",
-            next: AnyView(diagnosticView15()),
-            previous: AnyView(diagnosticView13())
         )
     }
 }
@@ -234,8 +206,6 @@ struct diagnosticView15: View {
             logLabel: "Start/Charge",
             photoKey: "page15",
             photoButtonTitle: "Take Photo for Start/Charge",
-            next: AnyView(diagnosticView16()),
-            previous: AnyView(diagnosticView14())
         )
     }
 }
@@ -250,8 +220,6 @@ struct diagnosticView16: View {
             logLabel: "Belts",
             photoKey: "page16",
             photoButtonTitle: "Take Photo for Belts",
-            next: AnyView(diagnosticView17()),
-            previous: AnyView(diagnosticView15())
         )
     }
 }
@@ -265,9 +233,7 @@ struct diagnosticView17: View {
             logKey: "Spark Plugs",
             logLabel: "Spark Plugs",
             photoKey: "page17",
-            photoButtonTitle: "Take Photo for Spark Plugs",
-            next: AnyView(diagnosticView18()),
-            previous: AnyView(diagnosticView16())
+            photoButtonTitle: "Take Photo for Spark Plugs"
         )
     }
 }
@@ -282,8 +248,6 @@ struct diagnosticView18: View {
             logLabel: "Fuel Filter",
             photoKey: "page18",
             photoButtonTitle: "Take Photo for Fuel Filter",
-            next: AnyView(diagnosticView19()),
-            previous: AnyView(diagnosticView17())
         )
     }
 }
@@ -298,8 +262,6 @@ struct diagnosticView19: View {
             logLabel: "Ignition Wires",
             photoKey: "page19",
             photoButtonTitle: "Take Photo for Ignition Wires",
-            next: AnyView(diagnosticView20()),
-            previous: AnyView(diagnosticView18())
         )
     }
 }
@@ -314,8 +276,6 @@ struct diagnosticView20: View {
             logLabel: "Valve Cover Gasket",
             photoKey: "page20",
             photoButtonTitle: "Take Photo for Valve Cover Gasket",
-            next: AnyView(diagnosticView21()),
-            previous: AnyView(diagnosticView19())
         )
     }
 }
@@ -330,8 +290,6 @@ struct diagnosticView21: View {
             logLabel: "Power Steering Hose",
             photoKey: "page21",
             photoButtonTitle: "Take Photo for Power Steering Hose",
-            next: AnyView(diagnosticView22()),
-            previous: AnyView(diagnosticView20())
         )
     }
 }
@@ -346,8 +304,6 @@ struct diagnosticView22: View {
             logLabel: "Timing Belt",
             photoKey: "page22",
             photoButtonTitle: "Take Photo for Timing Belt",
-            next: AnyView(diagnosticView23()),
-            previous: AnyView(diagnosticView21())
         )
     }
 }
@@ -362,8 +318,6 @@ struct diagnosticView23: View {
             logLabel: "Transfer Case/Differential Fluid",
             photoKey: "page23",
             photoButtonTitle: "Take Photo for Transfer Case/Differential Fluid",
-            next: AnyView(diagnosticView24()),
-            previous: AnyView(diagnosticView22())
         )
     }
 }
@@ -378,8 +332,6 @@ struct diagnosticView24: View {
             logLabel: "Transmission Fluid",
             photoKey: "page24",
             photoButtonTitle: "Take Photo for Transmission Fluid",
-            next: AnyView(diagnosticView25()),
-            previous: AnyView(diagnosticView23())
         )
     }
 }

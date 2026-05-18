@@ -11,8 +11,6 @@ struct diagnosticView25: View {
             logLabel: "Exhaust System",
             photoKey: "page25",
             photoButtonTitle: "Take Photo for Exhaust System",
-            next: diagnosticView26(),
-            previous: diagnosticView24()
         )
     }
 }
