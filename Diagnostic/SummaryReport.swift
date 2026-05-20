@@ -32,6 +32,30 @@ struct PrintSummaryView: View {
                                 .background(Color.gray.opacity(0.15))
                                 .cornerRadius(10)
                         }
+
+                        // Photos section
+                        if !photoStore.imagesByKey.isEmpty {
+                            Text("Photos")
+                                .font(.title2)
+                                .padding(.top, 8)
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 12) {
+                                    ForEach(Array(photoStore.imagesByKey.values.enumerated()), id: \.offset) { _, img in
+                                        Image(uiImage: img)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 200, height: 200)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            .padding(4)
+                                            .background(Color.gray.opacity(0.1))
+                                            .cornerRadius(14)
+                                    }
+                                }
+                                .padding(.horizontal, 2)
+                            }
+                            .frame(height: 220)
+                        }
                     }
                 }
                 .padding()
@@ -41,7 +65,7 @@ struct PrintSummaryView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         let statuses = printStore.messages
-                        let photos: [UIImage] = photoStore.imagesByKey.values.compactMap { $0 as? UIImage }
+                        let photos: [UIImage] = Array(photoStore.imagesByKey.values)
                         // Notes are separate from statuses; provide empty or fetch from your store
                         let notes = ""
                         if let data = makePDF(from: ReportView(notes: notes, statuses: statuses, photos: photos)) {

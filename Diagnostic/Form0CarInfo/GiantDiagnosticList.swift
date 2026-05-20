@@ -7,7 +7,7 @@ struct GiantDiagnosticList: View {
                 NavigationLink {
                     DiagnosticView1()
                 } label: {
-                    Label("User & Car Information", systemImage: "person.crop.circle.badge.car")
+                    Label("User & Car Information", systemImage: "checklist")
                 }
                 
             }
@@ -34,7 +34,7 @@ struct GiantDiagnosticList: View {
                 NavigationLink { diagnosticView19() } label: { Label("Ignition Wires", systemImage: "cable.coaxial") }
                 NavigationLink { diagnosticView20() } label: { Label("Valve Cover Gasket", systemImage: "ev.plug.dc.nacs") }
                 NavigationLink { diagnosticView21() } label: { Label("Timing Belt", systemImage: "timelapse") }
-                NavigationLink { diagnosticView22() } label: { Label("name", systemImage: "symbol") }
+                NavigationLink { diagnosticView22() } label: { Label("Transfer Case/Differential Fluid", systemImage: "latch.2.case") }
             }
             Section("Exhaust System") {
                 NavigationLink { diagnosticView25() } label: { Label("Exhaust System", systemImage: "heat.waves") }

@@ -24,14 +24,14 @@ struct ContentView: View {
                     ZStack(alignment: .center) {
                         VStack(spacing: 8) {
                             ZStack(alignment: .leading) {
-                                Image("TireMarks")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 24)
-                                    .opacity(0)
-                                    .offset(x: -24)
-                                    .rotationEffect(Angle(degrees: 38))
-
+//                                Image("tiremarks")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(height: 24)
+//                                    .opacity(0)
+//                                    .offset(x: -24)
+//                                    .rotationEffect(Angle(degrees: 38))
+//
                                 Text("Welcome To Diagnostic")
                                     .font(.system(size: 48, weight: .heavy, design: .default))
                                     .opacity(0)
