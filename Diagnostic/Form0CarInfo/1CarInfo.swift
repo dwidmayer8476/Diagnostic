@@ -222,15 +222,6 @@ struct DiagnosticView1: View {
                 }
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Label("Back to List", systemImage: "chevron.left")
-                }
-            }
-        }
     }
     
     private func confirmAction() {

@@ -60,7 +60,7 @@ struct CameraExampleView: View {
             VStack {
                 if images.isEmpty {
                     Text("No Image Yet")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.black)
                 } else {
                     ScrollView(.horizontal) {
                         HStack(spacing: 12) {

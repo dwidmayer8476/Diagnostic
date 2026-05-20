@@ -1,6 +1,9 @@
 import SwiftUI
 import UIKit
-
+import AVFoundation
+//add car parts circled
+//vin take photo
+//
 enum DiagnosticCategory {
     case underHood
     case exhaust
@@ -37,6 +40,25 @@ struct DiagnosticPage: View {
     @State private var showCamera = false
     @State private var notes: String = ""
     @State private var status: DiagnosticColor = .none
+    @State private var capturedImages: [UIImage] = []
+    
+    private func presentCameraIfAuthorized() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            showCamera = true
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                DispatchQueue.main.async {
+                    if granted { showCamera = true }
+                }
+            }
+        case .denied, .restricted:
+            // Optionally present an alert guiding the user to Settings
+            break
+        @unknown default:
+            break
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -131,14 +153,14 @@ struct DiagnosticPage: View {
                                     Text("Photos")
                                         .font(.headline)
                                     Button {
-                                        showCamera = true
+                                        presentCameraIfAuthorized()
                                     } label: {
                                         Label(photoButtonTitle, systemImage: "camera")
                                             .frame(maxWidth: .infinity)
                                     }
                                     .buttonStyle(.borderedProminent)
                                     .sheet(isPresented: $showCamera) {
-                                        CameraPicker(images: .constant([]), onConfirm: { captured in
+                                        CameraPicker(images: $capturedImages, onCapture: { captured in
                                             photoStore.imagesByKey[photoKey] = captured
                                         })
                                     }
@@ -173,3 +195,4 @@ struct DiagnosticPage: View {
         }
     }
 }
+
