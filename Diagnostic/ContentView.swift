@@ -10,6 +10,7 @@ import AVKit
 
 struct ContentView: View {
     @State private var showTitle = false
+    @State private var revealProgress: CGFloat = 0
     var body: some View {
         NavigationStack {
             ZStack {
@@ -22,31 +23,29 @@ struct ContentView: View {
                 
                 VStack {
                     ZStack(alignment: .center) {
-                        VStack(spacing: 8) {
-                            ZStack(alignment: .leading) {
-//                                Image("tiremarks")
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(height: 24)
-//                                    .opacity(0)
-//                                    .offset(x: -24)
-//                                    .rotationEffect(Angle(degrees: 38))
-//
-                                Text("Welcome To Diagnostic")
-                                    .font(.system(size: 48, weight: .heavy, design: .default))
-                                    .opacity(0)
-                            }
-                        }
-                        VStack(spacing: 8) {
-                            ZStack(alignment: .leading) {
-                                if showTitle {
-                                    Text("Welcome To Diagnostic")
-                                        .font(.system(size: 48, weight: .heavy, design: .default))
-                                        .foregroundStyle(.white)
-                                        .shadow(color: .black.opacity(0.9), radius: 6.5, x: 0, y: -5)
-                                        .transition(.move(edge: .leading))
-                                }
-                            }
+                        ZStack(alignment: .leading) {
+                            let titleView = Text("Welcome To Diagnostic")
+                                .font(.system(size: 48, weight: .heavy, design: .default))
+                                .foregroundStyle(.white)
+                                .shadow(color: .black.opacity(0.9), radius: 6.5, x: 0, y: -5)
+
+                            titleView
+                                .mask(
+                                    GeometryReader { geo in
+                                        Rectangle()
+                                            .frame(width: geo.size.width * max(0, min(1, revealProgress)))
+                                    }
+                                )
+                                .animation(.easeOut(duration: 1.0), value: revealProgress)
+
+                            Image("tire")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 56, height: 56)
+                                .shadow(color: .black.opacity(0.6), radius: 4, x: 0, y: 1)
+                                .offset(x: -80 + 540 * revealProgress, y: 0)
+                                .rotationEffect(.degrees(Double(360 * revealProgress)))
+                                .animation(.easeOut(duration: 1.0), value: revealProgress)
                         }
                     }
                     .padding(.bottom, 30)
@@ -96,7 +95,10 @@ struct ContentView: View {
                 
             }
             .onAppear {
-                withAnimation(.easeOut(duration: 0.75)) {
+                revealProgress = 0
+                showTitle = false
+                withAnimation(.easeOut(duration: 1.0)) {
+                    revealProgress = 1
                     showTitle = true
                 }
             }
