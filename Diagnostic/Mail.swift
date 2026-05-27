@@ -257,13 +257,37 @@ struct SendTheReportView: View {
 
             HStack(spacing: 12) {
                 Button {
-                    pdfData = makePDF(from: ReportView(notes: exampleNotes, statuses: exampleStatuses, photos: examplePhotos))
+                    pdfData = PDFGenerator.makeReportPDFData(
+                        vin: "TESTVIN1234567890",
+                        make: "Test Make",
+                        mileage: "123,456",
+                        brakes: "OK",
+                        tires: "OK",
+                        engine: "OK",
+                        technician: "Technician"
+                    )
+                    if let d = pdfData { print("Generated PDF bytes: \(d.count)") }
                 } label: { Label("Generate PDF", systemImage: "doc.fill") }
                 .buttonStyle(.borderedProminent)
 
                 Button {
 #if canImport(MessageUI)
-                    if MFMailComposeViewController.canSendMail() { showMail = true } else { showShare = true }
+                    if MFMailComposeViewController.canSendMail() {
+                        if pdfData == nil {
+                            pdfData = PDFGenerator.makeReportPDFData(
+                                vin: "TESTVIN1234567890",
+                                make: "Test Make",
+                                mileage: "123,456",
+                                brakes: "OK",
+                                tires: "OK",
+                                engine: "OK",
+                                technician: "Technician"
+                            )
+                        }
+                        showMail = (pdfData != nil)
+                    } else {
+                        showShare = true
+                    }
 #else
                     showShare = true
 #endif

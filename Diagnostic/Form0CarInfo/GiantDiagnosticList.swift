@@ -24,7 +24,7 @@ struct GiantDiagnosticList: View {
                 NavigationLink {
                     DiagnosticView1()
                 } label: {
-                    CompletionLabel(title: "User & Car Information", systemImage: "person.crop.circle.badge.car", logKey: "User & Car Information")
+                    CompletionLabel(title: "User & Car Information", systemImage: "car.badge.gearshape", logKey: "User & Car Information")
                 }
                 
             }
