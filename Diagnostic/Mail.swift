@@ -192,15 +192,16 @@ struct SendTheReportView: View {
                 if MFMailComposeViewController.canSendMail() {
                     showMail = true
                 } else {
-                    Text("No PDF yet. Tap Generate.")
-                        .foregroundStyle(.secondary)
-                        .frame(height: 120)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.secondarySystemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    showShare = true
                 }
+#else
+                showShare = true
+#endif
+            } label: {
+                Label("Send PDF", systemImage: "envelope")
             }
-            .padding(.horizontal)
+            .buttonStyle(.borderedProminent)
+            .disabled(pdfData == nil)
 
             HStack(spacing: 12) {
                 Button {
@@ -237,21 +238,18 @@ struct SendTheReportView: View {
                     }
 #else
                     showShare = true
-                }
-#else
-                showShare = true
 #endif
-            } label: {
-                Label("Send PDF", systemImage: "envelope")
-            }
-            .buttonStyle(.borderedProminent)
-            .onAppear {
-                // Prepare a minimal blank PDF once
-                if pdfData == nil {
-                    pdfData = makeBlankPDF()
+                } label: {
+                    Label("Send PDF", systemImage: "paperplane")
                 }
+                .buttonStyle(.bordered)
             }
-            .disabled(pdfData == nil)
+        }
+        .padding(.horizontal)
+        .onAppear {
+            if pdfData == nil {
+                pdfData = makeBlankPDF()
+            }
         }
         .navigationTitle("Send Report")
         .sheet(isPresented: $showMail) {
