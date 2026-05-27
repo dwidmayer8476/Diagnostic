@@ -65,57 +65,17 @@ struct PDFPreviewView: UIViewRepresentable {
 }
 
 
-// This turns a SwiftUI view into a PDF file (as Data).
-func makePDF<Content: View>(from view: Content,
-                            pageSize: CGSize = .init(width: 612, height: 792), // US Letter
-                            margins: CGFloat = 24) -> Data? {
+// Minimal, lower-level: create a single blank PDF page as Data
+func makeBlankPDF(pageSize: CGSize = CGSize(width: 612, height: 792)) -> Data? {
 #if canImport(UIKit)
-    let printableWidth = pageSize.width - margins * 2
-
-    // Put the SwiftUI view inside a hosting controller so it can lay it out
-    let host = UIHostingController(rootView: view)
-    host.view.backgroundColor = .systemBackground
-    host.view.translatesAutoresizingMaskIntoConstraints = false
-
-    // Creates a container to hlp size the view at the given width
-    let container = UIView(frame: CGRect(origin: .zero, size: CGSize(width: printableWidth, height: 10)))
-    container.addSubview(host.view)
-    NSLayoutConstraint.activate([
-        host.view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-        host.view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-        host.view.topAnchor.constraint(equalTo: container.topAnchor)
-    ])
-
-    let targetSize = CGSize(width: printableWidth, height: UIView.layoutFittingCompressedSize.height)
-    let fittingSize = host.view.systemLayoutSizeFitting(
-        targetSize,
-        withHorizontalFittingPriority: .required,
-        verticalFittingPriority: .fittingSizeLevel
-    )
-
-    let contentHeight = max(ceil(fittingSize.height), 1)
-    let printableHeight = pageSize.height - margins * 2
-
     let bounds = CGRect(origin: .zero, size: pageSize)
     let renderer = UIGraphicsPDFRenderer(bounds: bounds)
-
     let data = renderer.pdfData { ctx in
-        var yOffset: CGFloat = 0
-        let totalPages = max(Int(ceil(contentHeight / printableHeight)), 1)
-
-        for _ in 0..<totalPages {
-            ctx.beginPage()
-            let cg = ctx.cgContext
-            cg.saveGState()
-            cg.translateBy(x: margins, y: margins - yOffset)
-
-            host.view.frame = CGRect(origin: .zero, size: CGSize(width: printableWidth, height: contentHeight))
-            host.view.layoutIfNeeded()
-            host.view.layer.render(in: cg)
-
-            cg.restoreGState()
-            yOffset += printableHeight
-        }
+        ctx.beginPage()
+        // Intentionally draw nothing: a blank page
+        // If you want a border to visualize, uncomment below:
+        // UIColor.black.setStroke()
+        // UIBezierPath(rect: bounds.insetBy(dx: 1, dy: 1)).stroke()
     }
     return data
 #else
@@ -225,71 +185,38 @@ struct SendTheReportView: View {
     @State private var showMail = false
     @State private var showShare = false
 
-    let exampleStatuses = ["Battery: OK", "Storage: Low", "Network: Unstable"]
-    let exampleNotes = "User noticed slow launches sometimes."
-    let examplePhotos: [UIImage] = []
-
     var body: some View {
         VStack(spacing: 16) {
-            VStack(spacing: 12) {
-                // Live report preview
-                ReportView(notes: exampleNotes, statuses: exampleStatuses, photos: examplePhotos)
-                    .frame(maxHeight: 360)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.secondarySystemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                // PDF preview (if generated)
-                if let data = pdfData {
-                    PDFPreviewView(data: data)
-                        .frame(height: 360)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+            Button {
+#if canImport(MessageUI)
+                if MFMailComposeViewController.canSendMail() {
+                    showMail = true
                 } else {
-                    Text("No PDF yet. Tap Generate.")
-                        .foregroundStyle(.secondary)
-                        .frame(height: 120)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.secondarySystemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    showShare = true
+                }
+#else
+                showShare = true
+#endif
+            } label: {
+                Label("Send PDF", systemImage: "envelope")
+            }
+            .buttonStyle(.borderedProminent)
+            .onAppear {
+                // Prepare a minimal blank PDF once
+                if pdfData == nil {
+                    pdfData = makeBlankPDF()
                 }
             }
-            .padding(.horizontal)
-
-            HStack(spacing: 12) {
-                Button {
-                    pdfData = makePDF(from: ReportView(notes: exampleNotes, statuses: exampleStatuses, photos: examplePhotos))
-                } label: { Label("Generate PDF", systemImage: "doc.fill") }
-                .buttonStyle(.borderedProminent)
-
-                Button {
-#if canImport(MessageUI)
-                    if MFMailComposeViewController.canSendMail() { showMail = true } else { showShare = true }
-#else
-                    showShare = true
-#endif
-                } label: { Label("Send via Mail", systemImage: "envelope") }
-                .buttonStyle(.bordered)
-                .disabled(pdfData == nil)
-            }
-            .padding(.horizontal)
-            Spacer()
-            NavigationLink(destination: ContentView()) {
-                Text("Finished")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: 650)
-                    .frame(maxHeight: 100)
-                    .padding(.vertical, 18)
-            }
+            .disabled(pdfData == nil)
         }
         .navigationTitle("Send Report")
         .sheet(isPresented: $showMail) {
             if let data = pdfData {
                 SimpleMailComposer(
-                    subject: "Diagnostic Report",
-                    message: "Please find the diagnostic report attached.",
+                    subject: "PDF",
+                    message: "",
                     recipients: [],
-                    attachment: (data, "application/pdf", "DiagnosticReport.pdf")
+                    attachment: (data, "application/pdf", "Document.pdf")
                 )
             }
         }

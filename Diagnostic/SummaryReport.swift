@@ -1,14 +1,17 @@
 import SwiftUI
 import MessageUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 struct PrintSummaryView: View {
     @EnvironmentObject var printStore: PrintStore
     @EnvironmentObject var photoStore: PhotoStore
-
+    
     @State private var pdfData: Data?
     @State private var showMail = false
     @State private var showShare = false
-
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -16,7 +19,7 @@ struct PrintSummaryView: View {
                     Text("Summary")
                         .font(.largeTitle)
                         .padding(.bottom)
-
+                    
                     if printStore.messages.isEmpty {
                         Text("No items to summarize yet.")
                             .foregroundStyle(.secondary)
@@ -32,13 +35,13 @@ struct PrintSummaryView: View {
                                 .background(Color.gray.opacity(0.15))
                                 .cornerRadius(10)
                         }
-
+                        
                         // Photos section
                         if !photoStore.imagesByKey.isEmpty {
                             Text("Photos")
                                 .font(.title2)
                                 .padding(.top, 8)
-
+                            
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 12) {
                                     ForEach(Array(photoStore.imagesByKey.values.enumerated()), id: \.offset) { _, img in
@@ -68,18 +71,6 @@ struct PrintSummaryView: View {
                         let photos: [UIImage] = Array(photoStore.imagesByKey.values)
                         // Notes are separate from statuses; provide empty or fetch from your store
                         let notes = ""
-                        if let data = makePDF(from: ReportView(notes: notes, statuses: statuses, photos: photos)) {
-                            pdfData = data
-#if canImport(MessageUI)
-                            if MFMailComposeViewController.canSendMail() {
-                                showMail = true
-                            } else {
-                                showShare = true
-                            }
-#else
-                            showShare = true
-#endif
-                        }
                     } label: {
                         Label("Send PDF", systemImage: "paperplane")
                     }
@@ -103,4 +94,3 @@ struct PrintSummaryView: View {
         }
     }
 }
-
